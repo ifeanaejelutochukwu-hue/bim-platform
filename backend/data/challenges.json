@@ -1,0 +1,244 @@
+[
+  {
+    "id": "camel-to-snake-case",
+    "level": 20,
+    "title": "CamelToSnakeCase",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "100.0 B",
+    "filesToSubmit": "cameltosnakecase.go",
+    "allowedFunctions": "unicode, strings",
+    "instructions": [
+      "Write a function that converts a string from camelCase to snake_case.",
+      "If the string is empty, return an empty string.",
+      "If the string is not camelCase, return the string unchanged.",
+      "If the string is camelCase, return the snake_case version of the string.",
+      "For this exercise you need to know that camelCase has two different writing alternatives that will be accepted: lowerCamelCase and UpperCamelCase.",
+      "Rules for writing in camelCase:",
+      "The word does not end on a capitalized letter (CamelCasE is invalid).",
+      "No two capitalized letters shall follow directly each other (CamelCAse is invalid).",
+      "Numbers or punctuation are not allowed in the word anywhere (camelCase1 is invalid)."
+    ],
+    "expectedSignature": "func CamelToSnakeCase(s string) string {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.CamelToSnakeCase(\"HelloWorld\"))\n\tfmt.Println(piscine.CamelToSnakeCase(\"helloWorld\"))\n\tfmt.Println(piscine.CamelToSnakeCase(\"camelCase\"))\n\tfmt.Println(piscine.CamelToSnakeCase(\"CAMELtoSnackCASE\"))\n\tfmt.Println(piscine.CamelToSnakeCase(\"camelToSnakeCase\"))\n\tfmt.Println(piscine.CamelToSnakeCase(\"hey2\"))\n}",
+    "initialStudentCode": "package piscine\n\nfunc CamelToSnakeCase(s string) string {\n\t// Write your code here\n\treturn \"\"\n}",
+    "testCases": [
+      {
+        "input": "HelloWorld",
+        "expectedOutput": "Hello_World"
+      },
+      {
+        "input": "helloWorld",
+        "expectedOutput": "hello_World"
+      },
+      {
+        "input": "camelCase",
+        "expectedOutput": "camel_Case"
+      },
+      {
+        "input": "CAMELtoSnackCASE",
+        "expectedOutput": "CAMELtoSnackCASE"
+      },
+      {
+        "input": "camelToSnakeCase",
+        "expectedOutput": "camel_To_Snake_Case"
+      },
+      {
+        "input": "hey2",
+        "expectedOutput": "hey2"
+      }
+    ]
+  },
+  {
+    "id": "retain-first-half",
+    "level": 26,
+    "title": "RetainFirstHalf",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "100.0 B",
+    "filesToSubmit": "retainfirsthalf.go",
+    "allowedFunctions": "--allow-builtin, strings",
+    "instructions": [
+      "Write a function called RetainFirstHalf() that takes a string as an argument and returns the first half of this string.",
+      "If the length of the string is odd, round it down.",
+      "If the string is empty, return an empty string.",
+      "If the string length is equal to one, return the string."
+    ],
+    "expectedSignature": "func RetainFirstHalf(str string) string {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.RetainFirstHalf(\"This is the 1st halfThis is the 2nd half\"))\n\tfmt.Println(piscine.RetainFirstHalf(\"A\"))\n\tfmt.Println(piscine.RetainFirstHalf(\"\"))\n\tfmt.Println(piscine.RetainFirstHalf(\"Hello World\"))\n}",
+    "initialStudentCode": "package piscine\n\nfunc RetainFirstHalf(str string) string {\n\t// Write your code here\n\treturn \"\"\n}",
+    "testCases": [
+      {
+        "input": "This is the 1st halfThis is the 2nd half",
+        "expectedOutput": "This is the 1st half"
+      },
+      {
+        "input": "A",
+        "expectedOutput": "A"
+      },
+      {
+        "input": "",
+        "expectedOutput": ""
+      },
+      {
+        "input": "Hello World",
+        "expectedOutput": "Hello"
+      }
+    ]
+  },
+  {
+    "id": "is-prime",
+    "level": 15,
+    "title": "IsPrime",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "80.0 B",
+    "filesToSubmit": "isprime.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function called IsPrime() that checks if a given integer is a prime number.",
+      "The function should return true if the number is prime, and false otherwise.",
+      "Negative numbers, 0, and 1 are not prime numbers."
+    ],
+    "expectedSignature": "func IsPrime(nb int) bool {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.IsPrime(5))\n\tfmt.Println(piscine.IsPrime(4))\n\tfmt.Println(piscine.IsPrime(1))\n\tfmt.Println(piscine.IsPrime(-7))\n\tfmt.Println(piscine.IsPrime(13))\n}",
+    "initialStudentCode": "package piscine\n\nfunc IsPrime(nb int) bool {\n\t// Write your code here\n\treturn false\n}",
+    "testCases": [
+      {
+        "input": "5",
+        "expectedOutput": "true"
+      },
+      {
+        "input": "4",
+        "expectedOutput": "false"
+      },
+      {
+        "input": "1",
+        "expectedOutput": "false"
+      },
+      {
+        "input": "-7",
+        "expectedOutput": "false"
+      },
+      {
+        "input": "13",
+        "expectedOutput": "true"
+      }
+    ]
+  },
+  {
+    "id": "reverse-string",
+    "level": 18,
+    "title": "ReverseString",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "75.0 B",
+    "filesToSubmit": "reversestring.go",
+    "allowedFunctions": "--allow-builtin, strings.Builder",
+    "instructions": [
+      "Write a function called ReverseString() that takes a string as an argument and returns its characters reversed.",
+      "If the input string is empty, return an empty string."
+    ],
+    "expectedSignature": "func ReverseString(s string) string {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.ReverseString(\"hello\"))\n\tfmt.Println(piscine.ReverseString(\"Go Language\"))\n\tfmt.Println(piscine.ReverseString(\"\"))\n\tfmt.Println(piscine.ReverseString(\"A\"))\n}",
+    "initialStudentCode": "package piscine\n\nfunc ReverseString(s string) string {\n\t// Write your code here\n\treturn \"\"\n}",
+    "testCases": [
+      {
+        "input": "hello",
+        "expectedOutput": "olleh"
+      },
+      {
+        "input": "Go Language",
+        "expectedOutput": "egaugnaL oG"
+      },
+      {
+        "input": "",
+        "expectedOutput": ""
+      },
+      {
+        "input": "A",
+        "expectedOutput": "A"
+      }
+    ]
+  },
+  {
+    "id": "checknumber",
+    "level": 10,
+    "title": "checknumber",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "100.0 B",
+    "filesToSubmit": "checknumber.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "checknumber",
+      "Instructions",
+      "Write a function that takes a string as an argument and returns true if the string contains any number, otherwise return false.",
+      "Expected function",
+      "func CheckNumber(arg string) bool {",
+      "}",
+      "Usage",
+      "Here is a possible program to test your function:",
+      "package main",
+      "import (",
+      "\"fmt\"",
+      ")",
+      "func main() {",
+      "fmt.Println(CheckNumber(\"Hello\"))",
+      "fmt.Println(CheckNumber(\"Hello1\"))",
+      "}",
+      "And its output:",
+      "$ go run .",
+      "false",
+      "true",
+      "$"
+    ],
+    "expectedSignature": "func Solution() {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(\"TODO\")\n}",
+    "initialStudentCode": "package piscine\n\nfunc Solution() {\n\t// Write your code here\n}",
+    "testCases": [
+      {
+        "input": "test_1",
+        "expectedOutput": "false"
+      },
+      {
+        "input": "test_2",
+        "expectedOutput": "true"
+      }
+    ]
+  },
+  {
+    "id": "hashcode",
+    "level": 10,
+    "title": "HashCode",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "100.0 B",
+    "filesToSubmit": "hashcode.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function called HashCode() that takes a string as an argument and returns a new hashed string.  The hash equation is computed as follows: (ASCII of current character + size of the string) % 127, ensuring the result falls within the ASCII range of 0 to 127.  If the resulting character is unprintable add 33 to it."
+    ],
+    "expectedSignature": "func HashCode(dec string) string {\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n    \"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(HashCode(\"A\"))\n\tfmt.Println(HashCode(\"AB\"))\n\tfmt.Println(HashCode(\"BAC\"))\n\tfmt.Println(HashCode(\"Hello World\"))\n}",
+    "initialStudentCode": "func HashCode(dec string) string {\n}",
+    "testCases": [
+      {
+        "input": "output_1",
+        "expectedOutput": "B"
+      },
+      {
+        "input": "output_2",
+        "expectedOutput": "CD"
+      },
+      {
+        "input": "output_3",
+        "expectedOutput": "EDF"
+      },
+      {
+        "input": "output_4",
+        "expectedOutput": "Spwwz+bz}wo"
+      }
+    ]
+  }
+]

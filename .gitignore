@@ -1,0 +1,14 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+
+# Generated data files — contain user credentials, never commit
+backend/data/users.json
+
+# Go build artifacts
+backend/server
