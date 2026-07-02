@@ -61,15 +61,29 @@ export default function App() {
   const [examTimeLimitMinutes, setExamTimeLimitMinutes] = useState(30);
   const [challenges, setChallenges] = useState<Challenge[]>([]);
 
-  // Fetch challenges once when reaching home
+  // Fetch challenges — on mount when home, on window focus, and every 60s
+  const fetchChallenges = useCallback(() => {
+    fetch("/api/challenges")
+      .then((r) => r.json())
+      .then((data: Challenge[]) => setChallenges(data))
+      .catch(() => {});
+  }, []);
+
   useEffect(() => {
-    if (view === "home" && challenges.length === 0) {
-      fetch("/api/challenges")
-        .then((r) => r.json())
-        .then((data: Challenge[]) => setChallenges(data))
-        .catch(() => {});
+    if (view === "home" || view === "practice" || view === "exam") {
+      fetchChallenges();
     }
-  }, [view, challenges.length]);
+  }, [view, fetchChallenges]);
+
+  useEffect(() => {
+    const onFocus = () => fetchChallenges();
+    window.addEventListener("focus", onFocus);
+    const interval = setInterval(fetchChallenges, 60_000);
+    return () => {
+      window.removeEventListener("focus", onFocus);
+      clearInterval(interval);
+    };
+  }, [fetchChallenges]);
 
   const handleAuth = (user: User, token: string) => {
     storeAuth(user, token);

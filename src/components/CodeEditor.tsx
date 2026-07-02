@@ -344,10 +344,24 @@ export default function CodeEditor({
     lines.push({ kind: "divider" });
 
     if (res.compilationError) {
-      lines.push({ kind: "error", text: "Build failed:" });
+      // Show a header line then every line of the compiler/runtime output
+      // exactly as Go would print it — file:line:col: message
+      lines.push({ kind: "error", text: "# build error" });
+      lines.push({ kind: "divider" });
       res.compilationError.split("\n").forEach(l => {
-        if (l.trim()) lines.push({ kind: "error", text: l });
+        if (l.trim()) {
+          // Lines like "ft_islower.go:5:2: undefined: fmt" stay as-is
+          lines.push({ kind: "error", text: l });
+        }
       });
+      // If there was also runtime stdout (panic trace etc.), show it too
+      if (res.stdout?.trim()) {
+        lines.push({ kind: "divider" });
+        lines.push({ kind: "dim", text: "output:" });
+        res.stdout.split("\n").forEach(l => {
+          if (l.trim()) lines.push({ kind: "error", text: l });
+        });
+      }
       return lines;
     }
 
