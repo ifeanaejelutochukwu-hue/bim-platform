@@ -20,10 +20,11 @@ RUN apk add --no-cache git
 
 WORKDIR /app
 
-# Copy only the compiled binary from the build stage
+# Copy the compiled binary from the build stage
 COPY --from=builder /app/server .
 
 # Copy seed challenges so the platform has questions on first boot
+RUN mkdir -p /data
 COPY data/challenges.json /data/challenges.json
 
 EXPOSE 8080
