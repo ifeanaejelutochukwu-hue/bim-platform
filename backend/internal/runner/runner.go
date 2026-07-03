@@ -1,16 +1,22 @@
 package runner
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"goexam/internal/store"
 )
 
 const goModContent = "module goexam\ngo 1.21\n"
+
+// execTimeout is the maximum time a student's program is allowed to run.
+// This prevents infinite loops from hanging the server.
+const execTimeout = 10 * time.Second
 
 // Run compiles and executes the student's code against the test template.
 // It creates a real Go module in a temp directory, builds it, runs it,
@@ -35,7 +41,6 @@ func Run(challengeID, filename, studentCode, mainCode string, testCases []store.
 
 	if standalone {
 		// ── Standalone mode: student writes the full main package ──────────
-		// Write the student's code directly as main.go
 		if err := os.WriteFile(filepath.Join(dir, "main.go"), []byte(studentCode), 0o644); err != nil {
 			return errorResult(fmt.Sprintf("failed to write main.go: %v", err))
 		}
@@ -55,8 +60,10 @@ func Run(challengeID, filename, studentCode, mainCode string, testCases []store.
 		}
 	}
 
-	// 5. Build (gives clean compiler errors before we try to run).
-	buildCmd := exec.Command("go", "build", "./...")
+	// 3. Build — gives clean compiler errors before we try to run.
+	buildCtx, buildCancel := context.WithTimeout(context.Background(), execTimeout)
+	defer buildCancel()
+	buildCmd := exec.CommandContext(buildCtx, "go", "build", "./...")
 	buildCmd.Dir = dir
 	buildOut, buildErr := buildCmd.CombinedOutput()
 	if buildErr != nil {
@@ -67,20 +74,34 @@ func Run(challengeID, filename, studentCode, mainCode string, testCases []store.
 		}
 	}
 
-	// 6. Run the program.
+	// 4. Run the program with a hard timeout.
 	runArgs := []string{"run", "."}
 	if args != "" {
 		for _, a := range strings.Fields(args) {
 			runArgs = append(runArgs, a)
 		}
 	}
-	runCmd := exec.Command("go", runArgs...)
+	runCtx, runCancel := context.WithTimeout(context.Background(), execTimeout)
+	defer runCancel()
+	runCmd := exec.CommandContext(runCtx, "go", runArgs...)
 	runCmd.Dir = dir
 	runOut, runErr := runCmd.CombinedOutput()
-	stdout := strings.TrimRight(string(runOut), "\n")
+
+	// Detect timeout
+	if runCtx.Err() == context.DeadlineExceeded {
+		return store.ExecutionResult{
+			CompilationError: fmt.Sprintf("program exceeded time limit (%s) — possible infinite loop", execTimeout),
+			TestResults:      noResultsFor(testCases),
+		}
+	}
+
+	// Normalise the raw output: replace all \r\n → \n, strip trailing newline.
+	rawStdout := strings.ReplaceAll(string(runOut), "\r\n", "\n")
+	rawStdout = strings.ReplaceAll(rawStdout, "\r", "\n")
+	stdout := strings.TrimRight(rawStdout, "\n")
 
 	if runErr != nil {
-		// Runtime panic or non-zero exit — show stderr but still run test matching.
+		// Runtime panic or non-zero exit — show the error output.
 		cleaned := cleanError(stdout, filename)
 		return store.ExecutionResult{
 			CompilationError: cleaned,
@@ -89,18 +110,28 @@ func Run(challengeID, filename, studentCode, mainCode string, testCases []store.
 		}
 	}
 
-	// 7. Compare output lines to expected outputs.
-	outputLines := strings.Split(stdout, "\n")
+	// 5. Split output into lines and compare against test cases.
+	//    Each output line is trimmed of any stray \r (Windows CRLF residue).
+	var outputLines []string
+	if stdout != "" {
+		for _, l := range strings.Split(stdout, "\n") {
+			outputLines = append(outputLines, strings.TrimRight(l, "\r"))
+		}
+	}
+
 	testResults := make([]store.TestResult, len(testCases))
 	allPassed := len(testCases) > 0
 
 	for i, tc := range testCases {
+		expected := strings.TrimRight(tc.ExpectedOutput, "\r\n")
+
 		var actual string
 		if i < len(outputLines) {
-			actual = strings.TrimRight(outputLines[i], "\r")
+			actual = outputLines[i]
 		}
-		expected := strings.TrimRight(tc.ExpectedOutput, "\r\n")
-		passed := actual == expected
+		// Trim leading/trailing whitespace from both sides for a lenient comparison
+		// that handles editors adding a trailing space, fmt.Println adding nothing, etc.
+		passed := strings.TrimSpace(actual) == strings.TrimSpace(expected)
 		if !passed {
 			allPassed = false
 		}
