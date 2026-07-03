@@ -273,38 +273,40 @@ export default function CodeEditor({
     const el = e.currentTarget;
     const start = el.selectionStart;
     const end = el.selectionEnd;
-    const value = studentCode;
+    const value = activeTab === "student" ? studentCode : mainCode;
+    const setter = activeTab === "student" ? setStudentCode : setMainCode;
+    const ref = activeTab === "student" ? textareaRef : mainTextareaRef;
     const charAfter = value[end] ?? "";
 
     // ── Tab ──────────────────────────────────────────────────────────
     if (e.key === "Tab") {
       e.preventDefault();
       const newCode = value.substring(0, start) + "\t" + value.substring(end);
-      setStudentCode(newCode);
+      setter(newCode);
       requestAnimationFrame(() => {
-        if (textareaRef.current) {
-          textareaRef.current.selectionStart = textareaRef.current.selectionEnd = start + 1;
+        if (ref.current) {
+          ref.current.selectionStart = ref.current.selectionEnd = start + 1;
         }
       });
       return;
     }
 
-    // ── Enter inside {} ───────────────────────────────────────────────
+    // ── Enter inside {} — indent the body ────────────────────────────
     if (e.key === "Enter") {
       const charBefore = value[start - 1] ?? "";
       if (charBefore === "{" && charAfter === "}") {
         e.preventDefault();
-        // Find the indentation of the current line
         const lineStart = value.lastIndexOf("\n", start - 1) + 1;
         const lineText = value.substring(lineStart, start);
-        const indent = lineText.match(/^(\t| )*/)?.[0] ?? "";
-        const insert = "\n" + indent + "\t" + "\n" + indent;
+        const indent = lineText.match(/^[\t ]*/)?.[0] ?? "";
+        const insert = "\n" + indent + "\t\n" + indent;
         const newCode = value.substring(0, start) + insert + value.substring(end);
-        const cursorAt = start + indent.length + 2; // after the \n + indent + \t
-        setStudentCode(newCode);
+        // cursor goes after the \n + indent + \t
+        const cursorAt = start + 1 + indent.length + 1;
+        setter(newCode);
         requestAnimationFrame(() => {
-          if (textareaRef.current) {
-            textareaRef.current.selectionStart = textareaRef.current.selectionEnd = cursorAt;
+          if (ref.current) {
+            ref.current.selectionStart = ref.current.selectionEnd = cursorAt;
           }
         });
         return;
@@ -314,14 +316,14 @@ export default function CodeEditor({
     // ── Backspace: delete matching pair ──────────────────────────────
     if (e.key === "Backspace" && start === end) {
       const charBefore = value[start - 1] ?? "";
-      const pairs: Record<string, string> = { "{": "}", "(": ")", "[": "]", '"': '"', "`": "`" };
+      const pairs: Record<string, string> = { "(": ")", "[": "]", '"': '"', "`": "`" };
       if (pairs[charBefore] && charAfter === pairs[charBefore]) {
         e.preventDefault();
         const newCode = value.substring(0, start - 1) + value.substring(end + 1);
-        setStudentCode(newCode);
+        setter(newCode);
         requestAnimationFrame(() => {
-          if (textareaRef.current) {
-            textareaRef.current.selectionStart = textareaRef.current.selectionEnd = start - 1;
+          if (ref.current) {
+            ref.current.selectionStart = ref.current.selectionEnd = start - 1;
           }
         });
         return;
@@ -329,28 +331,27 @@ export default function CodeEditor({
     }
 
     // ── Closing char: skip over if already there ──────────────────────
-    if ((e.key === "}" || e.key === ")" || e.key === "]") && start === end && charAfter === e.key) {
+    if ((e.key === ")" || e.key === "]") && start === end && charAfter === e.key) {
       e.preventDefault();
       requestAnimationFrame(() => {
-        if (textareaRef.current) {
-          textareaRef.current.selectionStart = textareaRef.current.selectionEnd = start + 1;
+        if (ref.current) {
+          ref.current.selectionStart = ref.current.selectionEnd = start + 1;
         }
       });
       return;
     }
 
-    // ── Auto-pair: {, (, [, ", ` ─────────────────────────────────────
-    const openPairs: Record<string, string> = { "{": "}", "(": ")", "[": "]", '"': '"', "`": "`" };
+    // ── Auto-pair: (, [, ", ` only — NOT { to avoid corrupting code ──
+    const openPairs: Record<string, string> = { "(": ")", "[": "]", '"': '"', "`": "`" };
     if (e.key in openPairs) {
-      // For quotes: don't double-insert if next char is already the same quote
       if ((e.key === '"' || e.key === "`") && charAfter === e.key) return;
       e.preventDefault();
       const close = openPairs[e.key];
       const newCode = value.substring(0, start) + e.key + close + value.substring(end);
-      setStudentCode(newCode);
+      setter(newCode);
       requestAnimationFrame(() => {
-        if (textareaRef.current) {
-          textareaRef.current.selectionStart = textareaRef.current.selectionEnd = start + 1;
+        if (ref.current) {
+          ref.current.selectionStart = ref.current.selectionEnd = start + 1;
         }
       });
       return;
@@ -574,6 +575,7 @@ export default function CodeEditor({
                 }}
                 onSelect={handleTextareaSelect}
                 onKeyUp={handleTextareaSelect}
+                onKeyDown={handleKeyDown}
                 style={{
                   ...editorStyle,
                   color: "transparent",
