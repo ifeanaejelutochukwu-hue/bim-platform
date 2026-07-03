@@ -19,9 +19,9 @@ export default function HomePage({ user, token: _token, onStartPractice, onStart
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
 
-      {/* ── Nav bar ────────────────────────────────────────────────────── */}
+      {/* ── Nav bar (same style as landing) ────────────────────────────── */}
       <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-        {/* BIM Logo — keep emerald untouched */}
+        {/* BIM Logo */}
         <div className="flex items-center gap-2.5">
           <div className="w-9 h-9 rounded-xl bg-white border-2 border-emerald-500 flex items-center justify-center shadow-[0_0_12px_rgba(16,185,129,0.2)]">
             <svg viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round"
@@ -36,7 +36,7 @@ export default function HomePage({ user, token: _token, onStartPractice, onStart
 
         <div className="flex items-center gap-3">
           {!isGuest && (
-            <span className="text-xs font-semibold text-[#800020] bg-[#800020]/8 border border-[#800020]/25 px-2.5 py-1 rounded-full font-mono">
+            <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full font-mono">
               {Math.round(user.xp)} XP
             </span>
           )}
@@ -65,15 +65,15 @@ export default function HomePage({ user, token: _token, onStartPractice, onStart
 
         {/* Welcome heading */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#800020]/8 border border-[#800020]/25 rounded-full mb-5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#800020]" />
-            <span className="text-xs font-semibold text-[#800020] uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-50 border border-emerald-200 rounded-full mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+            <span className="text-xs font-semibold text-emerald-700 uppercase tracking-wider">
               {isGuest ? "Guest Session" : "Dashboard"}
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl font-black text-gray-900 tracking-tight mb-3" style={{ letterSpacing: "-0.03em" }}>
             {isGuest ? "Welcome," : "Welcome back,"}{" "}
-            <span className="text-[#800020]">{displayName}</span>
+            <span className="text-emerald-600">{displayName}</span>
           </h1>
           <p className="text-gray-500 text-base max-w-md mx-auto">
             {isGuest
@@ -86,13 +86,11 @@ export default function HomePage({ user, token: _token, onStartPractice, onStart
         <div className="w-full max-w-3xl grid grid-cols-1 sm:grid-cols-2 gap-6">
 
           {/* ── Practice Checkpoint card ────────────────────────────── */}
-          <div
-            className="bg-white border-2 border-gray-100 hover:border-[#800020]/40 rounded-2xl p-7 flex flex-col gap-5 transition-all shadow-sm hover:shadow-md group cursor-pointer"
-            onClick={onStartPractice}
-          >
+          <div className="bg-white border-2 border-gray-100 hover:border-emerald-300 rounded-2xl p-7 flex flex-col gap-5 transition-all shadow-sm hover:shadow-md group cursor-pointer"
+            onClick={onStartPractice}>
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-[#800020]/6 border-2 border-[#800020]/20 flex items-center justify-center shrink-0 group-hover:border-[#800020]/40 group-hover:bg-[#800020]/10 transition-all">
-                <BookOpen className="w-6 h-6 text-[#800020]" />
+              <div className="w-12 h-12 rounded-xl bg-emerald-50 border-2 border-emerald-200 flex items-center justify-center shrink-0 group-hover:border-emerald-400 group-hover:bg-emerald-100 transition-all">
+                <BookOpen className="w-6 h-6 text-emerald-600" />
               </div>
               <div>
                 <h2 className="text-xl font-black text-gray-900 tracking-tight">Practice Checkpoint</h2>
@@ -109,8 +107,8 @@ export default function HomePage({ user, token: _token, onStartPractice, onStart
                 "Progress tracked per question",
               ].map(f => (
                 <li key={f} className="flex items-center gap-2">
-                  <span className="w-4 h-4 rounded-full bg-[#800020]/8 border border-[#800020]/30 flex items-center justify-center shrink-0">
-                    <svg className="w-2.5 h-2.5 text-[#800020]" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <span className="w-4 h-4 rounded-full bg-emerald-100 border border-emerald-300 flex items-center justify-center shrink-0">
+                    <svg className="w-2.5 h-2.5 text-emerald-600" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="10 3 5 8 2 5" />
                     </svg>
                   </span>
@@ -121,7 +119,7 @@ export default function HomePage({ user, token: _token, onStartPractice, onStart
 
             <button
               onClick={onStartPractice}
-              className="mt-auto w-full py-3 bg-[#800020] hover:bg-[#6b001b] text-white font-semibold text-sm rounded-xl transition-colors cursor-pointer flex items-center justify-center gap-2 shadow-sm shadow-[#800020]/20"
+              className="mt-auto w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm rounded-xl transition-colors cursor-pointer flex items-center justify-center gap-2 shadow-sm shadow-emerald-500/20"
             >
               Start Practicing <ArrowRight className="w-4 h-4" />
             </button>
@@ -160,6 +158,7 @@ export default function HomePage({ user, token: _token, onStartPractice, onStart
 
             {/* Exam config */}
             <div className="space-y-2.5">
+              {/* Number of questions */}
               <div className="flex items-center justify-between bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5">
                 <label className="text-sm text-gray-600 font-medium">Questions</label>
                 <div className="flex items-center gap-2">
@@ -177,6 +176,7 @@ export default function HomePage({ user, token: _token, onStartPractice, onStart
                 </div>
               </div>
 
+              {/* Time limit */}
               <div className="flex items-center justify-between bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5">
                 <label className="text-sm text-gray-600 font-medium">Time limit</label>
                 <div className="flex items-center gap-2">
@@ -213,7 +213,7 @@ export default function HomePage({ user, token: _token, onStartPractice, onStart
             </div>
             <div className="w-px h-10 bg-gray-200" />
             <div className="flex flex-col items-center gap-0.5">
-              <span className="text-2xl font-black text-[#800020]">{Math.round(user.xp)}</span>
+              <span className="text-2xl font-black text-emerald-600">{Math.round(user.xp)}</span>
               <span>total XP</span>
             </div>
           </div>
