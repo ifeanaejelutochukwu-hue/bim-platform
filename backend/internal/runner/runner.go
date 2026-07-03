@@ -15,6 +15,9 @@ const goModContent = "module goexam\ngo 1.21\n"
 // Run compiles and executes the student's code against the test template.
 // It creates a real Go module in a temp directory, builds it, runs it,
 // and compares the output line-by-line to the expected test case outputs.
+//
+// Standalone mode: if mainCode is empty, the student's code IS the main
+// package (no piscine subdirectory). Used for "write a program" challenges.
 func Run(challengeID, filename, studentCode, mainCode string, testCases []store.TestCase, args string) store.ExecutionResult {
 	// 1. Create a temp directory for this run.
 	dir, err := os.MkdirTemp("", "goexam-run-")
@@ -23,25 +26,33 @@ func Run(challengeID, filename, studentCode, mainCode string, testCases []store.
 	}
 	defer os.RemoveAll(dir)
 
-	piscineDir := filepath.Join(dir, "piscine")
-	if err := os.Mkdir(piscineDir, 0o755); err != nil {
-		return errorResult(fmt.Sprintf("failed to create piscine dir: %v", err))
-	}
-
 	// 2. Write go.mod
 	if err := os.WriteFile(filepath.Join(dir, "go.mod"), []byte(goModContent), 0o644); err != nil {
 		return errorResult(fmt.Sprintf("failed to write go.mod: %v", err))
 	}
 
-	// 3. Write student code as piscine/solution.go
-	if err := os.WriteFile(filepath.Join(piscineDir, "solution.go"), []byte(studentCode), 0o644); err != nil {
-		return errorResult(fmt.Sprintf("failed to write solution.go: %v", err))
-	}
+	standalone := strings.TrimSpace(mainCode) == ""
 
-	// 4. Write main.go — replace "piscine" import with the local module path.
-	fixedMain := strings.ReplaceAll(mainCode, `"piscine"`, `"goexam/piscine"`)
-	if err := os.WriteFile(filepath.Join(dir, "main.go"), []byte(fixedMain), 0o644); err != nil {
-		return errorResult(fmt.Sprintf("failed to write main.go: %v", err))
+	if standalone {
+		// ── Standalone mode: student writes the full main package ──────────
+		// Write the student's code directly as main.go
+		if err := os.WriteFile(filepath.Join(dir, "main.go"), []byte(studentCode), 0o644); err != nil {
+			return errorResult(fmt.Sprintf("failed to write main.go: %v", err))
+		}
+	} else {
+		// ── Library mode: student implements a piscine function ─────────────
+		piscineDir := filepath.Join(dir, "piscine")
+		if err := os.Mkdir(piscineDir, 0o755); err != nil {
+			return errorResult(fmt.Sprintf("failed to create piscine dir: %v", err))
+		}
+		if err := os.WriteFile(filepath.Join(piscineDir, "solution.go"), []byte(studentCode), 0o644); err != nil {
+			return errorResult(fmt.Sprintf("failed to write solution.go: %v", err))
+		}
+		// Write main.go — replace "piscine" import with the local module path.
+		fixedMain := strings.ReplaceAll(mainCode, `"piscine"`, `"goexam/piscine"`)
+		if err := os.WriteFile(filepath.Join(dir, "main.go"), []byte(fixedMain), 0o644); err != nil {
+			return errorResult(fmt.Sprintf("failed to write main.go: %v", err))
+		}
 	}
 
 	// 5. Build (gives clean compiler errors before we try to run).
@@ -114,12 +125,13 @@ func cleanError(raw, filename string) string {
 	lines := strings.Split(raw, "\n")
 	var out []string
 	for _, line := range lines {
-		// Skip the module header line "# goexam/piscine"
+		// Skip the module header line "# goexam/piscine" or "# goexam"
 		if strings.HasPrefix(line, "# goexam") {
 			continue
 		}
 		// Replace the internal path with the student filename
 		line = strings.ReplaceAll(line, "piscine/solution.go", filename)
+		line = strings.ReplaceAll(line, "main.go", filename)
 		if line != "" {
 			out = append(out, line)
 		}

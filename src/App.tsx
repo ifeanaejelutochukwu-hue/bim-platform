@@ -480,6 +480,7 @@ function Platform({ auth, challenges, onChallengesLoaded, onLogout, onGoHome, on
                 </ul>
               </div>
 
+              {currentChallenge.expectedSignature && (
               <div className="space-y-2">
                 <h3 className="font-semibold text-slate-300 text-xs uppercase tracking-wider">Expected function</h3>
                 <div className="h-px bg-slate-800/85" />
@@ -487,7 +488,9 @@ function Platform({ auth, challenges, onChallengesLoaded, onLogout, onGoHome, on
                   {currentChallenge.expectedSignature}
                 </pre>
               </div>
+              )}
 
+              {currentChallenge.testTemplate && (
               <div className="space-y-2">
                 <h3 className="font-semibold text-slate-100 text-sm">Usage</h3>
                 <div className="h-px bg-slate-800/85" />
@@ -496,6 +499,7 @@ function Platform({ auth, challenges, onChallengesLoaded, onLogout, onGoHome, on
                   {currentChallenge.testTemplate}
                 </pre>
               </div>
+              )}
 
               {currentChallenge.testCases.length > 0 && (
                 <div className="space-y-2">

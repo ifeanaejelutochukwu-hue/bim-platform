@@ -230,7 +230,6 @@ export default function CodeEditor({
     setProgramArgs("");
     setMainCode(challenge.testTemplate);
   }, [challenge]);
-
   // Terminal resize drag
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
@@ -470,18 +469,20 @@ export default function CodeEditor({
       <div className="flex items-center justify-between bg-[#15161d] border-b border-slate-800/60 px-3 py-1 shrink-0">
         <div className="flex items-center gap-1">
 
-          {/* main.go tab (read-only test template) */}
-          <button
-            onClick={() => setActiveTab("main")}
-            className={`flex items-center gap-2 px-3 py-1.5 text-xs font-mono font-medium border-r border-slate-800/60 transition-all ${
-              activeTab === "main"
-                ? "bg-[#1e1f29] text-slate-200 border-t-2 border-t-indigo-400"
-                : "text-slate-500 hover:text-slate-300"
-            }`}
-          >
-            <span>main.go</span>
-            <Info className="w-3.5 h-3.5 text-slate-500" />
-          </button>
+          {/* main.go tab — only shown for piscine (function) challenges */}
+          {challenge.testTemplate && (
+            <button
+              onClick={() => setActiveTab("main")}
+              className={`flex items-center gap-2 px-3 py-1.5 text-xs font-mono font-medium border-r border-slate-800/60 transition-all ${
+                activeTab === "main"
+                  ? "bg-[#1e1f29] text-slate-200 border-t-2 border-t-indigo-400"
+                  : "text-slate-500 hover:text-slate-300"
+              }`}
+            >
+              <span>main.go</span>
+              <Info className="w-3.5 h-3.5 text-slate-500" />
+            </button>
+          )}
 
           {/* student file tab */}
           <button

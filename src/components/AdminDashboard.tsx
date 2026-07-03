@@ -119,19 +119,28 @@ function parseQuestion(raw: string): Partial<Challenge> | string {
   // ── 3. Extract expected signature ─────────────────────────────────
   // Find func line(s) in the text (skip package main context)
   const funcLineIdx = lines.findIndex(l => l.trim().startsWith("func ") && !/func main\(\)/.test(l));
-  if (funcLineIdx >= 0) {
+  const isStandalone = funcLineIdx < 0; // no piscine function — student writes full main package
+
+  if (!isStandalone && funcLineIdx >= 0) {
     const funcLine = lines[funcLineIdx].trim();
     // Build clean stub: `func Foo(...) RetType {\n\n}`
     const stubBody = funcLine.replace(/\{.*\}$/, "").replace(/\{\s*$/, "").trim();
     result.expectedSignature = `${stubBody} {\n\n}`;
+  } else {
+    result.expectedSignature = ""; // standalone — no function signature to show
   }
 
   // ── 4 & 7. Build initialStudentCode ───────────────────────────────
-  if (result.expectedSignature) {
+  if (!isStandalone && result.expectedSignature) {
     const retDefault = inferReturnDefault(result.expectedSignature);
     const sig = result.expectedSignature.replace(/\{\s*\n?\s*\}/, "").trim();
     result.initialStudentCode =
       `package piscine\n\n${sig} {\n\t// Write your code here\n\t${retDefault}\n}`;
+  } else {
+    // Standalone: student writes the whole main package
+    result.initialStudentCode =
+      `package main\n\nimport "fmt"\n\nfunc main() {\n\t// Write your code here\n\tfmt.Println("")\n}`;
+    result.testTemplate = ""; // empty = standalone mode in runner
   }
 
   // ── 5. Extract main.go test template ──────────────────────────────
@@ -265,12 +274,13 @@ function PasteImportView({
       category: parsed.category ?? "REQUIRED",
       difficulty: parsed.difficulty ?? 2,
       xp: parsed.xp ?? "100.0 B",
-      filesToSubmit: parsed.filesToSubmit ?? "solution.go",
+      filesToSubmit: parsed.filesToSubmit ?? "main.go",
       allowedFunctions: parsed.allowedFunctions ?? "--allow-builtin",
       instructions: parsed.instructions ?? ["Implement the function."],
-      expectedSignature: parsed.expectedSignature ?? "func Solution() {\n\n}",
-      testTemplate: parsed.testTemplate ?? 'package main\n\nimport (\n\t"fmt"\n\t"piscine"\n)\n\nfunc main() {\n\tfmt.Println("TODO")\n}',
-      initialStudentCode: parsed.initialStudentCode ?? `package piscine\n\n${parsed.expectedSignature ?? "func Solution() {\n\t// Write your code here\n}"}`,
+      expectedSignature: parsed.expectedSignature ?? "",
+      // Empty testTemplate = standalone mode (student writes full main package)
+      testTemplate: parsed.testTemplate ?? "",
+      initialStudentCode: parsed.initialStudentCode ?? `package main\n\nimport "fmt"\n\nfunc main() {\n\t// Write your code here\n\tfmt.Println("")\n}`,
       testCases: parsed.testCases ?? [],
     };
     try {
@@ -484,9 +494,11 @@ function emptyChallenge(): Challenge {
     id: "", level: 1, title: "", category: "REQUIRED", difficulty: 2,
     xp: "100.0 B", filesToSubmit: "", allowedFunctions: "--allow-builtin",
     instructions: [""],
-    expectedSignature: "func YourFunction() {\n\n}",
-    testTemplate: 'package main\n\nimport (\n\t"fmt"\n\t"piscine"\n)\n\nfunc main() {\n\tfmt.Println(piscine.YourFunction())\n}',
-    initialStudentCode: "package piscine\n\nfunc YourFunction() {\n\t// Write your code here\n}",
+    expectedSignature: "",
+    // Leave testTemplate empty for standalone "write a program" challenges.
+    // Fill it in for function-based challenges that use package piscine.
+    testTemplate: "",
+    initialStudentCode: "package main\n\nimport \"fmt\"\n\nfunc main() {\n\t// Write your code here\n\tfmt.Println(\"\")\n}",
     testCases: [{ input: "", expectedOutput: "" }],
   };
 }
