@@ -23,9 +23,11 @@ WORKDIR /app
 # Copy the compiled binary from the build stage
 COPY --from=builder /app/server .
 
-# Copy seed challenges so the platform has questions on first boot
-RUN mkdir -p /data
-COPY data/challenges.json /data/challenges.json
+# Copy seed challenges to a separate location — /data is a persistent volume
+# that gets mounted at runtime and would hide anything copied there.
+# The server copies from /data-seed on first boot if /data/challenges.json is missing.
+RUN mkdir -p /data-seed
+COPY data/challenges.json /data-seed/challenges.json
 
 EXPOSE 8080
 

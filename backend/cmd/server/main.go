@@ -25,6 +25,25 @@ func main() {
 		dataDir = filepath.Join(filepath.Dir(exe), "..", "data")
 	}
 
+	// ── Ensure data dir exists and seed challenges if missing ─────────────
+	if err := os.MkdirAll(dataDir, 0o755); err != nil {
+		log.Fatalf("create data dir: %v", err)
+	}
+	challengesPath := filepath.Join(dataDir, "challenges.json")
+	if _, err := os.Stat(challengesPath); os.IsNotExist(err) {
+		// Volume is empty on first boot — copy the bundled seed file
+		seedPath := "/data-seed/challenges.json"
+		if seed, err := os.ReadFile(seedPath); err == nil {
+			if err := os.WriteFile(challengesPath, seed, 0o644); err != nil {
+				log.Printf("warn: could not write seed challenges: %v", err)
+			} else {
+				log.Println("✅  Seeded challenges.json from bundle")
+			}
+		} else {
+			log.Printf("warn: seed file not found at %s: %v", seedPath, err)
+		}
+	}
+
 	// ── Open stores ───────────────────────────────────────────────────────
 	cs, err := store.NewChallengeStore(filepath.Join(dataDir, "challenges.json"))
 	if err != nil {
