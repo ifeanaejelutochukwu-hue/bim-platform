@@ -134,8 +134,30 @@ function parseQuestion(raw: string): Partial<Challenge> | string {
   if (!isStandalone && result.expectedSignature) {
     const retDefault = inferReturnDefault(result.expectedSignature);
     const sig = result.expectedSignature.replace(/\{\s*\n?\s*\}/, "").trim();
+
+    // Try to detect imports the student will likely need from the question text.
+    // Look for import blocks near the function definition (not inside package main).
+    const importHintRx = /import\s*\(\s*([\s\S]*?)\s*\)/g;
+    const studentImports: string[] = [];
+    let importMatch: RegExpExecArray | null;
+    while ((importMatch = importHintRx.exec(text)) !== null) {
+      const block = importMatch[1];
+      // Skip if it's clearly the main.go block (contains "piscine")
+      if (block.includes("piscine") || block.includes("fmt")) continue;
+      block.split("\n").forEach(l => {
+        const pkg = l.trim().replace(/^"/, "").replace(/"$/, "");
+        if (pkg && !pkg.includes("piscine") && !pkg.includes("fmt")) {
+          studentImports.push(`\t"${pkg}"`);
+        }
+      });
+    }
+
+    const importBlock = studentImports.length > 0
+      ? `\nimport (\n${studentImports.join("\n")}\n)\n`
+      : "";
+
     result.initialStudentCode =
-      `package piscine\n\n${sig} {\n\t// Write your code here\n\t${retDefault}\n}`;
+      `package piscine\n${importBlock}\n${sig} {\n\t// Write your code here\n\t${retDefault}\n}`;
   } else {
     // Standalone: student writes the whole main package
     result.initialStudentCode =

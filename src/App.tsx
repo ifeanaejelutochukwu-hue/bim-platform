@@ -8,6 +8,29 @@ import AdminDashboard from "./components/AdminDashboard";
 import { ChevronRight, Check, BookOpen, X, LogOut, Shield } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
+// ── View/session persistence helpers ─────────────────────────────────────
+function getStoredView(): AppView {
+  try {
+    const v = localStorage.getItem("goexam_view") as AppView | null;
+    // Only restore meaningful views — don't restore exam mid-session
+    if (v && ["home", "practice", "landing"].includes(v)) return v;
+  } catch { /* ignore */ }
+  return "landing";
+}
+function storeView(v: AppView) {
+  try { localStorage.setItem("goexam_view", v); } catch { /* ignore */ }
+}
+function getStoredFlags(): { adminMode: boolean; isGuest: boolean } {
+  try {
+    const raw = localStorage.getItem("goexam_flags");
+    if (raw) return JSON.parse(raw);
+  } catch { /* ignore */ }
+  return { adminMode: false, isGuest: false };
+}
+function storeFlags(adminMode: boolean, isGuest: boolean) {
+  try { localStorage.setItem("goexam_flags", JSON.stringify({ adminMode, isGuest })); } catch { /* ignore */ }
+}
+
 // ── Auth helpers ──────────────────────────────────────────────────────────
 function getStoredAuth(): { user: User; token: string } | null {
   try {
@@ -51,15 +74,25 @@ export function BimLogo({ size = "sm" }: { size?: "sm" | "lg" }) {
 // ── App root ──────────────────────────────────────────────────────────────
 export default function App() {
   const [auth, setAuth] = useState<{ user: User; token: string } | null>(() => getStoredAuth());
-  const [isGuest, setIsGuest] = useState(false);
-  const [view, setView] = useState<AppView>(() => {
-    const stored = getStoredAuth();
-    return stored ? "home" : "landing";
+  const [isGuest, setIsGuest] = useState(() => {
+    if (!getStoredAuth()) return false;
+    return getStoredFlags().isGuest;
   });
-  const [adminMode, setAdminMode] = useState(false);
+  const [view, setView] = useState<AppView>(() => {
+    if (!getStoredAuth()) return "landing";
+    return getStoredView();
+  });
+  const [adminMode, setAdminMode] = useState(() => {
+    if (!getStoredAuth()) return false;
+    return getStoredFlags().adminMode;
+  });
   const [numExamQuestions, setNumExamQuestions] = useState(10);
   const [examTimeLimitMinutes, setExamTimeLimitMinutes] = useState(30);
   const [challenges, setChallenges] = useState<Challenge[]>([]);
+
+  // Persist view and flags whenever they change
+  useEffect(() => { storeView(view); }, [view]);
+  useEffect(() => { storeFlags(adminMode, isGuest); }, [adminMode, isGuest]);
 
   // Fetch challenges — on mount when home, on window focus, and every 60s
   const fetchChallenges = useCallback(() => {
@@ -105,6 +138,8 @@ export default function App() {
 
   const handleLogout = () => {
     clearAuth();
+    localStorage.removeItem("goexam_view");
+    localStorage.removeItem("goexam_flags");
     setAuth(null);
     setIsGuest(false);
     setAdminMode(false);
