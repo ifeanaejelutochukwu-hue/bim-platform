@@ -56,7 +56,7 @@ export default function AuthPage({ onAuth, onQuickVisit }: AuthPageProps) {
 
       {/* ── Nav bar ───────────────────────────────────────────────────── */}
       <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-        {/* BIM Logo */}
+        {/* BIM Logo — keep emerald untouched */}
         <div className="flex items-center gap-2.5">
           <div className="w-9 h-9 rounded-xl bg-white border-2 border-emerald-500 flex items-center justify-center shadow-[0_0_12px_rgba(16,185,129,0.2)]">
             <svg viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round"
@@ -77,7 +77,7 @@ export default function AuthPage({ onAuth, onQuickVisit }: AuthPageProps) {
           </button>
           <button
             onClick={() => openForm("register")}
-            className="px-4 py-2 text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-500 rounded-lg transition-colors cursor-pointer shadow-sm"
+            className="px-4 py-2 text-sm font-semibold text-white bg-[#800020] hover:bg-[#6b001b] rounded-lg transition-colors cursor-pointer shadow-sm"
           >
             Get Started
           </button>
@@ -87,7 +87,7 @@ export default function AuthPage({ onAuth, onQuickVisit }: AuthPageProps) {
       {/* ── Hero ──────────────────────────────────────────────────────── */}
       <main className="flex-1 flex flex-col items-center justify-center px-4 py-16 text-center">
 
-        {/* Badge */}
+        {/* Badge — logo, keep emerald */}
         <div className="inline-flex items-center gap-3 mb-8">
           <div className="w-12 h-12 rounded-2xl bg-white border-2 border-emerald-500 flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.25)]">
             <svg viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round"
@@ -103,7 +103,7 @@ export default function AuthPage({ onAuth, onQuickVisit }: AuthPageProps) {
         {/* Headline */}
         <h1 className="text-5xl sm:text-6xl font-black text-gray-900 tracking-tight mb-5 max-w-2xl" style={{ letterSpacing: "-0.03em" }}>
           Code. Practice.{" "}
-          <span className="text-emerald-600">Succeed.</span>
+          <span className="text-[#800020]">Succeed.</span>
         </h1>
         <p className="text-lg text-gray-500 max-w-xl mb-8 leading-relaxed">
           Write real code, get real results. Every submission runs against the actual compiler — no tricks, no shortcuts.
@@ -112,7 +112,7 @@ export default function AuthPage({ onAuth, onQuickVisit }: AuthPageProps) {
         {/* Feature pills */}
         <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
           {["✓ Real compiler", "✓ Instant feedback", "✓ Exam simulation"].map(pill => (
-            <span key={pill} className="px-4 py-1.5 bg-white border border-emerald-200 text-emerald-700 text-sm font-semibold rounded-full shadow-sm">
+            <span key={pill} className="px-4 py-1.5 bg-white border border-[#800020]/30 text-[#800020] text-sm font-semibold rounded-full shadow-sm">
               {pill}
             </span>
           ))}
@@ -128,7 +128,7 @@ export default function AuthPage({ onAuth, onQuickVisit }: AuthPageProps) {
           </button>
           <button
             onClick={() => openForm("register")}
-            className="w-full sm:w-auto px-8 py-3.5 text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-500 rounded-xl transition-colors cursor-pointer shadow-md shadow-emerald-500/25"
+            className="w-full sm:w-auto px-8 py-3.5 text-sm font-semibold text-white bg-[#800020] hover:bg-[#6b001b] rounded-xl transition-colors cursor-pointer shadow-md shadow-[#800020]/25"
           >
             Create Account
           </button>
@@ -180,7 +180,7 @@ export default function AuthPage({ onAuth, onQuickVisit }: AuthPageProps) {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
-                  className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#800020] focus:ring-2 focus:ring-[#800020]/10 transition-all"
                 />
               </div>
 
@@ -196,7 +196,7 @@ export default function AuthPage({ onAuth, onQuickVisit }: AuthPageProps) {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="Choose a username"
-                    className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#800020] focus:ring-2 focus:ring-[#800020]/10 transition-all"
                   />
                 </div>
               )}
@@ -212,7 +212,7 @@ export default function AuthPage({ onAuth, onQuickVisit }: AuthPageProps) {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder={formMode === "register" ? "At least 6 characters" : "Your password"}
-                  className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#800020] focus:ring-2 focus:ring-[#800020]/10 transition-all"
                 />
               </div>
 
@@ -225,7 +225,7 @@ export default function AuthPage({ onAuth, onQuickVisit }: AuthPageProps) {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-all text-sm cursor-pointer"
+                className="w-full py-2.5 bg-[#800020] hover:bg-[#6b001b] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-all text-sm cursor-pointer"
               >
                 {loading
                   ? "Please wait…"
@@ -239,14 +239,14 @@ export default function AuthPage({ onAuth, onQuickVisit }: AuthPageProps) {
               {formMode === "login" ? (
                 <>
                   Don't have an account?{" "}
-                  <button onClick={() => openForm("register")} className="text-emerald-600 hover:underline cursor-pointer">
+                  <button onClick={() => openForm("register")} className="text-[#800020] hover:underline cursor-pointer">
                     Create one
                   </button>
                 </>
               ) : (
                 <>
                   Already have an account?{" "}
-                  <button onClick={() => openForm("login")} className="text-emerald-600 hover:underline cursor-pointer">
+                  <button onClick={() => openForm("login")} className="text-[#800020] hover:underline cursor-pointer">
                     Sign in
                   </button>
                 </>
