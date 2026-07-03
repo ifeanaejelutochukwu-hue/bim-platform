@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Challenge, ExecutionResult } from "../types";
-import { Trash2, Check, Info, Play, Send } from "lucide-react";
+import { Trash2, Check, Info, Play, Send, RotateCcw } from "lucide-react";
 
 // ---------------------------------------------------------------------------
 // VS Code Dark+ Go syntax highlighter
@@ -495,9 +495,25 @@ export default function CodeEditor({
           </button>
         </div>
 
-        <span className="text-[9px] bg-indigo-500/10 text-indigo-400/85 border border-indigo-500/15 font-mono px-2 py-0.5 rounded mr-1">
-          EDITABLE
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="text-[9px] bg-indigo-500/10 text-indigo-400/85 border border-indigo-500/15 font-mono px-2 py-0.5 rounded">
+            EDITABLE
+          </span>
+          {activeTab === "student" && (
+            <button
+              onClick={() => {
+                if (confirm("Reset to initial code? Your current code will be lost.")) {
+                  setStudentCode(challenge.initialStudentCode);
+                }
+              }}
+              className="flex items-center gap-1 text-[11px] font-mono text-slate-600 hover:text-amber-400 transition-colors cursor-pointer"
+              title="Reset to initial code"
+            >
+              <RotateCcw className="w-3 h-3" />
+              <span>reset</span>
+            </button>
+          )}
+        </div>
       </div>
 
       {/* ── Code editor body ─────────────────────────────────────────────── */}
