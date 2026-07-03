@@ -143,45 +143,56 @@ function parseQuestion(raw: string): Partial<Challenge> | string {
     result.testTemplate = ""; // empty = standalone mode in runner
   }
 
-  // ── 5. Extract main.go test template ──────────────────────────────
-  // Try markdown code fences first
-  const codeBlockRx = /```(?:go|golang)?\n?([\s\S]*?)```/g;
-  let codeMatch: RegExpExecArray | null;
-  let mainBlock = "";
-  codeBlockRx.lastIndex = 0;
-  while ((codeMatch = codeBlockRx.exec(text)) !== null) {
-    if (codeMatch[1].includes("package main")) {
-      mainBlock = codeMatch[1].trim();
-      break;
-    }
-  }
-  // Fall back: plain-text squished main block
-  if (!mainBlock) {
-    const mainLineIdx = lines.findIndex(l => /package main/.test(l));
-    if (mainLineIdx >= 0) {
-      mainBlock = reconstructGoMain(lines.slice(mainLineIdx).join(" ").trim());
-    }
-  }
-  if (mainBlock) {
-    // Ensure piscine import and qualified calls
-    if (!mainBlock.includes('"piscine"')) {
-      mainBlock = mainBlock.replace(
-        /import\s*\(\n?([\s\S]*?)\n?\)/,
-        (_, inner) => `import (\n${inner.trim()}\n\t"piscine"\n)`
-      );
-      if (!mainBlock.includes("import")) {
-        mainBlock = mainBlock.replace(
-          /package main\n/,
-          `package main\n\nimport (\n\t"fmt"\n\t"piscine"\n)\n`
-        );
+  // ── 5. Extract main.go test template (only for piscine/function challenges) ──
+  if (!isStandalone) {
+    // Try markdown code fences first
+    const codeBlockRx = /```(?:go|golang)?\n?([\s\S]*?)```/g;
+    let codeMatch: RegExpExecArray | null;
+    let mainBlock = "";
+    codeBlockRx.lastIndex = 0;
+    while ((codeMatch = codeBlockRx.exec(text)) !== null) {
+      if (codeMatch[1].includes("package main")) {
+        mainBlock = codeMatch[1].trim();
+        break;
       }
     }
-    // Qualify unqualified calls to the parsed function name
-    if (result.title) {
-      const fnRx = new RegExp(`(?<!piscine\\.)\\b(${result.title})\\(`, "g");
-      mainBlock = mainBlock.replace(fnRx, `piscine.$1(`);
+    // Fall back: plain-text squished main block
+    if (!mainBlock) {
+      const mainLineIdx = lines.findIndex(l => /package main/.test(l));
+      if (mainLineIdx >= 0) {
+        mainBlock = reconstructGoMain(lines.slice(mainLineIdx).join(" ").trim());
+      }
     }
-    result.testTemplate = mainBlock;
+    if (mainBlock) {
+      // Step 1: qualify unqualified calls FIRST (before import injection)
+      if (result.title) {
+        const fnRx = new RegExp(`(?<!piscine\\.)\\b(${result.title})\\(`, "g");
+        mainBlock = mainBlock.replace(fnRx, `piscine.$1(`);
+      }
+      // Step 2: now ensure piscine import exists (calls are already qualified)
+      if (!mainBlock.includes('"piscine"')) {
+        // Try to inject into existing import block
+        if (/import\s*\(/.test(mainBlock)) {
+          mainBlock = mainBlock.replace(
+            /import\s*\(\n?([\s\S]*?)\n?\)/,
+            (_: string, inner: string) => `import (\n${inner.trim()}\n\t"piscine"\n)`
+          );
+        } else if (/import\s+"/.test(mainBlock)) {
+          // Single import — convert to block
+          mainBlock = mainBlock.replace(
+            /import\s+"([^"]+)"/,
+            `import (\n\t"$1"\n\t"piscine"\n)`
+          );
+        } else {
+          // No import at all
+          mainBlock = mainBlock.replace(
+            /package main\n/,
+            `package main\n\nimport (\n\t"fmt"\n\t"piscine"\n)\n`
+          );
+        }
+      }
+      result.testTemplate = mainBlock;
+    }
   }
 
   // ── 6. Extract expected output lines ──────────────────────────────
