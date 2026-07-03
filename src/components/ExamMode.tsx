@@ -9,7 +9,7 @@ interface ExamModeProps {
   timeLimitMinutes: number;
   user: User | null;
   token: string | null;
-  onRun: (challengeId: string, studentCode: string, args: string) => Promise<ExecutionResult>;
+  onRun: (challengeId: string, studentCode: string, args: string, mainCode: string) => Promise<ExecutionResult>;
   onExit: () => void;
 }
 
@@ -203,10 +203,10 @@ export default function ExamMode({ challenges, numQuestions, timeLimitMinutes, u
     setStudentCodes((prev) => ({ ...prev, [currentChallenge.id]: code }));
   };
 
-  const handleRunCurrent = async (args: string): Promise<ExecutionResult> => {
+  const handleRunCurrent = async (args: string, mainCode: string): Promise<ExecutionResult> => {
     if (!currentChallenge) throw new Error("No challenge");
     const code = studentCodes[currentChallenge.id] ?? currentChallenge.initialStudentCode;
-    const result = await onRun(currentChallenge.id, code, args);
+    const result = await onRun(currentChallenge.id, code, args, mainCode);
     // If all tests pass, mark this question as solved so Next unlocks
     const allPassed = result.success ||
       (result.testResults != null &&
@@ -229,7 +229,7 @@ export default function ExamMode({ challenges, numQuestions, timeLimitMinutes, u
       const code = studentCodes[challenge.id] ?? challenge.initialStudentCode;
       let passed = false;
       try {
-        const result = await onRun(challenge.id, code, "");
+        const result = await onRun(challenge.id, code, "", challenge.testTemplate);
         passed = !!(result.success || (result.testResults && result.testResults.every((t) => t.passed)));
       } catch {
         passed = false;
@@ -440,7 +440,7 @@ export default function ExamMode({ challenges, numQuestions, timeLimitMinutes, u
             studentCode={currentCode}
             setStudentCode={handleUpdateCode}
             onRun={handleRunCurrent}
-            onSubmit={handleRunCurrent as unknown as () => Promise<ExecutionResult & { leaderboard?: unknown }>}
+            onSubmit={(mainCode: string) => handleRunCurrent("", mainCode)}
             hideSubmit={true}
           />
         </div>

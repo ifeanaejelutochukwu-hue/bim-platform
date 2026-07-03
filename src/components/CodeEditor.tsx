@@ -93,7 +93,7 @@ function Terminal({
   }, [lines, isRunning, isSubmitting]);
 
   return (
-    <div className="bg-[#0d0e14] border border-[#1e2030] rounded-lg p-4 min-h-[180px] max-h-[280px] overflow-y-auto font-mono text-[13px] select-text">
+    <div className="bg-[#0d0e14] border border-[#1e2030] rounded-lg p-4 overflow-y-auto font-mono text-[13px] select-text flex-1 min-h-[80px]">
       {(isRunning || isSubmitting) && (
         <div className="flex items-center gap-2 text-indigo-400 py-1 animate-pulse">
           <span className="inline-block w-2 h-2 rounded-full bg-indigo-400 animate-ping shrink-0" />
@@ -192,8 +192,8 @@ interface CodeEditorProps {
   challenge: Challenge;
   studentCode: string;
   setStudentCode: (code: string) => void;
-  onRun: (args: string) => Promise<ExecutionResult>;
-  onSubmit: () => Promise<ExecutionResult & { leaderboard?: any }>;
+  onRun: (args: string, mainCode: string) => Promise<ExecutionResult>;
+  onSubmit: (mainCode: string) => Promise<ExecutionResult & { leaderboard?: any }>;
   hideSubmit?: boolean;
 }
 
@@ -206,13 +206,20 @@ export default function CodeEditor({
   hideSubmit = false,
 }: CodeEditorProps) {
   const [activeTab, setActiveTab] = useState<"main" | "student">("student");
+  const [mainCode, setMainCode] = useState(challenge.testTemplate);
   const [programArgs, setProgramArgs] = useState("");
   const [termLines, setTermLines] = useState<TermLine[]>([]);
   const [isRunning, setIsRunning] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [cursorPos, setCursorPos] = useState({ line: 1, col: 1 });
+  // Resizable terminal: percentage of total height used by the editor body (vs terminal panel)
+  const [editorHeightPct, setEditorHeightPct] = useState(55);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const termDragging = useRef(false);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const mainTextareaRef = useRef<HTMLTextAreaElement>(null);
+  const mainHighlightRef = useRef<HTMLPreElement>(null);
   const numbersRef = useRef<HTMLDivElement>(null);
   const highlightRef = useRef<HTMLPreElement>(null);
 
@@ -221,9 +228,28 @@ export default function CodeEditor({
     setActiveTab("student");
     setTermLines([]);
     setProgramArgs("");
+    setMainCode(challenge.testTemplate);
   }, [challenge]);
 
-  const codeToShow = activeTab === "student" ? studentCode : challenge.testTemplate;
+  // Terminal resize drag
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      if (!termDragging.current || !containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const pct = ((e.clientY - rect.top) / rect.height) * 100;
+      setEditorHeightPct(Math.min(85, Math.max(25, pct)));
+    };
+    const onUp = () => {
+      termDragging.current = false;
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
+    };
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+    return () => { window.removeEventListener("mousemove", onMove); window.removeEventListener("mouseup", onUp); };
+  }, []);
+
+  const codeToShow = activeTab === "student" ? studentCode : mainCode;
   const lineCount = codeToShow.split("\n").length;
 
   // Sync scroll between textarea, highlight layer, and line numbers
@@ -409,7 +435,7 @@ export default function CodeEditor({
     setTermLines([]);
     const t0 = Date.now();
     try {
-      const res = await onRun(programArgs);
+      const res = await onRun(programArgs, mainCode);
       setTermLines(buildTermLines(res, "run", Date.now() - t0));
     } catch (err: any) {
       setTermLines([
@@ -426,7 +452,7 @@ export default function CodeEditor({
     setTermLines([]);
     const t0 = Date.now();
     try {
-      const res = await onSubmit();
+      const res = await onSubmit(mainCode);
       setTermLines(buildTermLines(res, "submit", Date.now() - t0));
     } catch (err: any) {
       setTermLines([
@@ -438,7 +464,7 @@ export default function CodeEditor({
   };
 
   return (
-    <div className="flex flex-col bg-[#1e1f29] border border-slate-800 rounded-xl overflow-hidden shadow-2xl h-full select-none">
+    <div ref={containerRef} className="flex flex-col bg-[#1e1f29] border border-slate-800 rounded-xl overflow-hidden shadow-2xl h-full select-none">
 
       {/* ── Tab bar ─────────────────────────────────────────────────────── */}
       <div className="flex items-center justify-between bg-[#15161d] border-b border-slate-800/60 px-3 py-1 shrink-0">
@@ -472,12 +498,12 @@ export default function CodeEditor({
         </div>
 
         <span className="text-[9px] bg-indigo-500/10 text-indigo-400/85 border border-indigo-500/15 font-mono px-2 py-0.5 rounded mr-1">
-          {activeTab === "student" ? "EDITABLE" : "READ ONLY"}
+          EDITABLE
         </span>
       </div>
 
       {/* ── Code editor body ─────────────────────────────────────────────── */}
-      <div className="relative flex flex-1 bg-[#1e1f29] font-mono overflow-hidden min-h-[260px]">
+      <div className="relative flex bg-[#1e1f29] font-mono overflow-hidden" style={{ height: `${editorHeightPct}%`, minHeight: "120px" }}>
         {/* Line numbers */}
         <div
           ref={numbersRef}
@@ -526,17 +552,69 @@ export default function CodeEditor({
               />
             </>
           ) : (
-            <pre
-              style={{ ...editorStyle, color: "#d4d4d4", backgroundColor: "transparent" }}
-              className="absolute inset-0 w-full h-full overflow-auto whitespace-pre select-text"
-              dangerouslySetInnerHTML={{ __html: highlightGo(challenge.testTemplate) }}
-            />
+            <>
+              {/* Highlighted layer for main.go */}
+              <pre
+                ref={mainHighlightRef}
+                style={{ ...editorStyle, color: "#d4d4d4", backgroundColor: "transparent" }}
+                className="absolute inset-0 w-full h-full whitespace-pre overflow-hidden pointer-events-none select-none"
+                dangerouslySetInnerHTML={{ __html: highlightGo(mainCode) }}
+              />
+              {/* Editable textarea for main.go */}
+              <textarea
+                ref={mainTextareaRef}
+                value={mainCode}
+                onChange={(e) => {
+                  setMainCode(e.target.value);
+                  if (mainHighlightRef.current && mainTextareaRef.current) {
+                    mainHighlightRef.current.scrollTop = mainTextareaRef.current.scrollTop;
+                  }
+                }}
+                onScroll={(e) => {
+                  const { scrollTop, scrollLeft } = e.currentTarget;
+                  if (numbersRef.current) numbersRef.current.scrollTop = scrollTop;
+                  if (mainHighlightRef.current) {
+                    mainHighlightRef.current.scrollTop = scrollTop;
+                    mainHighlightRef.current.scrollLeft = scrollLeft;
+                  }
+                }}
+                onSelect={handleTextareaSelect}
+                onKeyUp={handleTextareaSelect}
+                style={{
+                  ...editorStyle,
+                  color: "transparent",
+                  WebkitTextFillColor: "transparent",
+                  backgroundColor: "transparent",
+                  caretColor: "#f1f5f9",
+                }}
+                className="absolute inset-0 w-full h-full outline-none resize-none overflow-auto whitespace-pre focus:ring-0 select-text"
+                spellCheck={false}
+                autoCorrect="off"
+                autoCapitalize="off"
+              />
+            </>
           )}
         </div>
       </div>
 
+      {/* ── Terminal resize handle ─────────────────────────────────────────── */}
+      <div
+        onMouseDown={(e) => {
+          e.preventDefault();
+          termDragging.current = true;
+          document.body.style.cursor = "row-resize";
+          document.body.style.userSelect = "none";
+        }}
+        className="h-1.5 shrink-0 bg-slate-800/60 hover:bg-indigo-500/60 transition-colors cursor-row-resize flex items-center justify-center group"
+        title="Drag to resize terminal"
+      >
+        <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+          {[0,1,2,3,4].map(i => <div key={i} className="w-1 h-1 rounded-full bg-indigo-400/80" />)}
+        </div>
+      </div>
+
       {/* ── Terminal panel ────────────────────────────────────────────────── */}
-      <div className="bg-[#13141a] border-t border-slate-800/80 p-4 font-sans shrink-0 select-text space-y-3">
+      <div className="bg-[#13141a] border-t border-slate-800/80 p-4 font-sans select-text space-y-3 overflow-y-auto flex-1">
 
         {/* Args row */}
         <div className="flex items-center gap-3">

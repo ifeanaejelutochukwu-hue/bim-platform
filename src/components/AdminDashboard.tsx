@@ -68,10 +68,17 @@ function parseQuestion(raw: string): Partial<Challenge> | string {
     if (headingLine) {
       result.title = headingLine.replace(/^#+\s*/, "").trim();
     } else {
-      // Plain-text: first non-empty line before "Instructions"
-      const instrIdx = lines.findIndex(l => /^instructions$/i.test(l.trim()));
-      const candidates = (instrIdx > 0 ? lines.slice(0, instrIdx) : lines).filter(l => l.trim());
-      result.title = candidates[0]?.trim() ?? "";
+      // Plain-text squished: first word that looks like a Go function name (PascalCase or camelCase)
+      // e.g. "only1Instructions..." → title is "only1"
+      const squishMatch = text.match(/^([a-zA-Z0-9]+?)(?=[A-Z]|Instructions?|Usage)/);
+      if (squishMatch && squishMatch[1].length > 1) {
+        result.title = squishMatch[1];
+      } else {
+        // Last fallback: first non-empty line before "Instructions"
+        const instrIdx = lines.findIndex(l => /^instructions$/i.test(l.trim()));
+        const candidates = (instrIdx > 0 ? lines.slice(0, instrIdx) : lines).filter(l => l.trim());
+        result.title = candidates[0]?.trim() ?? "";
+      }
     }
   }
 
@@ -94,7 +101,19 @@ function parseQuestion(raw: string): Partial<Challenge> | string {
     }
     result.instructions = instrLines.length > 0 ? instrLines : ["Implement the function as described."];
   } else {
-    result.instructions = ["Implement the function as described."];
+    // Squished plain-text: extract between "Instructions" and "Usage"
+    const squishInstrMatch = text.match(/instructions?\s*([\s\S]*?)(?:usage|func\s)/i);
+    if (squishInstrMatch) {
+      const instrText = squishInstrMatch[1].trim();
+      if (instrText) {
+        // Split on sentence boundaries for readability
+        result.instructions = instrText.split(/(?<=[.!?])\s+/).map(s => s.trim()).filter(Boolean);
+      } else {
+        result.instructions = ["Implement the function as described."];
+      }
+    } else {
+      result.instructions = ["Implement the function as described."];
+    }
   }
 
   // ── 3. Extract expected signature ─────────────────────────────────
@@ -164,7 +183,20 @@ function parseQuestion(raw: string): Partial<Challenge> | string {
   if (outMatch) {
     outputLines = outMatch[1].split("\n").map(l => l.trim()).filter(l => l && !l.startsWith("$") && l !== "```");
   }
-  // Fall back: lines between `$ go run .` and next `$`
+
+  // Multiple "$ go run . [args]" → output_line blocks (e.g. the "only1" style)
+  if (outputLines.length === 0) {
+    const multiRunRx = /\$\s*go run\s*\.?[^\n]*\n([^\n$]+)/g;
+    let m: RegExpExecArray | null;
+    const multiLines: string[] = [];
+    while ((m = multiRunRx.exec(text)) !== null) {
+      const out = m[1].trim();
+      if (out && !out.startsWith("$")) multiLines.push(out);
+    }
+    if (multiLines.length > 0) outputLines = multiLines;
+  }
+
+  // Fall back: lines between first `$ go run .` and next `$`
   if (outputLines.length === 0) {
     const goRunRx = /\$\s*go run\s*\.?\s*\n([\s\S]*?)(?=\$|$)/;
     const goRunMatch = text.match(goRunRx);

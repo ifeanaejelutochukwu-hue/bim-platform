@@ -148,7 +148,8 @@ export default function App() {
     const handleExamRun = async (
       challengeId: string,
       studentCode: string,
-      args: string
+      args: string,
+      mainCode: string
     ): Promise<ExecutionResult> => {
       const challenge = challenges.find((c) => c.id === challengeId);
       if (!challenge) throw new Error("Challenge not found");
@@ -161,7 +162,7 @@ export default function App() {
           challengeId: challenge.id,
           filename: challenge.filesToSubmit,
           studentCode,
-          mainCode: challenge.testTemplate,
+          mainCode,
           testCases: challenge.testCases,
           args,
         }),
@@ -268,7 +269,7 @@ function Platform({ auth, challenges, onChallengesLoaded, onLogout, onGoHome, on
     setSolutions((p) => ({ ...p, [currentChallenge.id]: code }));
   };
 
-  const handleRun = async (args: string): Promise<ExecutionResult> => {
+  const handleRun = async (args: string, mainCode: string): Promise<ExecutionResult> => {
     if (!currentChallenge) throw new Error("No challenge selected");
     const headers: Record<string, string> = { "Content-Type": "application/json" };
     if (auth?.token) headers["Authorization"] = `Bearer ${auth.token}`;
@@ -279,7 +280,7 @@ function Platform({ auth, challenges, onChallengesLoaded, onLogout, onGoHome, on
         challengeId: currentChallenge.id,
         filename: currentChallenge.filesToSubmit,
         studentCode: currentCode,
-        mainCode: currentChallenge.testTemplate,
+        mainCode,
         testCases: currentChallenge.testCases,
         args,
       }),
@@ -288,7 +289,7 @@ function Platform({ auth, challenges, onChallengesLoaded, onLogout, onGoHome, on
     return res.json();
   };
 
-  const handleSubmit = async (): Promise<ExecutionResult & { leaderboard?: unknown }> => {
+  const handleSubmit = async (mainCode: string): Promise<ExecutionResult & { leaderboard?: unknown }> => {
     if (!currentChallenge) throw new Error("No challenge selected");
     const headers: Record<string, string> = { "Content-Type": "application/json" };
     if (auth?.token) headers["Authorization"] = `Bearer ${auth.token}`;
@@ -300,7 +301,7 @@ function Platform({ auth, challenges, onChallengesLoaded, onLogout, onGoHome, on
         filename: currentChallenge.filesToSubmit,
         xpValue: currentChallenge.xp,
         studentCode: currentCode,
-        mainCode: currentChallenge.testTemplate,
+        mainCode,
         testCases: currentChallenge.testCases,
       }),
     });
