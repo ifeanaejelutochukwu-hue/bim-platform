@@ -223,13 +223,14 @@ export default function CodeEditor({
   const numbersRef = useRef<HTMLDivElement>(null);
   const highlightRef = useRef<HTMLPreElement>(null);
 
-  // Reset terminal & tab on challenge switch
+  // Reset terminal & tab on challenge switch — key on id only to avoid
+  // resetting when parent re-renders with a new object reference
   useEffect(() => {
     setActiveTab("student");
-    setTermLines([]);
     setProgramArgs("");
     setMainCode(challenge.testTemplate);
-  }, [challenge]);
+    // Don't clear termLines here — keep last output visible
+  }, [challenge.id]);
   // Terminal resize drag
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
@@ -260,7 +261,6 @@ export default function CodeEditor({
       highlightRef.current.scrollLeft = scrollLeft;
     }
   };
-
   const handleTextareaSelect = (e: React.SyntheticEvent<HTMLTextAreaElement>) => {
     const el = e.currentTarget;
     const before = el.value.substring(0, el.selectionStart);
@@ -431,15 +431,13 @@ export default function CodeEditor({
   const handleRun = async () => {
     if (isRunning || isSubmitting) return;
     setIsRunning(true);
-    setTermLines([]);
+    // Don't clear — keep previous output visible while running
     const t0 = Date.now();
     try {
       const res = await onRun(programArgs, mainCode);
       setTermLines(buildTermLines(res, "run", Date.now() - t0));
     } catch (err: any) {
-      setTermLines([
-        { kind: "error", text: `Connection error: ${err.message}` },
-      ]);
+      setTermLines([{ kind: "error", text: `Connection error: ${err.message}` }]);
     } finally {
       setIsRunning(false);
     }
@@ -448,15 +446,13 @@ export default function CodeEditor({
   const handleSubmit = async () => {
     if (isRunning || isSubmitting) return;
     setIsSubmitting(true);
-    setTermLines([]);
+    // Don't clear — keep previous output visible while submitting
     const t0 = Date.now();
     try {
       const res = await onSubmit(mainCode);
       setTermLines(buildTermLines(res, "submit", Date.now() - t0));
     } catch (err: any) {
-      setTermLines([
-        { kind: "error", text: `Connection error: ${err.message}` },
-      ]);
+      setTermLines([{ kind: "error", text: `Connection error: ${err.message}` }]);
     } finally {
       setIsSubmitting(false);
     }
@@ -522,14 +518,15 @@ export default function CodeEditor({
         <div className="flex-1 relative overflow-hidden">
           {activeTab === "student" ? (
             <>
-              {/* Highlighted layer */}
+              {/* Highlighted layer — must mirror textarea scroll exactly */}
               <pre
                 ref={highlightRef}
+                aria-hidden="true"
                 style={{ ...editorStyle, color: "#d4d4d4", backgroundColor: "transparent" }}
-                className="absolute inset-0 w-full h-full whitespace-pre overflow-hidden pointer-events-none select-none"
-                dangerouslySetInnerHTML={{ __html: highlightGo(studentCode) }}
+                className="absolute inset-0 w-full h-full whitespace-pre overflow-auto pointer-events-none select-none"
+                dangerouslySetInnerHTML={{ __html: highlightGo(studentCode) + "\n" }}
               />
-              {/* Editable textarea */}
+              {/* Editable textarea — transparent text, visible caret */}
               <textarea
                 ref={textareaRef}
                 value={studentCode}
@@ -557,20 +554,16 @@ export default function CodeEditor({
               {/* Highlighted layer for main.go */}
               <pre
                 ref={mainHighlightRef}
+                aria-hidden="true"
                 style={{ ...editorStyle, color: "#d4d4d4", backgroundColor: "transparent" }}
-                className="absolute inset-0 w-full h-full whitespace-pre overflow-hidden pointer-events-none select-none"
-                dangerouslySetInnerHTML={{ __html: highlightGo(mainCode) }}
+                className="absolute inset-0 w-full h-full whitespace-pre overflow-auto pointer-events-none select-none"
+                dangerouslySetInnerHTML={{ __html: highlightGo(mainCode) + "\n" }}
               />
               {/* Editable textarea for main.go */}
               <textarea
                 ref={mainTextareaRef}
                 value={mainCode}
-                onChange={(e) => {
-                  setMainCode(e.target.value);
-                  if (mainHighlightRef.current && mainTextareaRef.current) {
-                    mainHighlightRef.current.scrollTop = mainTextareaRef.current.scrollTop;
-                  }
-                }}
+                onChange={(e) => setMainCode(e.target.value)}
                 onScroll={(e) => {
                   const { scrollTop, scrollLeft } = e.currentTarget;
                   if (numbersRef.current) numbersRef.current.scrollTop = scrollTop;
