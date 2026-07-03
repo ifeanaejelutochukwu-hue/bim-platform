@@ -135,7 +135,8 @@ function parseQuestion(raw: string): Partial<Challenge> | string {
   // Students must figure out what packages they need themselves.
   if (!isStandalone && result.expectedSignature) {
     const retDefault = inferReturnDefault(result.expectedSignature);
-    const sig = result.expectedSignature.replace(/\{\s*\n?\s*\}/, "").trim();
+    // Strip everything from the first { to the end (handles {\n\n}, {\n}, {}, etc.)
+    const sig = result.expectedSignature.replace(/\s*\{[\s\S]*$/, "").trim();
     result.initialStudentCode =
       `package piscine\n\n${sig} {\n\t// Write your code here\n\t${retDefault}\n}`;
   } else {

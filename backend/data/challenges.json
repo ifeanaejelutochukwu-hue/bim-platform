@@ -164,45 +164,25 @@
   {
     "id": "checknumber",
     "level": 10,
-    "title": "checknumber",
+    "title": "CheckNumber",
     "category": "REQUIRED",
     "difficulty": 2,
     "xp": "100.0 B",
     "filesToSubmit": "checknumber.go",
     "allowedFunctions": "--allow-builtin",
     "instructions": [
-      "checknumber",
-      "Instructions",
-      "Write a function that takes a string as an argument and returns true if the string contains any number, otherwise return false.",
-      "Expected function",
-      "func CheckNumber(arg string) bool {",
-      "}",
-      "Usage",
-      "Here is a possible program to test your function:",
-      "package main",
-      "import (",
-      "\"fmt\"",
-      ")",
-      "func main() {",
-      "fmt.Println(CheckNumber(\"Hello\"))",
-      "fmt.Println(CheckNumber(\"Hello1\"))",
-      "}",
-      "And its output:",
-      "$ go run .",
-      "false",
-      "true",
-      "$"
+      "Write a function that takes a string as an argument and returns true if the string contains any number, otherwise return false."
     ],
-    "expectedSignature": "func Solution() {\n\n}",
-    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(\"TODO\")\n}",
-    "initialStudentCode": "package piscine\n\nfunc Solution() {\n\t// Write your code here\n}",
+    "expectedSignature": "func CheckNumber(arg string) bool {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.CheckNumber(\"Hello\"))\n\tfmt.Println(piscine.CheckNumber(\"Hello1\"))\n}",
+    "initialStudentCode": "package piscine\n\nfunc CheckNumber(arg string) bool {\n\t// Write your code here\n\treturn false\n}",
     "testCases": [
       {
-        "input": "test_1",
+        "input": "Hello",
         "expectedOutput": "false"
       },
       {
-        "input": "test_2",
+        "input": "Hello1",
         "expectedOutput": "true"
       }
     ]
@@ -217,26 +197,28 @@
     "filesToSubmit": "hashcode.go",
     "allowedFunctions": "--allow-builtin",
     "instructions": [
-      "Write a function called HashCode() that takes a string as an argument and returns a new hashed string.  The hash equation is computed as follows: (ASCII of current character + size of the string) % 127, ensuring the result falls within the ASCII range of 0 to 127.  If the resulting character is unprintable add 33 to it."
+      "Write a function called HashCode() that takes a string as an argument and returns a new hashed string.",
+      "The hash equation is computed as follows: (ASCII of current character + size of the string) % 127, ensuring the result falls within the ASCII range of 0 to 127.",
+      "If the resulting character is unprintable add 33 to it."
     ],
-    "expectedSignature": "func HashCode(dec string) string {\n}",
-    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n    \"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(HashCode(\"A\"))\n\tfmt.Println(HashCode(\"AB\"))\n\tfmt.Println(HashCode(\"BAC\"))\n\tfmt.Println(HashCode(\"Hello World\"))\n}",
-    "initialStudentCode": "func HashCode(dec string) string {\n}",
+    "expectedSignature": "func HashCode(dec string) string {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.HashCode(\"A\"))\n\tfmt.Println(piscine.HashCode(\"AB\"))\n\tfmt.Println(piscine.HashCode(\"BAC\"))\n\tfmt.Println(piscine.HashCode(\"Hello World\"))\n}",
+    "initialStudentCode": "package piscine\n\nfunc HashCode(dec string) string {\n\t// Write your code here\n\treturn \"\"\n}",
     "testCases": [
       {
-        "input": "output_1",
+        "input": "A",
         "expectedOutput": "B"
       },
       {
-        "input": "output_2",
+        "input": "AB",
         "expectedOutput": "CD"
       },
       {
-        "input": "output_3",
+        "input": "BAC",
         "expectedOutput": "EDF"
       },
       {
-        "input": "output_4",
+        "input": "Hello World",
         "expectedOutput": "Spwwz+bz}wo"
       }
     ]
