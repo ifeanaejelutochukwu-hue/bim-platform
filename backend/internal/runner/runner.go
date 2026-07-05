@@ -129,9 +129,29 @@ func Run(challengeID, filename, studentCode, mainCode string, testCases []store.
 		if i < len(outputLines) {
 			actual = outputLines[i]
 		}
-		// Trim leading/trailing whitespace from both sides for a lenient comparison
-		// that handles editors adding a trailing space, fmt.Println adding nothing, etc.
-		passed := strings.TrimSpace(actual) == strings.TrimSpace(expected)
+
+		var passed bool
+		if strings.Contains(expected, "...") {
+			// Truncated expected output — the question displays "A, B, ..., Y, Z"
+			// Split on " ..., " and check that actual starts with the prefix
+			// and ends with the suffix. This handles challenges where the full
+			// output is too long to type out but has a known start and end.
+			parts := strings.SplitN(expected, "...", 2)
+			prefix := strings.TrimSpace(parts[0])
+			suffix := ""
+			if len(parts) == 2 {
+				suffix = strings.TrimSpace(parts[1])
+				// strip leading ", " from suffix if present
+				suffix = strings.TrimPrefix(suffix, ", ")
+			}
+			actualTrimmed := strings.TrimSpace(actual)
+			passed = strings.HasPrefix(actualTrimmed, prefix) &&
+				(suffix == "" || strings.HasSuffix(actualTrimmed, suffix))
+		} else {
+			// Exact match (trim surrounding whitespace only)
+			passed = strings.TrimSpace(actual) == strings.TrimSpace(expected)
+		}
+
 		if !passed {
 			allPassed = false
 		}
