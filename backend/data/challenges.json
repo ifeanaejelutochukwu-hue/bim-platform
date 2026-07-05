@@ -472,5 +472,453 @@
     "testCases": [
       { "input": "output", "expectedOutput": "987, 986, 985, 984, 983, 982, 981, 980, 976, ..., 310, 210" }
     ]
+  },
+  {
+    "id": "printstr",
+    "level": 22,
+    "title": "PrintStr",
+    "category": "REQUIRED",
+    "difficulty": 1,
+    "xp": "50.0 B",
+    "filesToSubmit": "printstr.go",
+    "allowedFunctions": "z01",
+    "instructions": [
+      "Write a function that prints one by one the characters of a string on the screen."
+    ],
+    "expectedSignature": "func PrintStr(s string) {\n\n}",
+    "testTemplate": "package main\n\nimport \"piscine\"\n\nfunc main() {\n\tpiscine.PrintStr(\"Hello World!\")\n}",
+    "initialStudentCode": "package piscine\n\nimport \"fmt\"\n\nfunc PrintStr(s string) {\n\t// Write your code here\n\t_ = fmt.Sprintf\n}",
+    "testCases": [
+      { "input": "Hello World!", "expectedOutput": "Hello World!" }
+    ]
+  },
+  {
+    "id": "basicatoi",
+    "level": 23,
+    "title": "BasicAtoi",
+    "category": "REQUIRED",
+    "difficulty": 1,
+    "xp": "60.0 B",
+    "filesToSubmit": "basicatoi.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function that simulates the behaviour of the Atoi function in Go.",
+      "Atoi transforms a number defined as a string into a number defined as an int.",
+      "For this exercise only valid strings will be tested — they will only contain digit characters.",
+      "The handling of the signs + or - does not have to be taken into account.",
+      "This function will only have to return the int."
+    ],
+    "expectedSignature": "func BasicAtoi(s string) int {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.BasicAtoi(\"12345\"))\n\tfmt.Println(piscine.BasicAtoi(\"0000000012345\"))\n\tfmt.Println(piscine.BasicAtoi(\"000000\"))\n}",
+    "initialStudentCode": "package piscine\n\nfunc BasicAtoi(s string) int {\n\t// Write your code here\n\treturn 0\n}",
+    "testCases": [
+      { "input": "12345", "expectedOutput": "12345" },
+      { "input": "0000000012345", "expectedOutput": "12345" },
+      { "input": "000000", "expectedOutput": "0" }
+    ]
+  },
+  {
+    "id": "basicatoi2",
+    "level": 24,
+    "title": "BasicAtoi2",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "70.0 B",
+    "filesToSubmit": "basicatoi2.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function that simulates the behaviour of the Atoi function in Go.",
+      "Atoi transforms a number defined as a string into a number defined as an int.",
+      "Atoi returns 0 if the string is not considered as a valid number.",
+      "Non-valid string chains will be tested — some will contain non-digit characters.",
+      "The handling of the signs + or - does not have to be taken into account.",
+      "This function will only have to return the int."
+    ],
+    "expectedSignature": "func BasicAtoi2(s string) int {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.BasicAtoi2(\"12345\"))\n\tfmt.Println(piscine.BasicAtoi2(\"0000000012345\"))\n\tfmt.Println(piscine.BasicAtoi2(\"012 345\"))\n\tfmt.Println(piscine.BasicAtoi2(\"Hello World!\"))\n}",
+    "initialStudentCode": "package piscine\n\nfunc BasicAtoi2(s string) int {\n\t// Write your code here\n\treturn 0\n}",
+    "testCases": [
+      { "input": "12345", "expectedOutput": "12345" },
+      { "input": "0000000012345", "expectedOutput": "12345" },
+      { "input": "012 345", "expectedOutput": "0" },
+      { "input": "Hello World!", "expectedOutput": "0" }
+    ]
+  }
+,
+  {
+    "id": "atoibase",
+    "level": 25,
+    "title": "AtoiBase",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "90.0 B",
+    "filesToSubmit": "atoibase.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function that takes two arguments: s (a numeric string in a given base) and base (a string representing all the different digits that can represent a numeric value).",
+      "Return the integer value of s in the given base.",
+      "If the base is not valid it returns 0.",
+      "Validity rules: A base must contain at least 2 characters. Each character must be unique. A base should not contain + or - characters.",
+      "The function does not have to manage negative numbers."
+    ],
+    "expectedSignature": "func AtoiBase(s string, base string) int {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.AtoiBase(\"125\", \"0123456789\"))\n\tfmt.Println(piscine.AtoiBase(\"1111101\", \"01\"))\n\tfmt.Println(piscine.AtoiBase(\"7D\", \"0123456789ABCDEF\"))\n\tfmt.Println(piscine.AtoiBase(\"bbbbbab\", \"-ab\"))\n}",
+    "initialStudentCode": "package piscine\n\nfunc AtoiBase(s string, base string) int {\n\t// Write your code here\n\treturn 0\n}",
+    "testCases": [
+      { "input": "125 base10", "expectedOutput": "125" },
+      { "input": "1111101 base2", "expectedOutput": "125" },
+      { "input": "7D base16", "expectedOutput": "125" },
+      { "input": "bbbbbab invalid-base", "expectedOutput": "0" }
+    ]
+  },
+  {
+    "id": "itoabase",
+    "level": 26,
+    "title": "ItoaBase",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "90.0 B",
+    "filesToSubmit": "itoabase.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function that converts an int value to a string using the specified base and returns this string.",
+      "The base is expressed as an int, from 2 to 16.",
+      "The characters comprising the base are the digits 0 to 9, followed by uppercase letters A to F.",
+      "For example, base 4 is equivalent to '0123' and base 16 is '0123456789ABCDEF'.",
+      "If the value is negative, the resulting string must be preceded by a minus sign -.",
+      "Only valid inputs will be tested."
+    ],
+    "expectedSignature": "func ItoaBase(value, base int) string {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.ItoaBase(125, 10))\n\tfmt.Println(piscine.ItoaBase(125, 2))\n\tfmt.Println(piscine.ItoaBase(125, 16))\n\tfmt.Println(piscine.ItoaBase(-42, 16))\n}",
+    "initialStudentCode": "package piscine\n\nfunc ItoaBase(value, base int) string {\n\t// Write your code here\n\treturn \"\"\n}",
+    "testCases": [
+      { "input": "125 base10", "expectedOutput": "125" },
+      { "input": "125 base2", "expectedOutput": "1111101" },
+      { "input": "125 base16", "expectedOutput": "7D" },
+      { "input": "-42 base16", "expectedOutput": "-2A" }
+    ]
+  },
+  {
+    "id": "isalpha",
+    "level": 27,
+    "title": "IsAlpha",
+    "category": "REQUIRED",
+    "difficulty": 1,
+    "xp": "50.0 B",
+    "filesToSubmit": "isalpha.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function that returns true if the string passed as the parameter only contains alphanumerical characters or is empty, otherwise returns false."
+    ],
+    "expectedSignature": "func IsAlpha(s string) bool {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.IsAlpha(\"Hello! How are you?\"))\n\tfmt.Println(piscine.IsAlpha(\"HelloHowareyou\"))\n\tfmt.Println(piscine.IsAlpha(\"What's this 4?\"))\n\tfmt.Println(piscine.IsAlpha(\"Whatsthis4\"))\n}",
+    "initialStudentCode": "package piscine\n\nfunc IsAlpha(s string) bool {\n\t// Write your code here\n\treturn false\n}",
+    "testCases": [
+      { "input": "Hello! How are you?", "expectedOutput": "false" },
+      { "input": "HelloHowareyou", "expectedOutput": "true" },
+      { "input": "What's this 4?", "expectedOutput": "false" },
+      { "input": "Whatsthis4", "expectedOutput": "true" }
+    ]
+  },
+  {
+    "id": "iscapitalized",
+    "level": 28,
+    "title": "IsCapitalized",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "70.0 B",
+    "filesToSubmit": "iscapitalized.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function IsCapitalized() that takes a string as an argument and returns true if each word in the string begins with either an uppercase letter or a non-alphabetic character.",
+      "If any of the words begin with a lowercase letter return false.",
+      "If the string is empty return false."
+    ],
+    "expectedSignature": "func IsCapitalized(s string) bool {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.IsCapitalized(\"Hello! How are you?\"))\n\tfmt.Println(piscine.IsCapitalized(\"Hello How Are You\"))\n\tfmt.Println(piscine.IsCapitalized(\"Whats 4this 100K?\"))\n\tfmt.Println(piscine.IsCapitalized(\"\"))\n}",
+    "initialStudentCode": "package piscine\n\nfunc IsCapitalized(s string) bool {\n\t// Write your code here\n\treturn false\n}",
+    "testCases": [
+      { "input": "Hello! How are you?", "expectedOutput": "false" },
+      { "input": "Hello How Are You", "expectedOutput": "true" },
+      { "input": "Whats 4this 100K?", "expectedOutput": "true" },
+      { "input": "", "expectedOutput": "false" }
+    ]
+  }
+,
+  {
+    "id": "issorted",
+    "level": 29,
+    "title": "IsSorted",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "90.0 B",
+    "filesToSubmit": "issorted.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function IsSorted() that returns true if the slice of int is sorted, otherwise returns false.",
+      "The function f passed as an argument (func(a, b int) int) returns a positive int if a > b, 0 if equal, and a negative int otherwise.",
+      "Your solution file must also include a helper Compare function: func Compare(a, b int) int that returns a - b."
+    ],
+    "expectedSignature": "func IsSorted(f func(a, b int) int, a []int) bool {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\ta1 := []int{0, 1, 2, 3, 4, 5}\n\ta2 := []int{0, 2, 1, 3}\n\tfmt.Println(piscine.IsSorted(piscine.Compare, a1))\n\tfmt.Println(piscine.IsSorted(piscine.Compare, a2))\n}",
+    "initialStudentCode": "package piscine\n\nfunc Compare(a, b int) int {\n\treturn a - b\n}\n\nfunc IsSorted(f func(a, b int) int, a []int) bool {\n\t// Write your code here\n\treturn false\n}",
+    "testCases": [
+      { "input": "[0,1,2,3,4,5]", "expectedOutput": "true" },
+      { "input": "[0,2,1,3]", "expectedOutput": "false" }
+    ]
+  },
+  {
+    "id": "appendrange",
+    "level": 30,
+    "title": "AppendRange",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "70.0 B",
+    "filesToSubmit": "appendrange.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function that takes an int min and an int max as parameters.",
+      "The function should return a slice of ints with all the values between the min and max.",
+      "Min is included, and max is excluded.",
+      "If min is greater than or equal to max, a nil slice is returned.",
+      "make is not allowed for this exercise."
+    ],
+    "expectedSignature": "func AppendRange(min, max int) []int {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.AppendRange(5, 10))\n\tfmt.Println(piscine.AppendRange(10, 5))\n\tfmt.Println(piscine.AppendRange(0, 1))\n}",
+    "initialStudentCode": "package piscine\n\nfunc AppendRange(min, max int) []int {\n\t// Write your code here\n\treturn nil\n}",
+    "testCases": [
+      { "input": "5,10", "expectedOutput": "[5 6 7 8 9]" },
+      { "input": "10,5", "expectedOutput": "[]" },
+      { "input": "0,1", "expectedOutput": "[0]" }
+    ]
+  },
+  {
+    "id": "makerange",
+    "level": 31,
+    "title": "MakeRange",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "70.0 B",
+    "filesToSubmit": "makerange.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function that takes an int min and an int max as parameters.",
+      "The function must return a slice of ints with all the values between min and max.",
+      "Min is included, and max is excluded.",
+      "If min is greater than or equal to max, a nil slice is returned.",
+      "append is not allowed for this exercise."
+    ],
+    "expectedSignature": "func MakeRange(min, max int) []int {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.MakeRange(5, 10))\n\tfmt.Println(piscine.MakeRange(10, 5))\n\tfmt.Println(piscine.MakeRange(0, 3))\n}",
+    "initialStudentCode": "package piscine\n\nfunc MakeRange(min, max int) []int {\n\t// Write your code here\n\treturn nil\n}",
+    "testCases": [
+      { "input": "5,10", "expectedOutput": "[5 6 7 8 9]" },
+      { "input": "10,5", "expectedOutput": "[]" },
+      { "input": "0,3", "expectedOutput": "[0 1 2]" }
+    ]
+  },
+  {
+    "id": "sortintegertable",
+    "level": 32,
+    "title": "SortIntegerTable",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "75.0 B",
+    "filesToSubmit": "sortintegertable.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function that reorders a slice of int in ascending order."
+    ],
+    "expectedSignature": "func SortIntegerTable(table []int) {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\ts1 := []int{5, 4, 3, 2, 1, 0}\n\tpiscine.SortIntegerTable(s1)\n\tfmt.Println(s1)\n\ts2 := []int{3, 1, 4, 1, 5, 9, 2, 6}\n\tpiscine.SortIntegerTable(s2)\n\tfmt.Println(s2)\n}",
+    "initialStudentCode": "package piscine\n\nfunc SortIntegerTable(table []int) {\n\t// Write your code here\n}",
+    "testCases": [
+      { "input": "[5,4,3,2,1,0]", "expectedOutput": "[0 1 2 3 4 5]" },
+      { "input": "[3,1,4,1,5,9,2,6]", "expectedOutput": "[1 1 2 3 4 5 6 9]" }
+    ]
+  }
+,
+  {
+    "id": "concatparams",
+    "level": 33,
+    "title": "ConcatParams",
+    "category": "REQUIRED",
+    "difficulty": 1,
+    "xp": "50.0 B",
+    "filesToSubmit": "concatparams.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function that takes a slice of strings and returns them concatenated as a single string.",
+      "Each argument is separated by a newline (\\n)."
+    ],
+    "expectedSignature": "func ConcatParams(args []string) string {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\ttest := []string{\"Hello\", \"how\", \"are\", \"you?\"}\n\tfmt.Println(piscine.ConcatParams(test))\n}",
+    "initialStudentCode": "package piscine\n\nfunc ConcatParams(args []string) string {\n\t// Write your code here\n\treturn \"\"\n}",
+    "testCases": [
+      { "input": "[Hello,how,are,you?]", "expectedOutput": "Hello\nhow\nare\nyou?" }
+    ]
+  },
+  {
+    "id": "splitwhitespaces",
+    "level": 34,
+    "title": "SplitWhiteSpaces",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "70.0 B",
+    "filesToSubmit": "splitwhitespaces.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function that separates the words of a string and puts them in a string slice.",
+      "The separators are spaces, tabs and newlines."
+    ],
+    "expectedSignature": "func SplitWhiteSpaces(s string) []string {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Printf(\"%#v\\n\", piscine.SplitWhiteSpaces(\"Hello how are you?\"))\n\tfmt.Printf(\"%#v\\n\", piscine.SplitWhiteSpaces(\"one\\ttwo\\nthree\"))\n}",
+    "initialStudentCode": "package piscine\n\nfunc SplitWhiteSpaces(s string) []string {\n\t// Write your code here\n\treturn nil\n}",
+    "testCases": [
+      { "input": "Hello how are you?", "expectedOutput": "[]string{\"Hello\", \"how\", \"are\", \"you?\"}" },
+      { "input": "one\ttwo\nthree", "expectedOutput": "[]string{\"one\", \"two\", \"three\"}" }
+    ]
+  },
+  {
+    "id": "collatzcountdown",
+    "level": 35,
+    "title": "CollatzCountdown",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "75.0 B",
+    "filesToSubmit": "collatzcountdown.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function CollatzCountdown that returns the number of steps necessary to reach 1 using the Collatz conjecture.",
+      "It must return -1 if start is equal to 0 or negative.",
+      "The Collatz rule: if n is even, divide by 2; if n is odd, multiply by 3 and add 1. Repeat until reaching 1."
+    ],
+    "expectedSignature": "func CollatzCountdown(start int) int {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.CollatzCountdown(12))\n\tfmt.Println(piscine.CollatzCountdown(1))\n\tfmt.Println(piscine.CollatzCountdown(0))\n\tfmt.Println(piscine.CollatzCountdown(-5))\n\tfmt.Println(piscine.CollatzCountdown(27))\n}",
+    "initialStudentCode": "package piscine\n\nfunc CollatzCountdown(start int) int {\n\t// Write your code here\n\treturn 0\n}",
+    "testCases": [
+      { "input": "12", "expectedOutput": "9" },
+      { "input": "1", "expectedOutput": "0" },
+      { "input": "0", "expectedOutput": "-1" },
+      { "input": "-5", "expectedOutput": "-1" },
+      { "input": "27", "expectedOutput": "111" }
+    ]
+  },
+  {
+    "id": "reduceint",
+    "level": 36,
+    "title": "ReduceInt",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "90.0 B",
+    "filesToSubmit": "reduceint.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function ReduceInt that takes a slice of integers and a function f func(int, int) int.",
+      "For each element of the slice, it applies f using the previous result as the accumulator, and prints each intermediate result.",
+      "Your solution file must also include Add and Mul helper functions."
+    ],
+    "expectedSignature": "func ReduceInt(a []int, f func(int, int) int) {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"piscine\"\n)\n\nfunc main() {\n\tas := []int{500, 2}\n\tpiscine.ReduceInt(as, piscine.Mul)\n\tpiscine.ReduceInt(as, piscine.Add)\n}",
+    "initialStudentCode": "package piscine\n\nimport \"fmt\"\n\nfunc Add(acc, cur int) int { return acc + cur }\nfunc Mul(acc, cur int) int { return acc * cur }\n\nfunc ReduceInt(a []int, f func(int, int) int) {\n\t// Write your code here\n\t_ = fmt.Println\n}",
+    "testCases": [
+      { "input": "[500,2] Mul then Add", "expectedOutput": "1000\n502" }
+    ]
+  },
+  {
+    "id": "alphamirror",
+    "level": 37,
+    "title": "alphamirror",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "70.0 B",
+    "filesToSubmit": "main.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a program called alphamirror that takes a string as argument and displays this string after replacing each alphabetical character with the opposite alphabetical character.",
+      "The case of the letter remains unchanged: 'a' becomes 'z', 'Z' becomes 'A', 'd' becomes 'w', 'M' becomes 'N'.",
+      "The final result is followed by a newline.",
+      "If the number of arguments is different from 1, the program prints a new line."
+    ],
+    "expectedSignature": "",
+    "testTemplate": "",
+    "initialStudentCode": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n}",
+    "testCases": [
+      { "input": "abc", "expectedOutput": "zyx" },
+      { "input": "My horse is Amazing.", "expectedOutput": "Nb slihv rh Znzarmt." }
+    ]
+  },
+  {
+    "id": "switchcase",
+    "level": 38,
+    "title": "switchcase",
+    "category": "REQUIRED",
+    "difficulty": 1,
+    "xp": "50.0 B",
+    "filesToSubmit": "main.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a program that takes a string and reverses the case of all its letters.",
+      "Other characters remain unchanged.",
+      "The result must be followed by a newline.",
+      "If the number of arguments is different from 1, the program displays nothing."
+    ],
+    "expectedSignature": "",
+    "testTemplate": "",
+    "initialStudentCode": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n}",
+    "testCases": [
+      { "input": "SometHingS iS WronG", "expectedOutput": "sOMEThINGs Is wRONg" },
+      { "input": "Hello World", "expectedOutput": "hELLO wORLD" }
+    ]
+  },
+  {
+    "id": "ispowerof2",
+    "level": 39,
+    "title": "ispowerof2",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "70.0 B",
+    "filesToSubmit": "main.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a program that determines if a given number is a power of 2.",
+      "A number n is a power of 2 if n = 2^m where m is another integer.",
+      "Print true if the given number is a power of 2, otherwise print false.",
+      "If there is more than one or no argument, the program should print nothing.",
+      "When there is only one argument, it will always be a positive valid int."
+    ],
+    "expectedSignature": "",
+    "testTemplate": "",
+    "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
+    "testCases": [
+      { "input": "2", "expectedOutput": "true" },
+      { "input": "64", "expectedOutput": "true" },
+      { "input": "513", "expectedOutput": "false" },
+      { "input": "1", "expectedOutput": "true" }
+    ]
+  },
+  {
+    "id": "addprimesum",
+    "level": 40,
+    "title": "addprimesum",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "90.0 B",
+    "filesToSubmit": "main.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a program that takes a positive integer as argument and displays the sum of all prime numbers less than or equal to it, followed by a newline.",
+      "If the number of arguments is different from 1, or if the argument is not a positive number, the program displays 0 followed by a newline."
+    ],
+    "expectedSignature": "",
+    "testTemplate": "",
+    "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
+    "testCases": [
+      { "input": "5", "expectedOutput": "10" },
+      { "input": "7", "expectedOutput": "17" },
+      { "input": "0", "expectedOutput": "0" },
+      { "input": "2", "expectedOutput": "2" },
+      { "input": "10", "expectedOutput": "17" }
+    ]
   }
 ]
