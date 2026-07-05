@@ -1,94 +1,248 @@
 [
   {
-    "id": "camel-to-snake-case",
-    "level": 20,
-    "title": "CamelToSnakeCase",
+    "id": "countdown",
+    "level": 1,
+    "title": "countdown",
     "category": "REQUIRED",
-    "difficulty": 3,
-    "xp": "100.0 B",
-    "filesToSubmit": "cameltosnakecase.go",
-    "allowedFunctions": "unicode, strings",
+    "difficulty": 1,
+    "xp": "50.0 B",
+    "filesToSubmit": "main.go",
+    "allowedFunctions": "--allow-builtin",
     "instructions": [
-      "Write a function that converts a string from camelCase to snake_case.",
-      "If the string is empty, return an empty string.",
-      "If the string is not camelCase, return the string unchanged.",
-      "If the string is camelCase, return the snake_case version of the string.",
-      "For this exercise you need to know that camelCase has two different writing alternatives that will be accepted: lowerCamelCase and UpperCamelCase.",
-      "Rules for writing in camelCase:",
-      "The word does not end on a capitalized letter (CamelCasE is invalid).",
-      "No two capitalized letters shall follow directly each other (CamelCAse is invalid).",
-      "Numbers or punctuation are not allowed in the word anywhere (camelCase1 is invalid)."
+      "Write a program that displays all digits in descending order, followed by a newline."
     ],
-    "expectedSignature": "func CamelToSnakeCase(s string) string {\n\n}",
-    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.CamelToSnakeCase(\"HelloWorld\"))\n\tfmt.Println(piscine.CamelToSnakeCase(\"helloWorld\"))\n\tfmt.Println(piscine.CamelToSnakeCase(\"camelCase\"))\n\tfmt.Println(piscine.CamelToSnakeCase(\"CAMELtoSnackCASE\"))\n\tfmt.Println(piscine.CamelToSnakeCase(\"camelToSnakeCase\"))\n\tfmt.Println(piscine.CamelToSnakeCase(\"hey2\"))\n}",
-    "initialStudentCode": "package piscine\n\nfunc CamelToSnakeCase(s string) string {\n\t// Write your code here\n\treturn \"\"\n}",
+    "expectedSignature": "",
+    "testTemplate": "",
+    "initialStudentCode": "package main\n\nfunc main() {\n\t// Write your code here\n}",
     "testCases": [
-      {
-        "input": "HelloWorld",
-        "expectedOutput": "Hello_World"
-      },
-      {
-        "input": "helloWorld",
-        "expectedOutput": "hello_World"
-      },
-      {
-        "input": "camelCase",
-        "expectedOutput": "camel_Case"
-      },
-      {
-        "input": "CAMELtoSnackCASE",
-        "expectedOutput": "CAMELtoSnackCASE"
-      },
-      {
-        "input": "camelToSnakeCase",
-        "expectedOutput": "camel_To_Snake_Case"
-      },
-      {
-        "input": "hey2",
-        "expectedOutput": "hey2"
-      }
+      { "input": "output", "expectedOutput": "9876543210" }
     ]
   },
   {
-    "id": "retain-first-half",
-    "level": 26,
-    "title": "RetainFirstHalf",
+    "id": "strlen",
+    "level": 2,
+    "title": "StrLen",
     "category": "REQUIRED",
-    "difficulty": 3,
-    "xp": "100.0 B",
-    "filesToSubmit": "retainfirsthalf.go",
-    "allowedFunctions": "--allow-builtin, strings",
+    "difficulty": 1,
+    "xp": "50.0 B",
+    "filesToSubmit": "strlen.go",
+    "allowedFunctions": "--allow-builtin",
     "instructions": [
-      "Write a function called RetainFirstHalf() that takes a string as an argument and returns the first half of this string.",
-      "If the length of the string is odd, round it down.",
-      "If the string is empty, return an empty string.",
-      "If the string length is equal to one, return the string."
+      "Write a function that counts the runes of a string and returns that count."
     ],
-    "expectedSignature": "func RetainFirstHalf(str string) string {\n\n}",
-    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.RetainFirstHalf(\"This is the 1st halfThis is the 2nd half\"))\n\tfmt.Println(piscine.RetainFirstHalf(\"A\"))\n\tfmt.Println(piscine.RetainFirstHalf(\"\"))\n\tfmt.Println(piscine.RetainFirstHalf(\"Hello World\"))\n}",
-    "initialStudentCode": "package piscine\n\nfunc RetainFirstHalf(str string) string {\n\t// Write your code here\n\treturn \"\"\n}",
+    "expectedSignature": "func StrLen(s string) int {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tl := piscine.StrLen(\"Hello World!\")\n\tfmt.Println(l)\n}",
+    "initialStudentCode": "package piscine\n\nfunc StrLen(s string) int {\n\t// Write your code here\n\treturn 0\n}",
     "testCases": [
-      {
-        "input": "This is the 1st halfThis is the 2nd half",
-        "expectedOutput": "This is the 1st half"
-      },
-      {
-        "input": "A",
-        "expectedOutput": "A"
-      },
-      {
-        "input": "",
-        "expectedOutput": ""
-      },
-      {
-        "input": "Hello World",
-        "expectedOutput": "Hello"
-      }
+      { "input": "Hello World!", "expectedOutput": "12" }
+    ]
+  },
+  {
+    "id": "islower",
+    "level": 3,
+    "title": "IsLower",
+    "category": "REQUIRED",
+    "difficulty": 1,
+    "xp": "50.0 B",
+    "filesToSubmit": "islower.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function that returns true if the string passed as parameter contains only lowercase characters, otherwise returns false."
+    ],
+    "expectedSignature": "func IsLower(s string) bool {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.IsLower(\"hello\"))\n\tfmt.Println(piscine.IsLower(\"hello!\"))\n}",
+    "initialStudentCode": "package piscine\n\nfunc IsLower(s string) bool {\n\t// Write your code here\n\treturn false\n}",
+    "testCases": [
+      { "input": "hello", "expectedOutput": "true" },
+      { "input": "hello!", "expectedOutput": "false" }
+    ]
+  },
+  {
+    "id": "isupper",
+    "level": 4,
+    "title": "IsUpper",
+    "category": "REQUIRED",
+    "difficulty": 1,
+    "xp": "50.0 B",
+    "filesToSubmit": "isupper.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function that returns true if the string passed as parameter contains only uppercase characters, otherwise returns false."
+    ],
+    "expectedSignature": "func IsUpper(s string) bool {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.IsUpper(\"HELLO\"))\n\tfmt.Println(piscine.IsUpper(\"HELLO!\"))\n}",
+    "initialStudentCode": "package piscine\n\nfunc IsUpper(s string) bool {\n\t// Write your code here\n\treturn false\n}",
+    "testCases": [
+      { "input": "HELLO", "expectedOutput": "true" },
+      { "input": "HELLO!", "expectedOutput": "false" }
+    ]
+  },
+  {
+    "id": "swap",
+    "level": 5,
+    "title": "Swap",
+    "category": "REQUIRED",
+    "difficulty": 1,
+    "xp": "60.0 B",
+    "filesToSubmit": "swap.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function that takes two pointers to an int (*int) and swaps their contents."
+    ],
+    "expectedSignature": "func Swap(a *int, b *int) {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\ta := 0\n\tb := 1\n\tpiscine.Swap(&a, &b)\n\tfmt.Println(a)\n\tfmt.Println(b)\n}",
+    "initialStudentCode": "package piscine\n\nfunc Swap(a *int, b *int) {\n\t// Write your code here\n}",
+    "testCases": [
+      { "input": "a=0,b=1", "expectedOutput": "1\n0" }
+    ]
+  },
+  {
+    "id": "strrev",
+    "level": 6,
+    "title": "StrRev",
+    "category": "REQUIRED",
+    "difficulty": 1,
+    "xp": "60.0 B",
+    "filesToSubmit": "strrev.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function that reverses a string.",
+      "This function will return the reversed string."
+    ],
+    "expectedSignature": "func StrRev(s string) string {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\ts := \"Hello World!\"\n\ts = piscine.StrRev(s)\n\tfmt.Println(s)\n}",
+    "initialStudentCode": "package piscine\n\nfunc StrRev(s string) string {\n\t// Write your code here\n\treturn \"\"\n}",
+    "testCases": [
+      { "input": "Hello World!", "expectedOutput": "!dlroW olleH" }
+    ]
+  },
+  {
+    "id": "activebits",
+    "level": 7,
+    "title": "ActiveBits",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "75.0 B",
+    "filesToSubmit": "activebits.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function ActiveBits that returns the number of active bits (bits with the value 1) in the binary representation of an integer number."
+    ],
+    "expectedSignature": "func ActiveBits(n int) int {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.ActiveBits(7))\n\tfmt.Println(piscine.ActiveBits(0))\n\tfmt.Println(piscine.ActiveBits(8))\n\tfmt.Println(piscine.ActiveBits(15))\n}",
+    "initialStudentCode": "package piscine\n\nfunc ActiveBits(n int) int {\n\t// Write your code here\n\treturn 0\n}",
+    "testCases": [
+      { "input": "7", "expectedOutput": "3" },
+      { "input": "0", "expectedOutput": "0" },
+      { "input": "8", "expectedOutput": "1" },
+      { "input": "15", "expectedOutput": "4" }
+    ]
+  },
+  {
+    "id": "max",
+    "level": 8,
+    "title": "Max",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "75.0 B",
+    "filesToSubmit": "max.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function Max that will return the maximum value in a slice of integers.",
+      "If the slice is empty it will return 0."
+    ],
+    "expectedSignature": "func Max(a []int) int {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\ta := []int{23, 123, 1, 11, 55, 93}\n\tmax := piscine.Max(a)\n\tfmt.Println(max)\n\tfmt.Println(piscine.Max([]int{}))\n}",
+    "initialStudentCode": "package piscine\n\nfunc Max(a []int) int {\n\t// Write your code here\n\treturn 0\n}",
+    "testCases": [
+      { "input": "[23, 123, 1, 11, 55, 93]", "expectedOutput": "123\n0" }
+    ]
+  },
+  {
+    "id": "itoa",
+    "level": 9,
+    "title": "Itoa",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "80.0 B",
+    "filesToSubmit": "itoa.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function that simulates the behavior of the Itoa function in Go.",
+      "Itoa transforms a number represented as an int into a number represented as a string.",
+      "The handling of the signs + or - does have to be taken into account."
+    ],
+    "expectedSignature": "func Itoa(n int) string {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.Itoa(12345))\n\tfmt.Println(piscine.Itoa(0))\n\tfmt.Println(piscine.Itoa(-1234))\n\tfmt.Println(piscine.Itoa(987654321))\n}",
+    "initialStudentCode": "package piscine\n\nfunc Itoa(n int) string {\n\t// Write your code here\n\treturn \"\"\n}",
+    "testCases": [
+      { "input": "12345", "expectedOutput": "12345" },
+      { "input": "0", "expectedOutput": "0" },
+      { "input": "-1234", "expectedOutput": "-1234" },
+      { "input": "987654321", "expectedOutput": "987654321" }
+    ]
+  },
+  {
+    "id": "atoi",
+    "level": 10,
+    "title": "Atoi",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "80.0 B",
+    "filesToSubmit": "atoi.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function that simulates the behaviour of the Atoi function in Go.",
+      "Atoi transforms a number represented as a string into a number represented as an int.",
+      "Atoi returns 0 if the string is not considered as a valid number.",
+      "Non-valid string chains will be tested — some will contain non-digit characters.",
+      "The handling of the signs + or - does have to be taken into account.",
+      "This function will only have to return the int — the error result of Atoi is not required."
+    ],
+    "expectedSignature": "func Atoi(s string) int {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.Atoi(\"12345\"))\n\tfmt.Println(piscine.Atoi(\"0000000012345\"))\n\tfmt.Println(piscine.Atoi(\"012 345\"))\n\tfmt.Println(piscine.Atoi(\"Hello World!\"))\n\tfmt.Println(piscine.Atoi(\"+1234\"))\n\tfmt.Println(piscine.Atoi(\"-1234\"))\n\tfmt.Println(piscine.Atoi(\"++1234\"))\n\tfmt.Println(piscine.Atoi(\"--1234\"))\n}",
+    "initialStudentCode": "package piscine\n\nfunc Atoi(s string) int {\n\t// Write your code here\n\treturn 0\n}",
+    "testCases": [
+      { "input": "12345", "expectedOutput": "12345" },
+      { "input": "0000000012345", "expectedOutput": "12345" },
+      { "input": "012 345", "expectedOutput": "0" },
+      { "input": "Hello World!", "expectedOutput": "0" },
+      { "input": "+1234", "expectedOutput": "1234" },
+      { "input": "-1234", "expectedOutput": "-1234" },
+      { "input": "++1234", "expectedOutput": "0" },
+      { "input": "--1234", "expectedOutput": "0" }
+    ]
+  },
+  {
+    "id": "fibonacci",
+    "level": 11,
+    "title": "Fibonacci",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "80.0 B",
+    "filesToSubmit": "fibonacci.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a recursive function that returns the value at the position index in the fibonacci sequence.",
+      "The first value is at index 0.",
+      "The sequence starts this way: 0, 1, 1, 2, 3, 5, 8...",
+      "A negative index will return -1.",
+      "for loops are forbidden for this exercise — use recursion only."
+    ],
+    "expectedSignature": "func Fibonacci(index int) int {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.Fibonacci(0))\n\tfmt.Println(piscine.Fibonacci(1))\n\tfmt.Println(piscine.Fibonacci(4))\n\tfmt.Println(piscine.Fibonacci(10))\n\tfmt.Println(piscine.Fibonacci(-1))\n}",
+    "initialStudentCode": "package piscine\n\nfunc Fibonacci(index int) int {\n\t// Write your code here\n\treturn 0\n}",
+    "testCases": [
+      { "input": "0", "expectedOutput": "0" },
+      { "input": "1", "expectedOutput": "1" },
+      { "input": "4", "expectedOutput": "3" },
+      { "input": "10", "expectedOutput": "55" },
+      { "input": "-1", "expectedOutput": "-1" }
     ]
   },
   {
     "id": "is-prime",
-    "level": 15,
+    "level": 12,
     "title": "IsPrime",
     "category": "REQUIRED",
     "difficulty": 2,
@@ -104,37 +258,64 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.IsPrime(5))\n\tfmt.Println(piscine.IsPrime(4))\n\tfmt.Println(piscine.IsPrime(1))\n\tfmt.Println(piscine.IsPrime(-7))\n\tfmt.Println(piscine.IsPrime(13))\n}",
     "initialStudentCode": "package piscine\n\nfunc IsPrime(nb int) bool {\n\t// Write your code here\n\treturn false\n}",
     "testCases": [
-      {
-        "input": "5",
-        "expectedOutput": "true"
-      },
-      {
-        "input": "4",
-        "expectedOutput": "false"
-      },
-      {
-        "input": "1",
-        "expectedOutput": "false"
-      },
-      {
-        "input": "-7",
-        "expectedOutput": "false"
-      },
-      {
-        "input": "13",
-        "expectedOutput": "true"
-      }
+      { "input": "5", "expectedOutput": "true" },
+      { "input": "4", "expectedOutput": "false" },
+      { "input": "1", "expectedOutput": "false" },
+      { "input": "-7", "expectedOutput": "false" },
+      { "input": "13", "expectedOutput": "true" }
+    ]
+  },
+  {
+    "id": "map",
+    "level": 13,
+    "title": "Map",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "90.0 B",
+    "filesToSubmit": "map.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function Map that, for an int slice, applies a function of type func(int) bool on each element of that slice.",
+      "Map returns a slice of all the return values.",
+      "Your solution file must also include a helper IsEven function: func IsEven(n int) bool that returns true if n is even."
+    ],
+    "expectedSignature": "func Map(f func(int) bool, a []int) []bool {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\ta := []int{1, 2, 3, 4, 5, 6}\n\tresult := piscine.Map(piscine.IsEven, a)\n\tfmt.Println(result)\n}",
+    "initialStudentCode": "package piscine\n\nfunc IsEven(n int) bool {\n\treturn n%2 == 0\n}\n\nfunc Map(f func(int) bool, a []int) []bool {\n\t// Write your code here\n\treturn nil\n}",
+    "testCases": [
+      { "input": "[1,2,3,4,5,6]", "expectedOutput": "[false true false true false true]" }
+    ]
+  },
+  {
+    "id": "countif",
+    "level": 14,
+    "title": "CountIf",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "90.0 B",
+    "filesToSubmit": "countif.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function CountIf that returns the number of elements of a string slice for which the function f returns true.",
+      "Your solution file must also include a helper IsNumeric function: func IsNumeric(s string) bool that returns true if the string is a valid number."
+    ],
+    "expectedSignature": "func CountIf(f func(string) bool, tab []string) int {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\ttab1 := []string{\"Hello\", \"how\", \"are\", \"you\"}\n\ttab2 := []string{\"This\", \"1\", \"is\", \"4\", \"you\"}\n\tfmt.Println(piscine.CountIf(piscine.IsNumeric, tab1))\n\tfmt.Println(piscine.CountIf(piscine.IsNumeric, tab2))\n}",
+    "initialStudentCode": "package piscine\n\nimport \"unicode\"\n\nfunc IsNumeric(s string) bool {\n\tif s == \"\" {\n\t\treturn false\n\t}\n\tfor _, r := range s {\n\t\tif !unicode.IsDigit(r) {\n\t\t\treturn false\n\t\t}\n\t}\n\treturn true\n}\n\nfunc CountIf(f func(string) bool, tab []string) int {\n\t// Write your code here\n\treturn 0\n}",
+    "testCases": [
+      { "input": "tab1", "expectedOutput": "0" },
+      { "input": "tab2", "expectedOutput": "2" }
     ]
   },
   {
     "id": "reverse-string",
-    "level": 18,
+    "level": 15,
     "title": "ReverseString",
     "category": "REQUIRED",
     "difficulty": 2,
     "xp": "75.0 B",
     "filesToSubmit": "reversestring.go",
-    "allowedFunctions": "--allow-builtin, strings.Builder",
+    "allowedFunctions": "--allow-builtin",
     "instructions": [
       "Write a function called ReverseString() that takes a string as an argument and returns its characters reversed.",
       "If the input string is empty, return an empty string."
@@ -143,31 +324,74 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.ReverseString(\"hello\"))\n\tfmt.Println(piscine.ReverseString(\"Go Language\"))\n\tfmt.Println(piscine.ReverseString(\"\"))\n\tfmt.Println(piscine.ReverseString(\"A\"))\n}",
     "initialStudentCode": "package piscine\n\nfunc ReverseString(s string) string {\n\t// Write your code here\n\treturn \"\"\n}",
     "testCases": [
-      {
-        "input": "hello",
-        "expectedOutput": "olleh"
-      },
-      {
-        "input": "Go Language",
-        "expectedOutput": "egaugnaL oG"
-      },
-      {
-        "input": "",
-        "expectedOutput": ""
-      },
-      {
-        "input": "A",
-        "expectedOutput": "A"
-      }
+      { "input": "hello", "expectedOutput": "olleh" },
+      { "input": "Go Language", "expectedOutput": "egaugnaL oG" },
+      { "input": "", "expectedOutput": "" },
+      { "input": "A", "expectedOutput": "A" }
+    ]
+  },
+  {
+    "id": "retain-first-half",
+    "level": 16,
+    "title": "RetainFirstHalf",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "75.0 B",
+    "filesToSubmit": "retainfirsthalf.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function called RetainFirstHalf() that takes a string as an argument and returns the first half of this string.",
+      "If the length of the string is odd, round it down.",
+      "If the string is empty, return an empty string.",
+      "If the string length is equal to one, return the string."
+    ],
+    "expectedSignature": "func RetainFirstHalf(str string) string {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.RetainFirstHalf(\"This is the 1st halfThis is the 2nd half\"))\n\tfmt.Println(piscine.RetainFirstHalf(\"A\"))\n\tfmt.Println(piscine.RetainFirstHalf(\"\"))\n\tfmt.Println(piscine.RetainFirstHalf(\"Hello World\"))\n}",
+    "initialStudentCode": "package piscine\n\nfunc RetainFirstHalf(str string) string {\n\t// Write your code here\n\treturn \"\"\n}",
+    "testCases": [
+      { "input": "This is the 1st halfThis is the 2nd half", "expectedOutput": "This is the 1st half" },
+      { "input": "A", "expectedOutput": "A" },
+      { "input": "", "expectedOutput": "" },
+      { "input": "Hello World", "expectedOutput": "Hello" }
+    ]
+  },
+  {
+    "id": "camel-to-snake-case",
+    "level": 17,
+    "title": "CamelToSnakeCase",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "100.0 B",
+    "filesToSubmit": "cameltosnakecase.go",
+    "allowedFunctions": "unicode, strings",
+    "instructions": [
+      "Write a function that converts a string from camelCase to snake_case.",
+      "If the string is empty, return an empty string.",
+      "If the string is not camelCase, return the string unchanged.",
+      "Rules for writing in camelCase:",
+      "The word does not end on a capitalized letter (CamelCasE is invalid).",
+      "No two capitalized letters shall follow directly each other (CamelCAse is invalid).",
+      "Numbers or punctuation are not allowed in the word anywhere (camelCase1 is invalid)."
+    ],
+    "expectedSignature": "func CamelToSnakeCase(s string) string {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.CamelToSnakeCase(\"HelloWorld\"))\n\tfmt.Println(piscine.CamelToSnakeCase(\"helloWorld\"))\n\tfmt.Println(piscine.CamelToSnakeCase(\"camelCase\"))\n\tfmt.Println(piscine.CamelToSnakeCase(\"CAMELtoSnackCASE\"))\n\tfmt.Println(piscine.CamelToSnakeCase(\"camelToSnakeCase\"))\n\tfmt.Println(piscine.CamelToSnakeCase(\"hey2\"))\n}",
+    "initialStudentCode": "package piscine\n\nfunc CamelToSnakeCase(s string) string {\n\t// Write your code here\n\treturn \"\"\n}",
+    "testCases": [
+      { "input": "HelloWorld", "expectedOutput": "Hello_World" },
+      { "input": "helloWorld", "expectedOutput": "hello_World" },
+      { "input": "camelCase", "expectedOutput": "camel_Case" },
+      { "input": "CAMELtoSnackCASE", "expectedOutput": "CAMELtoSnackCASE" },
+      { "input": "camelToSnakeCase", "expectedOutput": "camel_To_Snake_Case" },
+      { "input": "hey2", "expectedOutput": "hey2" }
     ]
   },
   {
     "id": "checknumber",
-    "level": 10,
+    "level": 18,
     "title": "CheckNumber",
     "category": "REQUIRED",
     "difficulty": 2,
-    "xp": "100.0 B",
+    "xp": "75.0 B",
     "filesToSubmit": "checknumber.go",
     "allowedFunctions": "--allow-builtin",
     "instructions": [
@@ -177,50 +401,76 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.CheckNumber(\"Hello\"))\n\tfmt.Println(piscine.CheckNumber(\"Hello1\"))\n}",
     "initialStudentCode": "package piscine\n\nfunc CheckNumber(arg string) bool {\n\t// Write your code here\n\treturn false\n}",
     "testCases": [
-      {
-        "input": "Hello",
-        "expectedOutput": "false"
-      },
-      {
-        "input": "Hello1",
-        "expectedOutput": "true"
-      }
+      { "input": "Hello", "expectedOutput": "false" },
+      { "input": "Hello1", "expectedOutput": "true" }
     ]
   },
   {
     "id": "hashcode",
-    "level": 10,
+    "level": 19,
     "title": "HashCode",
     "category": "REQUIRED",
-    "difficulty": 2,
+    "difficulty": 3,
     "xp": "100.0 B",
     "filesToSubmit": "hashcode.go",
     "allowedFunctions": "--allow-builtin",
     "instructions": [
       "Write a function called HashCode() that takes a string as an argument and returns a new hashed string.",
-      "The hash equation is computed as follows: (ASCII of current character + size of the string) % 127, ensuring the result falls within the ASCII range of 0 to 127.",
-      "If the resulting character is unprintable add 33 to it."
+      "The hash equation is computed as follows: (ASCII of current character + size of the string) % 127.",
+      "If the resulting character is unprintable (below ASCII 32), add 33 to it."
     ],
     "expectedSignature": "func HashCode(dec string) string {\n\n}",
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.HashCode(\"A\"))\n\tfmt.Println(piscine.HashCode(\"AB\"))\n\tfmt.Println(piscine.HashCode(\"BAC\"))\n\tfmt.Println(piscine.HashCode(\"Hello World\"))\n}",
     "initialStudentCode": "package piscine\n\nfunc HashCode(dec string) string {\n\t// Write your code here\n\treturn \"\"\n}",
     "testCases": [
-      {
-        "input": "A",
-        "expectedOutput": "B"
-      },
-      {
-        "input": "AB",
-        "expectedOutput": "CD"
-      },
-      {
-        "input": "BAC",
-        "expectedOutput": "EDF"
-      },
-      {
-        "input": "Hello World",
-        "expectedOutput": "Spwwz+bz}wo"
-      }
+      { "input": "A", "expectedOutput": "B" },
+      { "input": "AB", "expectedOutput": "CD" },
+      { "input": "BAC", "expectedOutput": "EDF" },
+      { "input": "Hello World", "expectedOutput": "Spwwz+bz}wo" }
+    ]
+  },
+  {
+    "id": "printcomb",
+    "level": 20,
+    "title": "PrintComb",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "100.0 B",
+    "filesToSubmit": "printcomb.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function that prints, in ascending order and on a single line, all unique combinations of three different digits so that the first digit is lower than the second, and the second is lower than the third.",
+      "These combinations are separated by a comma and a space.",
+      "000 or 999 are not valid combinations because the digits are not different.",
+      "987 should not be shown because the first digit is not less than the second."
+    ],
+    "expectedSignature": "func PrintComb() {\n\n}",
+    "testTemplate": "package main\n\nimport \"piscine\"\n\nfunc main() {\n\tpiscine.PrintComb()\n}",
+    "initialStudentCode": "package piscine\n\nimport \"fmt\"\n\nfunc PrintComb() {\n\t// Write your code here\n\t_ = fmt.Sprintf\n}",
+    "testCases": [
+      { "input": "output", "expectedOutput": "012, 013, 014, 015, 016, 017, 018, 019, 023, ..., 689, 789" }
+    ]
+  },
+  {
+    "id": "printrevcomb",
+    "level": 21,
+    "title": "printrevcomb",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "100.0 B",
+    "filesToSubmit": "main.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a program that prints in descending order on a single line all unique combinations of three different digits so that the first digit is greater than the second and the second is greater than the third.",
+      "These combinations are separated by a comma and a space.",
+      "999 or 000 are not valid combinations because the digits are not different.",
+      "789 should not be shown because the first digit is not greater than the second."
+    ],
+    "expectedSignature": "",
+    "testTemplate": "",
+    "initialStudentCode": "package main\n\nfunc main() {\n\t// Write your code here\n}",
+    "testCases": [
+      { "input": "output", "expectedOutput": "987, 986, 985, 984, 983, 982, 981, 980, 976, ..., 310, 210" }
     ]
   }
 ]
