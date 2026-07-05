@@ -25,22 +25,26 @@ func main() {
 		dataDir = filepath.Join(filepath.Dir(exe), "..", "data")
 	}
 
-	// ── Ensure data dir exists and seed challenges if missing ─────────────
+	// ── Ensure data dir exists and seed challenges ───────────────────────
 	if err := os.MkdirAll(dataDir, 0o755); err != nil {
 		log.Fatalf("create data dir: %v", err)
 	}
 	challengesPath := filepath.Join(dataDir, "challenges.json")
-	if _, err := os.Stat(challengesPath); os.IsNotExist(err) {
-		// Volume is empty on first boot — copy the bundled seed file
-		seedPath := "/data-seed/challenges.json"
-		if seed, err := os.ReadFile(seedPath); err == nil {
-			if err := os.WriteFile(challengesPath, seed, 0o644); err != nil {
-				log.Printf("warn: could not write seed challenges: %v", err)
-			} else {
-				log.Println("✅  Seeded challenges.json from bundle")
-			}
+
+	// Always overwrite challenges.json from the bundled seed so that
+	// deploying a new version of the repo updates the challenge set.
+	// Users.json is never touched here — user accounts persist across deploys.
+	seedPath := "/data-seed/challenges.json"
+	if seed, err := os.ReadFile(seedPath); err == nil {
+		if err := os.WriteFile(challengesPath, seed, 0o644); err != nil {
+			log.Printf("warn: could not write seed challenges: %v", err)
 		} else {
-			log.Printf("warn: seed file not found at %s: %v", seedPath, err)
+			log.Println("✅  challenges.json refreshed from bundle")
+		}
+	} else {
+		// Seed file missing (local dev without Docker) — keep existing file if present
+		if _, statErr := os.Stat(challengesPath); os.IsNotExist(statErr) {
+			log.Printf("warn: no seed file at %s and no existing challenges.json", seedPath)
 		}
 	}
 
