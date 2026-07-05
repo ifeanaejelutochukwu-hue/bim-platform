@@ -268,92 +268,163 @@ export default function CodeEditor({
     setCursorPos({ line: lines.length, col: lines[lines.length - 1].length + 1 });
   };
 
-  // Handle smart key bindings in the editor
+  // ── VS Code-style smart editor key bindings ──────────────────────────
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     const el = e.currentTarget;
     const start = el.selectionStart;
-    const end = el.selectionEnd;
-    const value = activeTab === "student" ? studentCode : mainCode;
+    const end   = el.selectionEnd;
+    const value  = activeTab === "student" ? studentCode : mainCode;
     const setter = activeTab === "student" ? setStudentCode : setMainCode;
-    const ref = activeTab === "student" ? textareaRef : mainTextareaRef;
-    const charAfter = value[end] ?? "";
+    const ref    = activeTab === "student" ? textareaRef : mainTextareaRef;
 
-    // ── Tab ──────────────────────────────────────────────────────────
+    const charBefore = value[start - 1] ?? "";
+    const charAfter  = value[end]       ?? "";
+
+    // Helper: apply a new value and set cursor/selection in next frame
+    const apply = (newValue: string, cursorAt: number, selectEnd?: number) => {
+      setter(newValue);
+      requestAnimationFrame(() => {
+        if (!ref.current) return;
+        ref.current.selectionStart = cursorAt;
+        ref.current.selectionEnd   = selectEnd ?? cursorAt;
+      });
+    };
+
+    // Helper: get the indentation of the line containing position pos
+    const lineIndent = (pos: number): string => {
+      const lineStart = value.lastIndexOf("\n", pos - 1) + 1;
+      return value.substring(lineStart, pos).match(/^[\t ]*/)?.[0] ?? "";
+    };
+
+    // ── Tab / Shift+Tab — indent or unindent selected lines ───────────
     if (e.key === "Tab") {
       e.preventDefault();
-      const newCode = value.substring(0, start) + "\t" + value.substring(end);
-      setter(newCode);
-      requestAnimationFrame(() => {
-        if (ref.current) {
-          ref.current.selectionStart = ref.current.selectionEnd = start + 1;
+      if (start === end) {
+        // No selection: insert a single tab at cursor
+        apply(value.substring(0, start) + "\t" + value.substring(end), start + 1);
+      } else {
+        // Selection: indent every selected line
+        const lineStart = value.lastIndexOf("\n", start - 1) + 1;
+        const lineEnd   = value.indexOf("\n", end - 1);
+        const block     = value.substring(lineStart, lineEnd === -1 ? undefined : lineEnd);
+        if (e.shiftKey) {
+          // Unindent: remove one leading tab (or up to 4 spaces) per line
+          const unindented = block.replace(/^(\t| {1,4})/gm, "");
+          const newValue   = value.substring(0, lineStart) + unindented + (lineEnd === -1 ? "" : value.substring(lineEnd));
+          const delta      = block.length - unindented.length;
+          apply(newValue, Math.max(lineStart, start - (block.substring(0, start - lineStart).match(/^(\t| {1,4})/m)?.[0].length ?? 0)), end - delta);
+        } else {
+          // Indent: add a tab at the start of every line
+          const indented = block.replace(/^/gm, "\t");
+          const newValue = value.substring(0, lineStart) + indented + (lineEnd === -1 ? "" : value.substring(lineEnd));
+          const addedBefore = start === lineStart ? 1 : 1; // one tab added before selection start
+          apply(newValue, start + 1, end + (indented.length - block.length));
         }
-      });
+      }
       return;
     }
 
-    // ── Enter inside {} — indent the body ────────────────────────────
+    // ── Enter — auto-indent + smart { } expansion ─────────────────────
     if (e.key === "Enter") {
-      const charBefore = value[start - 1] ?? "";
+      e.preventDefault();
+      const indent = lineIndent(start);
+
       if (charBefore === "{" && charAfter === "}") {
-        e.preventDefault();
-        const lineStart = value.lastIndexOf("\n", start - 1) + 1;
-        const lineText = value.substring(lineStart, start);
-        const indent = lineText.match(/^[\t ]*/)?.[0] ?? "";
+        // Cursor is between { } — expand with indented body, closing brace below
+        // Result:
+        //   {
+        //       <cursor here>
+        //   }
         const insert = "\n" + indent + "\t\n" + indent;
-        const newCode = value.substring(0, start) + insert + value.substring(end);
-        // cursor goes after the \n + indent + \t
-        const cursorAt = start + 1 + indent.length + 1;
-        setter(newCode);
-        requestAnimationFrame(() => {
-          if (ref.current) {
-            ref.current.selectionStart = ref.current.selectionEnd = cursorAt;
-          }
-        });
-        return;
+        apply(
+          value.substring(0, start) + insert + value.substring(end),
+          start + 1 + indent.length + 1   // land inside the body
+        );
+      } else if (charBefore === "{") {
+        // Opening brace at end of line, no auto-close yet — add closing brace
+        // Result:
+        //   {
+        //       <cursor here>
+        //   }
+        const insert = "\n" + indent + "\t\n" + indent + "}";
+        apply(
+          value.substring(0, start) + insert + value.substring(end),
+          start + 1 + indent.length + 1
+        );
+      } else {
+        // Normal enter — carry forward the current line's indentation
+        const insert = "\n" + indent;
+        apply(
+          value.substring(0, start) + insert + value.substring(end),
+          start + insert.length
+        );
       }
+      return;
     }
 
-    // ── Backspace: delete matching pair ──────────────────────────────
+    // ── { — auto-close and place cursor inside ────────────────────────
+    if (e.key === "{") {
+      e.preventDefault();
+      apply(
+        value.substring(0, start) + "{}" + value.substring(end),
+        start + 1   // cursor between { and }
+      );
+      return;
+    }
+
+    // ── } — skip over auto-inserted } rather than doubling it ─────────
+    if (e.key === "}" && charAfter === "}") {
+      e.preventDefault();
+      apply(value, start + 1);   // just move past it
+      return;
+    }
+
+    // ── Backspace — delete matching pair when cursor is between them ───
     if (e.key === "Backspace" && start === end) {
-      const charBefore = value[start - 1] ?? "";
-      const pairs: Record<string, string> = { "(": ")", "[": "]", '"': '"', "`": "`" };
-      if (pairs[charBefore] && charAfter === pairs[charBefore]) {
+      const allPairs: Record<string, string> = {
+        "{": "}", "(": ")", "[": "]", '"': '"', "`": "`",
+      };
+      if (allPairs[charBefore] && charAfter === allPairs[charBefore]) {
         e.preventDefault();
-        const newCode = value.substring(0, start - 1) + value.substring(end + 1);
-        setter(newCode);
-        requestAnimationFrame(() => {
-          if (ref.current) {
-            ref.current.selectionStart = ref.current.selectionEnd = start - 1;
-          }
-        });
+        apply(value.substring(0, start - 1) + value.substring(end + 1), start - 1);
         return;
       }
     }
 
-    // ── Closing char: skip over if already there ──────────────────────
+    // ── ) ] — skip over auto-inserted closing char ────────────────────
     if ((e.key === ")" || e.key === "]") && start === end && charAfter === e.key) {
       e.preventDefault();
-      requestAnimationFrame(() => {
-        if (ref.current) {
-          ref.current.selectionStart = ref.current.selectionEnd = start + 1;
-        }
-      });
+      apply(value, start + 1);
       return;
     }
 
-    // ── Auto-pair: (, [, ", ` only — NOT { to avoid corrupting code ──
-    const openPairs: Record<string, string> = { "(": ")", "[": "]", '"': '"', "`": "`" };
+    // ── Auto-pair: ( [ " ` ─────────────────────────────────────────────
+    const openPairs: Record<string, string> = {
+      "(": ")", "[": "]", '"': '"', "`": "`",
+    };
     if (e.key in openPairs) {
+      // Don't double-close quotes
       if ((e.key === '"' || e.key === "`") && charAfter === e.key) return;
       e.preventDefault();
-      const close = openPairs[e.key];
-      const newCode = value.substring(0, start) + e.key + close + value.substring(end);
-      setter(newCode);
-      requestAnimationFrame(() => {
-        if (ref.current) {
-          ref.current.selectionStart = ref.current.selectionEnd = start + 1;
-        }
-      });
+      apply(
+        value.substring(0, start) + e.key + openPairs[e.key] + value.substring(end),
+        start + 1
+      );
+      return;
+    }
+
+    // ── Home — jump to first non-whitespace char (VS Code behaviour) ──
+    if (e.key === "Home" && !e.ctrlKey) {
+      e.preventDefault();
+      const lineStart    = value.lastIndexOf("\n", start - 1) + 1;
+      const firstNonWS   = lineStart + (value.substring(lineStart).match(/^[\t ]*/)?.[0].length ?? 0);
+      // If already at first non-WS, go to true line start; otherwise go to first non-WS
+      const target = start === firstNonWS ? lineStart : firstNonWS;
+      if (e.shiftKey) {
+        apply(value, Math.min(start, target), Math.max(start, target));
+      } else {
+        apply(value, target);
+      }
       return;
     }
   };
