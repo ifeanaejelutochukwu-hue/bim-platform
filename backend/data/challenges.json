@@ -920,5 +920,751 @@
       { "input": "2", "expectedOutput": "2" },
       { "input": "10", "expectedOutput": "17" }
     ]
+  },
+  {
+    "id": "findprevprime",
+    "level": 41,
+    "title": "FindPrevPrime",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "75.0 B",
+    "filesToSubmit": "findprevprime.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function that returns the first prime number that is equal or inferior to the int passed as parameter.",
+      "If there are no primes inferior to the int passed as parameter the function should return 0."
+    ],
+    "expectedSignature": "func FindPrevPrime(nb int) int {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.FindPrevPrime(5))\n\tfmt.Println(piscine.FindPrevPrime(4))\n\tfmt.Println(piscine.FindPrevPrime(1))\n\tfmt.Println(piscine.FindPrevPrime(10))\n}",
+    "initialStudentCode": "package piscine\n\nfunc FindPrevPrime(nb int) int {\n\t// Write your code here\n\treturn 0\n}",
+    "testCases": [
+      { "input": "5", "expectedOutput": "5" },
+      { "input": "4", "expectedOutput": "3" },
+      { "input": "1", "expectedOutput": "0" },
+      { "input": "10", "expectedOutput": "7" }
+    ]
+  },
+  {
+    "id": "fromto",
+    "level": 42,
+    "title": "FromTo",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "75.0 B",
+    "filesToSubmit": "fromto.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function that takes two integers and returns a string showing the range of numbers from the first to the second.",
+      "The numbers must be separated by a comma and a space.",
+      "If any argument is bigger than 99 or less than 0, the function returns 'Invalid' followed by a newline.",
+      "Prepend a 0 to any number that is less than 10.",
+      "Add a newline at the end of the string."
+    ],
+    "expectedSignature": "func FromTo(from int, to int) string {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Print(piscine.FromTo(1, 5))\n\tfmt.Print(piscine.FromTo(10, 7))\n\tfmt.Print(piscine.FromTo(10, 10))\n\tfmt.Print(piscine.FromTo(100, 10))\n}",
+    "initialStudentCode": "package piscine\n\nfunc FromTo(from int, to int) string {\n\t// Write your code here\n\treturn \"\"\n}",
+    "testCases": [
+      { "input": "1,5", "expectedOutput": "01, 02, 03, 04, 05\n" },
+      { "input": "10,7", "expectedOutput": "10, 09, 08, 07\n" },
+      { "input": "10,10", "expectedOutput": "10\n" },
+      { "input": "100,10", "expectedOutput": "Invalid\n" }
+    ]
+  },
+  {
+    "id": "thirdtimeisacharm",
+    "level": 43,
+    "title": "ThirdTimeIsACharm",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "75.0 B",
+    "filesToSubmit": "thirdtimeisacharm.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function ThirdTimeIsACharm() that takes a string as an argument and returns another string with every third character.",
+      "Return the output followed by a newline.",
+      "If the string is empty, return a newline.",
+      "If there is no third character, return a newline."
+    ],
+    "expectedSignature": "func ThirdTimeIsACharm(str string) string {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Print(piscine.ThirdTimeIsACharm(\"123456789\"))\n\tfmt.Print(piscine.ThirdTimeIsACharm(\"\"))\n\tfmt.Print(piscine.ThirdTimeIsACharm(\"a b c d e f\"))\n\tfmt.Print(piscine.ThirdTimeIsACharm(\"12\"))\n}",
+    "initialStudentCode": "package piscine\n\nfunc ThirdTimeIsACharm(str string) string {\n\t// Write your code here\n\treturn \"\"\n}",
+    "testCases": [
+      { "input": "123456789", "expectedOutput": "369\n" },
+      { "input": "", "expectedOutput": "\n" },
+      { "input": "a b c d e f", "expectedOutput": "b e\n" },
+      { "input": "12", "expectedOutput": "\n" }
+    ]
+  },
+  {
+    "id": "weareunique",
+    "level": 44,
+    "title": "WeAreUnique",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "75.0 B",
+    "filesToSubmit": "weareunique.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function that takes two strings and returns the number of characters that are not included in both, without repeating characters.",
+      "If there are no unique characters return 0.",
+      "If both strings are empty return -1."
+    ],
+    "expectedSignature": "func WeAreUnique(str1, str2 string) int {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.WeAreUnique(\"foo\", \"boo\"))\n\tfmt.Println(piscine.WeAreUnique(\"\", \"\"))\n\tfmt.Println(piscine.WeAreUnique(\"abc\", \"def\"))\n}",
+    "initialStudentCode": "package piscine\n\nfunc WeAreUnique(str1, str2 string) int {\n\t// Write your code here\n\treturn 0\n}",
+    "testCases": [
+      { "input": "foo,boo", "expectedOutput": "2" },
+      { "input": ",", "expectedOutput": "-1" },
+      { "input": "abc,def", "expectedOutput": "6" }
+    ]
+  },
+  {
+    "id": "zipstring",
+    "level": 45,
+    "title": "ZipString",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "90.0 B",
+    "filesToSubmit": "zipstring.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function that takes a string and returns a new string that replaces every character with the number of duplicates and the character itself, deleting the extra duplications.",
+      "The letters are from the latin alphabet list only."
+    ],
+    "expectedSignature": "func ZipString(s string) string {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.ZipString(\"YouuungFellllas\"))\n\tfmt.Println(piscine.ZipString(\"Helloo Therre!\"))\n}",
+    "initialStudentCode": "package piscine\n\nfunc ZipString(s string) string {\n\t// Write your code here\n\treturn \"\"\n}",
+    "testCases": [
+      { "input": "YouuungFellllas", "expectedOutput": "1Y1o3u1n1g1F1e4l1a1s" },
+      { "input": "Helloo Therre!", "expectedOutput": "1H1e2l2o1 1T1h1e2r1e1!" }
+    ]
+  },
+  {
+    "id": "printmemory",
+    "level": 46,
+    "title": "PrintMemory",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "90.0 B",
+    "filesToSubmit": "printmemory.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function that takes (arr [10]byte) and displays the memory as in the example.",
+      "After displaying the memory the function must display all the ASCII graphic characters.",
+      "Non printable characters must be replaced by a dot.",
+      "The memory is displayed in rows of 4 bytes: first the hex values, then the ASCII representation."
+    ],
+    "expectedSignature": "func PrintMemory(arr [10]byte) {\n\n}",
+    "testTemplate": "package main\n\nimport \"piscine\"\n\nfunc main() {\n\tpiscine.PrintMemory([10]byte{'h', 'e', 'l', 'l', 'o', 16, 21, '*'})\n}",
+    "initialStudentCode": "package piscine\n\nimport \"fmt\"\n\nfunc PrintMemory(arr [10]byte) {\n\t// Write your code here\n\t_ = fmt.Sprintf\n}",
+    "testCases": [
+      { "input": "hello\\x10\\x15*\\x00\\x00", "expectedOutput": "68 65 6c 6c\n6f 10 15 2a\n00 00\nhello..*.." }
+    ]
+  },
+  {
+    "id": "canjump",
+    "level": 47,
+    "title": "CanJump",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "90.0 B",
+    "filesToSubmit": "canjump.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Given an array of non-negative integers representing the number of steps you can take forward from each position, implement CanJump() which determines if it is possible to reach and stay at the last index.",
+      "Each value represents the exact number of steps you must take forward from that position.",
+      "Return true if it is possible to reach the last index without stepping out, false otherwise.",
+      "If the input has only one element, return true. If the array is empty return false."
+    ],
+    "expectedSignature": "func CanJump(nums []uint) bool {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.CanJump([]uint{2, 3, 1, 1, 4}))\n\tfmt.Println(piscine.CanJump([]uint{3, 2, 1, 0, 4}))\n\tfmt.Println(piscine.CanJump([]uint{0}))\n\tfmt.Println(piscine.CanJump([]uint{}))\n}",
+    "initialStudentCode": "package piscine\n\nfunc CanJump(nums []uint) bool {\n\t// Write your code here\n\treturn false\n}",
+    "testCases": [
+      { "input": "[2,3,1,1,4]", "expectedOutput": "true" },
+      { "input": "[3,2,1,0,4]", "expectedOutput": "false" },
+      { "input": "[0]", "expectedOutput": "true" },
+      { "input": "[]", "expectedOutput": "false" }
+    ]
+  },
+  {
+    "id": "concatslice",
+    "level": 48,
+    "title": "ConcatSlice",
+    "category": "REQUIRED",
+    "difficulty": 1,
+    "xp": "50.0 B",
+    "filesToSubmit": "concatslice.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function ConcatSlice() that takes two slices of integers as arguments and returns the concatenation of the two slices."
+    ],
+    "expectedSignature": "func ConcatSlice(slice1, slice2 []int) []int {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.ConcatSlice([]int{1, 2, 3}, []int{4, 5, 6}))\n\tfmt.Println(piscine.ConcatSlice([]int{}, []int{4, 5, 6, 7, 8, 9}))\n\tfmt.Println(piscine.ConcatSlice([]int{1, 2, 3}, []int{}))\n}",
+    "initialStudentCode": "package piscine\n\nfunc ConcatSlice(slice1, slice2 []int) []int {\n\t// Write your code here\n\treturn nil\n}",
+    "testCases": [
+      { "input": "[1,2,3],[4,5,6]", "expectedOutput": "[1 2 3 4 5 6]" },
+      { "input": "[],[4,5,6,7,8,9]", "expectedOutput": "[4 5 6 7 8 9]" },
+      { "input": "[1,2,3],[]", "expectedOutput": "[1 2 3]" }
+    ]
+  },
+  {
+    "id": "concatalternate",
+    "level": 49,
+    "title": "ConcatAlternate",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "90.0 B",
+    "filesToSubmit": "concatalternate.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function ConcatAlternate() that receives two slices of int and returns a new slice with the alternated values of each slice.",
+      "The input slices can be of different lengths.",
+      "The new slice should start with an element of the largest slice.",
+      "If the slices are of equal length, return the elements of the first slice interleaved with the second."
+    ],
+    "expectedSignature": "func ConcatAlternate(slice1, slice2 []int) []int {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.ConcatAlternate([]int{1, 2, 3}, []int{4, 5, 6}))\n\tfmt.Println(piscine.ConcatAlternate([]int{1, 2, 3}, []int{4, 5, 6, 7, 8, 9}))\n\tfmt.Println(piscine.ConcatAlternate([]int{1, 2, 3}, []int{}))\n}",
+    "initialStudentCode": "package piscine\n\nfunc ConcatAlternate(slice1, slice2 []int) []int {\n\t// Write your code here\n\treturn nil\n}",
+    "testCases": [
+      { "input": "[1,2,3],[4,5,6]", "expectedOutput": "[1 4 2 5 3 6]" },
+      { "input": "[1,2,3],[4,5,6,7,8,9]", "expectedOutput": "[4 1 5 2 6 3 7 8 9]" },
+      { "input": "[1,2,3],[]", "expectedOutput": "[1 2 3]" }
+    ]
+  },
+  {
+    "id": "revconcatalternate",
+    "level": 50,
+    "title": "RevConcatAlternate",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "90.0 B",
+    "filesToSubmit": "revconcatalternate.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function RevConcatAlternate() that receives two slices of int and returns a new slice with alternated values of each slice in reverse order.",
+      "The input slices can have different lengths.",
+      "The new slice should start with the elements from the largest slice first.",
+      "If the slices are of equal length, start with an element of the first slice."
+    ],
+    "expectedSignature": "func RevConcatAlternate(slice1, slice2 []int) []int {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.RevConcatAlternate([]int{1, 2, 3}, []int{4, 5, 6}))\n\tfmt.Println(piscine.RevConcatAlternate([]int{1, 2, 3}, []int{4, 5, 6, 7, 8, 9}))\n\tfmt.Println(piscine.RevConcatAlternate([]int{1, 2, 3}, []int{}))\n}",
+    "initialStudentCode": "package piscine\n\nfunc RevConcatAlternate(slice1, slice2 []int) []int {\n\t// Write your code here\n\treturn nil\n}",
+    "testCases": [
+      { "input": "[1,2,3],[4,5,6]", "expectedOutput": "[3 6 2 5 1 4]" },
+      { "input": "[1,2,3],[4,5,6,7,8,9]", "expectedOutput": "[9 8 7 3 6 2 5 1 4]" },
+      { "input": "[1,2,3],[]", "expectedOutput": "[3 2 1]" }
+    ]
+  },
+  {
+    "id": "slice",
+    "level": 51,
+    "title": "Slice",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "90.0 B",
+    "filesToSubmit": "slice.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function Slice that receives a slice of strings and one or more integers, and returns a slice of strings.",
+      "The returned slice is part of the received one, cut from the position of the first int to the position of the second int.",
+      "If only one int exists, the resulting slice begins at that position and ends at the end.",
+      "The integers can be negative (counted from the end)."
+    ],
+    "expectedSignature": "func Slice(a []string, nbrs ...int) []string {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\ta := []string{\"coding\", \"algorithm\", \"ascii\", \"package\", \"golang\"}\n\tfmt.Printf(\"%#v\\n\", piscine.Slice(a, 1))\n\tfmt.Printf(\"%#v\\n\", piscine.Slice(a, 2, 4))\n\tfmt.Printf(\"%#v\\n\", piscine.Slice(a, -3))\n\tfmt.Printf(\"%#v\\n\", piscine.Slice(a, -2, -1))\n\tfmt.Printf(\"%#v\\n\", piscine.Slice(a, 2, 0))\n}",
+    "initialStudentCode": "package piscine\n\nfunc Slice(a []string, nbrs ...int) []string {\n\t// Write your code here\n\treturn nil\n}",
+    "testCases": [
+      { "input": "from index 1", "expectedOutput": "[]string{\"algorithm\", \"ascii\", \"package\", \"golang\"}" },
+      { "input": "from 2 to 4", "expectedOutput": "[]string{\"ascii\", \"package\"}" },
+      { "input": "from -3", "expectedOutput": "[]string{\"ascii\", \"package\", \"golang\"}" },
+      { "input": "from -2 to -1", "expectedOutput": "[]string{\"package\"}" },
+      { "input": "from 2 to 0", "expectedOutput": "[]string(nil)" }
+    ]
+  },
+  {
+    "id": "saveandmiss",
+    "level": 52,
+    "title": "SaveAndMiss",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "90.0 B",
+    "filesToSubmit": "saveandmiss.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function SaveAndMiss() that takes a string and an int as arguments.",
+      "The function moves through the string in sets determined by the int, saving the first set, omitting the second, saving the third, and so on.",
+      "Return a string containing the saved characters.",
+      "If the int is 0 or negative, return the original string."
+    ],
+    "expectedSignature": "func SaveAndMiss(arg string, num int) string {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.SaveAndMiss(\"123456789\", 3))\n\tfmt.Println(piscine.SaveAndMiss(\"abcdefghijklmnopqrstuvwyz\", 3))\n\tfmt.Println(piscine.SaveAndMiss(\"\", 3))\n\tfmt.Println(piscine.SaveAndMiss(\"hello\", 0))\n}",
+    "initialStudentCode": "package piscine\n\nfunc SaveAndMiss(arg string, num int) string {\n\t// Write your code here\n\treturn \"\"\n}",
+    "testCases": [
+      { "input": "123456789,3", "expectedOutput": "123789" },
+      { "input": "abcdefghijklmnopqrstuvwyz,3", "expectedOutput": "abcghimnostuz" },
+      { "input": ",3", "expectedOutput": "" },
+      { "input": "hello,0", "expectedOutput": "hello" }
+    ]
+  },
+  {
+    "id": "fprime",
+    "level": 53,
+    "title": "fprime",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "90.0 B",
+    "filesToSubmit": "main.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a program that takes a positive int and displays its prime factors followed by a newline.",
+      "Factors must be displayed in ascending order and separated by *.",
+      "If the number of arguments is different from 1, if the argument is invalid, or if the integer has no prime factor, the program displays nothing."
+    ],
+    "expectedSignature": "",
+    "testTemplate": "",
+    "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
+    "testCases": [
+      { "input": "225225", "expectedOutput": "3*3*5*5*7*11*13" },
+      { "input": "42", "expectedOutput": "2*3*7" },
+      { "input": "9539", "expectedOutput": "9539" }
+    ]
+  },
+  {
+    "id": "hiddenp",
+    "level": 54,
+    "title": "hiddenp",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "75.0 B",
+    "filesToSubmit": "main.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a program that takes two strings as arguments and checks whether the first string s1 is hidden in the second s2.",
+      "s1 is hidden in s2 if each character from s1 can be found in s2 in the same order (not necessarily consecutive).",
+      "If s1 is hidden in s2, print 1 followed by a newline. Otherwise print 0 followed by a newline.",
+      "If s1 is empty, it is considered hidden in any string.",
+      "If the number of arguments is different from 2, display nothing."
+    ],
+    "expectedSignature": "",
+    "testTemplate": "",
+    "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
+    "testCases": [
+      { "input": "abc 2altrb53c.sse", "expectedOutput": "1" },
+      { "input": "abc btarc", "expectedOutput": "0" },
+      { "input": "DD DABC", "expectedOutput": "0" }
+    ]
+  },
+  {
+    "id": "inter",
+    "level": 55,
+    "title": "inter",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "75.0 B",
+    "filesToSubmit": "main.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a program that takes two strings and displays, without doubles, the characters that appear in both strings, in the order they appear in the first one.",
+      "The display is followed by a newline.",
+      "If the number of arguments is different from 2, the program displays nothing."
+    ],
+    "expectedSignature": "",
+    "testTemplate": "",
+    "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
+    "testCases": [
+      { "input": "padinton paqefwtdjetyiytjneytjoeyjnejeyj", "expectedOutput": "padinto" },
+      { "input": "ddf6vewg64f twthgdwthdwfteewhrtag6h4ffdhsd", "expectedOutput": "df6ewg4" }
+    ]
+  },
+  {
+    "id": "union",
+    "level": 56,
+    "title": "union",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "75.0 B",
+    "filesToSubmit": "main.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a program that takes two strings and displays, without doubles, the characters that appear in either one of the strings.",
+      "The display is in the same order that the characters appear on the command line, followed by a newline.",
+      "If the number of arguments is different from 2, the program displays a newline."
+    ],
+    "expectedSignature": "",
+    "testTemplate": "",
+    "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
+    "testCases": [
+      { "input": "zpadinton paqefwtdjetyiytjneytjoeyjnejeyj", "expectedOutput": "zpadintoqefwjy" },
+      { "input": "rien cette phrase ne cache rien", "expectedOutput": "rienct phas" }
+    ]
+  },
+  {
+    "id": "wdmatch",
+    "level": 57,
+    "title": "wdmatch",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "75.0 B",
+    "filesToSubmit": "main.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a program that takes two strings and checks whether it is possible to write the first string with characters from the second string, respecting the order of characters in the second string.",
+      "If it is possible, display the first string followed by a newline, otherwise display nothing.",
+      "If the number of arguments is different from 2, display nothing."
+    ],
+    "expectedSignature": "",
+    "testTemplate": "",
+    "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
+    "testCases": [
+      { "input": "123 123", "expectedOutput": "123" },
+      { "input": "faya fgvvfdxcacpolhyghbreda", "expectedOutput": "faya" },
+      { "input": "faya fgvvfdxcacpolhyghbred", "expectedOutput": "" }
+    ]
+  },
+  {
+    "id": "reversestrcap",
+    "level": 58,
+    "title": "reversestrcap",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "75.0 B",
+    "filesToSubmit": "main.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a program that takes one or more arguments and, for each argument, puts the last letter of each word in uppercase and the rest in lowercase.",
+      "Display the result followed by a newline.",
+      "If there are no arguments, the program displays nothing."
+    ],
+    "expectedSignature": "",
+    "testTemplate": "",
+    "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
+    "testCases": [
+      { "input": "First SMALL TesT", "expectedOutput": "firsT smalL tesT" },
+      { "input": "SEconD Test IS a LItTLE EasIEr", "expectedOutput": "seconD tesT iS A littlE easieR" }
+    ]
+  },
+  {
+    "id": "fifthandskip",
+    "level": 59,
+    "title": "FifthAndSkip",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "90.0 B",
+    "filesToSubmit": "fifthandskip.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function FifthAndSkip() that takes a string and returns another string.",
+      "The function separates every five characters of the string with a space and removes the sixth one.",
+      "If there are spaces in the middle of a word, ignore them and get the first character after the spaces until you reach a length of 5.",
+      "If the string is less than 5 characters return 'Invalid Input' followed by a newline.",
+      "If the string is empty return a newline."
+    ],
+    "expectedSignature": "func FifthAndSkip(str string) string {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Print(piscine.FifthAndSkip(\"abcdefghijklmnopqrstuwxyz\"))\n\tfmt.Print(piscine.FifthAndSkip(\"This is a short sentence\"))\n\tfmt.Print(piscine.FifthAndSkip(\"1234\"))\n}",
+    "initialStudentCode": "package piscine\n\nfunc FifthAndSkip(str string) string {\n\t// Write your code here\n\treturn \"\"\n}",
+    "testCases": [
+      { "input": "abcdefghijklmnopqrstuwxyz", "expectedOutput": "abcde ghijk mnopq stuwx z\n" },
+      { "input": "This is a short sentence", "expectedOutput": "Thisi ashor sente ce\n" },
+      { "input": "1234", "expectedOutput": "Invalid Input\n" }
+    ]
+  },
+  {
+    "id": "notdecimal",
+    "level": 60,
+    "title": "NotDecimal",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "90.0 B",
+    "filesToSubmit": "notdecimal.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function NotDecimal() that takes a string in the form of a float number with a decimal point and returns a string converted to int without the decimal point (multiply by 10^n to remove the '.').",
+      "If the number has no decimal point or there is only a zero after the dot, return the number followed by a newline.",
+      "If the argument is empty return a newline.",
+      "If the argument is not a number return it followed by a newline."
+    ],
+    "expectedSignature": "func NotDecimal(dec string) string {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Print(piscine.NotDecimal(\"0.1\"))\n\tfmt.Print(piscine.NotDecimal(\"174.2\"))\n\tfmt.Print(piscine.NotDecimal(\"1952\"))\n\tfmt.Print(piscine.NotDecimal(\"\"))\n}",
+    "initialStudentCode": "package piscine\n\nfunc NotDecimal(dec string) string {\n\t// Write your code here\n\treturn \"\"\n}",
+    "testCases": [
+      { "input": "0.1", "expectedOutput": "1\n" },
+      { "input": "174.2", "expectedOutput": "1742\n" },
+      { "input": "1952", "expectedOutput": "1952\n" },
+      { "input": "", "expectedOutput": "\n" }
+    ]
+  },
+  {
+    "id": "revwstr",
+    "level": 61,
+    "title": "revwstr",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "75.0 B",
+    "filesToSubmit": "main.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a program that takes a string as a parameter and prints its words in reverse, followed by a newline.",
+      "A word is a sequence of alphanumerical characters.",
+      "If the number of arguments is different from 1, the program displays nothing.",
+      "There will not be extra spaces in the input."
+    ],
+    "expectedSignature": "",
+    "testTemplate": "",
+    "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
+    "testCases": [
+      { "input": "the time of contempt precedes that of indifference", "expectedOutput": "indifference of that precedes contempt of time the" },
+      { "input": "he stared at the mountain", "expectedOutput": "mountain the at stared he" },
+      { "input": "abcdefghijklm", "expectedOutput": "abcdefghijklm" }
+    ]
+  },
+  {
+    "id": "rostring",
+    "level": 62,
+    "title": "rostring",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "75.0 B",
+    "filesToSubmit": "main.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a program that takes a string and displays this string after rotating it one word to the left.",
+      "The first word becomes the last, and others stay in the same order.",
+      "A word is a sequence of alphanumerical characters.",
+      "Words are separated by only one space in the output.",
+      "If the number of arguments is different from 1, the program displays a newline."
+    ],
+    "expectedSignature": "",
+    "testTemplate": "",
+    "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
+    "testCases": [
+      { "input": "Let there be light", "expectedOutput": "there be light Let" },
+      { "input": "hello world foo", "expectedOutput": "world foo hello" }
+    ]
+  },
+  {
+    "id": "wordflip",
+    "level": 63,
+    "title": "WordFlip",
+    "category": "REQUIRED",
+    "difficulty": 2,
+    "xp": "75.0 B",
+    "filesToSubmit": "wordflip.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a function WordFlip() that takes a string as input and returns it with words in reverse order.",
+      "The output should be followed by a newline.",
+      "If the string is empty, return 'Invalid Output'.",
+      "Ignore multiple spaces between words and trim any leading or trailing spaces."
+    ],
+    "expectedSignature": "func WordFlip(str string) string {\n\n}",
+    "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Print(piscine.WordFlip(\"First second last\"))\n\tfmt.Print(piscine.WordFlip(\"\"))\n\tfmt.Print(piscine.WordFlip(\" hello  all  of  you! \"))\n}",
+    "initialStudentCode": "package piscine\n\nfunc WordFlip(str string) string {\n\t// Write your code here\n\treturn \"\"\n}",
+    "testCases": [
+      { "input": "First second last", "expectedOutput": "last second First\n" },
+      { "input": "", "expectedOutput": "Invalid Output" },
+      { "input": " hello  all  of  you! ", "expectedOutput": "you! of all hello\n" }
+    ]
+  },
+  {
+    "id": "findpairs",
+    "level": 64,
+    "title": "findpairs",
+    "category": "REQUIRED",
+    "difficulty": 4,
+    "xp": "100.0 B",
+    "filesToSubmit": "main.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a program that finds all pairs of elements in an integer array that sum up to a given target value.",
+      "Output a list of pairs as their indices.",
+      "Return 'No pairs found.' when no pair is present.",
+      "Return 'Invalid target sum.' if the target is invalid.",
+      "Return 'Invalid number: <number>' if a number in the array is invalid.",
+      "For any input format that deviates from '[1, 2, 3] target', return 'Invalid input.'",
+      "Input format: go run . '[1, 2, 3, 4, 5]' '6'"
+    ],
+    "expectedSignature": "",
+    "testTemplate": "",
+    "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
+    "testCases": [
+      { "input": "[1, 2, 3, 4, 5] 6", "expectedOutput": "Pairs with sum 6: [[0 4] [1 3]]" },
+      { "input": "[1, 2, 3, 4, 5] 10", "expectedOutput": "No pairs found." },
+      { "input": "[-1, 2, -3, 4, -5] 1", "expectedOutput": "Pairs with sum 1: [[0 1] [2 3]]" }
+    ]
+  },
+  {
+    "id": "piglatin",
+    "level": 65,
+    "title": "piglatin",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "90.0 B",
+    "filesToSubmit": "main.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a program that transforms a string passed as argument into its Pig Latin version.",
+      "Rules: If a word begins with a vowel, add 'ay' to the end. If it begins with a consonant, take all consonants before the first vowel, put them at the end, and add 'ay'.",
+      "Only latin vowels are considered: a, e, i, o, u.",
+      "If the word has no vowels, print 'No vowels'.",
+      "If the number of arguments is different from 1, print nothing."
+    ],
+    "expectedSignature": "",
+    "testTemplate": "",
+    "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
+    "testCases": [
+      { "input": "pig", "expectedOutput": "igpay" },
+      { "input": "Is", "expectedOutput": "Isay" },
+      { "input": "crunch", "expectedOutput": "unchcray" },
+      { "input": "crnch", "expectedOutput": "No vowels" }
+    ]
+  },
+  {
+    "id": "romannumbers",
+    "level": 66,
+    "title": "romannumbers",
+    "category": "REQUIRED",
+    "difficulty": 4,
+    "xp": "100.0 B",
+    "filesToSubmit": "main.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a program that converts a number given as argument into a roman number and prints it with its calculation.",
+      "The program has a limit of 4000. For invalid input (e.g. 'hello' or 0 or >= 4000), print 'ERROR: cannot convert to roman digit'.",
+      "Roman numeral rules apply: IV=4, IX=9, XL=40, XC=90, CD=400, CM=900."
+    ],
+    "expectedSignature": "",
+    "testTemplate": "",
+    "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
+    "testCases": [
+      { "input": "hello", "expectedOutput": "ERROR: cannot convert to roman digit" },
+      { "input": "123", "expectedOutput": "C+X+X+I+I+I\nCXXIII" },
+      { "input": "4000", "expectedOutput": "ERROR: cannot convert to roman digit" }
+    ]
+  },
+  {
+    "id": "brackets",
+    "level": 67,
+    "title": "brackets",
+    "category": "REQUIRED",
+    "difficulty": 3,
+    "xp": "90.0 B",
+    "filesToSubmit": "main.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a program that takes an undefined number of strings as arguments.",
+      "For each argument, if the expression is correctly bracketed, print 'OK' followed by a newline, otherwise print 'Error' followed by a newline.",
+      "Symbols considered as brackets: () [] {}. Every other symbol is ignored.",
+      "An opening bracket must always be closed by the matching closing bracket in the correct order.",
+      "A string with no brackets is considered correctly bracketed.",
+      "If there is no argument, print nothing."
+    ],
+    "expectedSignature": "",
+    "testTemplate": "",
+    "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
+    "testCases": [
+      { "input": "(johndoe)", "expectedOutput": "OK" },
+      { "input": "([)]", "expectedOutput": "Error" },
+      { "input": "{[(0 + 0)(1 + 1)](3*(-1)){()}}", "expectedOutput": "OK" }
+    ]
+  },
+  {
+    "id": "rpncalc",
+    "level": 68,
+    "title": "rpncalc",
+    "category": "REQUIRED",
+    "difficulty": 4,
+    "xp": "100.0 B",
+    "filesToSubmit": "main.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a program that takes a string containing an equation written in Reverse Polish Notation (RPN) as its first argument, evaluates it, and prints the result followed by a newline.",
+      "In RPN every operator follows all of its operands. Operands and operators must be separated by at least one space.",
+      "Implement the operators: +, -, *, /, and %.",
+      "If the string is not valid or if there is not exactly one argument, print 'Error'."
+    ],
+    "expectedSignature": "",
+    "testTemplate": "",
+    "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
+    "testCases": [
+      { "input": "1 2 * 3 * 4 +", "expectedOutput": "10" },
+      { "input": "1 2 3 4 +", "expectedOutput": "Error" },
+      { "input": "3 4 +", "expectedOutput": "7" }
+    ]
+  },
+  {
+    "id": "grouping",
+    "level": 69,
+    "title": "grouping",
+    "category": "REQUIRED",
+    "difficulty": 4,
+    "xp": "100.0 B",
+    "filesToSubmit": "main.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a program that receives two strings and replicates the use of brackets in regular expressions.",
+      "Brackets in regular expressions return the words that contain the expression inside of it.",
+      "Handle the '|' operator, which searches for both strings on each side of the operator.",
+      "Output results numbered and displayed by order of appearance in the string.",
+      "If the number of arguments is different from 2, if the regex is not valid, if the last argument is empty, or if there are no matches, print nothing."
+    ],
+    "expectedSignature": "",
+    "testTemplate": "",
+    "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
+    "testCases": [
+      { "input": "(a) I'm heavy, jumpsuit is on steady, Lighter when I'm lower, higher when I'm heavy", "expectedOutput": "1: heavy\n2: steady\n3: heavy" },
+      { "input": "(hi) He swore he just saw his sushi move.", "expectedOutput": "1: his\n2: sushi" }
+    ]
+  },
+  {
+    "id": "brainfuck",
+    "level": 70,
+    "title": "brainfuck",
+    "category": "REQUIRED",
+    "difficulty": 5,
+    "xp": "120.0 B",
+    "filesToSubmit": "main.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a Brainfuck interpreter program. The source code is given as the first parameter and will always be valid with fewer than 4096 operations.",
+      "Your interpreter consists of an array of 2048 bytes (all initialized to 0) with a pointer to the first byte.",
+      "> increments the pointer, < decrements it, + increments the pointed byte, - decrements it.",
+      ". prints the pointed byte to standard output.",
+      "[ if the byte at the current pointer is 0, skip forward to the command after the matching ].",
+      "] if the byte at the current pointer is not 0, jump back to the command after the matching [.",
+      "Any other character is treated as a comment and ignored."
+    ],
+    "expectedSignature": "",
+    "testTemplate": "",
+    "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
+    "testCases": [
+      { "input": "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.", "expectedOutput": "Hello World!" },
+      { "input": "++++++++++[>++++++++++>++++++++++>++++++++++<<<-]>---.>--.>-.", "expectedOutput": "abc" }
+    ]
+  },
+  {
+    "id": "options",
+    "level": 71,
+    "title": "options",
+    "category": "REQUIRED",
+    "difficulty": 4,
+    "xp": "100.0 B",
+    "filesToSubmit": "main.go",
+    "allowedFunctions": "--allow-builtin",
+    "instructions": [
+      "Write a program that takes an undefined number of arguments which could be options (arguments starting with -) and writes a representation of those options as groups of bytes followed by a newline.",
+      "An option begins with - and can have multiple characters a-z.",
+      "All options are stored in a single int where each option represents a bit: a=bit0, b=bit1, ..., z=bit25.",
+      "Launching without arguments or with -h prints all valid options: 'options: abcdefghijklmnopqrstuvwxyz'.",
+      "-h has priority over other flags when called first.",
+      "A wrong option prints 'Invalid Option' followed by a newline."
+    ],
+    "expectedSignature": "",
+    "testTemplate": "",
+    "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
+    "testCases": [
+      { "input": "-abc -ijk", "expectedOutput": "00000000 00000000 00000111 00000111" },
+      { "input": "-z", "expectedOutput": "00000010 00000000 00000000 00000000" },
+      { "input": "-%", "expectedOutput": "Invalid Option" }
+    ]
   }
 ]
