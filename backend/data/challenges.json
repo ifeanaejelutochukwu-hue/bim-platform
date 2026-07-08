@@ -15,7 +15,10 @@
     "testTemplate": "",
     "initialStudentCode": "package main\n\nfunc main() {\n\t// Write your code here\n}",
     "testCases": [
-      { "input": "output", "expectedOutput": "9876543210" }
+      {
+        "input": "output",
+        "expectedOutput": "9876543210"
+      }
     ]
   },
   {
@@ -34,7 +37,10 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tl := piscine.StrLen(\"Hello World!\")\n\tfmt.Println(l)\n}",
     "initialStudentCode": "package piscine\n\nfunc StrLen(s string) int {\n\t// Write your code here\n\treturn 0\n}",
     "testCases": [
-      { "input": "Hello World!", "expectedOutput": "12" }
+      {
+        "input": "Hello World!",
+        "expectedOutput": "12"
+      }
     ]
   },
   {
@@ -53,8 +59,14 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.IsLower(\"hello\"))\n\tfmt.Println(piscine.IsLower(\"hello!\"))\n}",
     "initialStudentCode": "package piscine\n\nfunc IsLower(s string) bool {\n\t// Write your code here\n\treturn false\n}",
     "testCases": [
-      { "input": "hello", "expectedOutput": "true" },
-      { "input": "hello!", "expectedOutput": "false" }
+      {
+        "input": "hello",
+        "expectedOutput": "true"
+      },
+      {
+        "input": "hello!",
+        "expectedOutput": "false"
+      }
     ]
   },
   {
@@ -73,8 +85,14 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.IsUpper(\"HELLO\"))\n\tfmt.Println(piscine.IsUpper(\"HELLO!\"))\n}",
     "initialStudentCode": "package piscine\n\nfunc IsUpper(s string) bool {\n\t// Write your code here\n\treturn false\n}",
     "testCases": [
-      { "input": "HELLO", "expectedOutput": "true" },
-      { "input": "HELLO!", "expectedOutput": "false" }
+      {
+        "input": "HELLO",
+        "expectedOutput": "true"
+      },
+      {
+        "input": "HELLO!",
+        "expectedOutput": "false"
+      }
     ]
   },
   {
@@ -93,7 +111,10 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\ta := 0\n\tb := 1\n\tpiscine.Swap(&a, &b)\n\tfmt.Println(a)\n\tfmt.Println(b)\n}",
     "initialStudentCode": "package piscine\n\nfunc Swap(a *int, b *int) {\n\t// Write your code here\n}",
     "testCases": [
-      { "input": "a=0,b=1", "expectedOutput": "1\n0" }
+      {
+        "input": "a=0,b=1",
+        "expectedOutput": "1\n0"
+      }
     ]
   },
   {
@@ -113,7 +134,10 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\ts := \"Hello World!\"\n\ts = piscine.StrRev(s)\n\tfmt.Println(s)\n}",
     "initialStudentCode": "package piscine\n\nfunc StrRev(s string) string {\n\t// Write your code here\n\treturn \"\"\n}",
     "testCases": [
-      { "input": "Hello World!", "expectedOutput": "!dlroW olleH" }
+      {
+        "input": "Hello World!",
+        "expectedOutput": "!dlroW olleH"
+      }
     ]
   },
   {
@@ -132,10 +156,22 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.ActiveBits(7))\n\tfmt.Println(piscine.ActiveBits(0))\n\tfmt.Println(piscine.ActiveBits(8))\n\tfmt.Println(piscine.ActiveBits(15))\n}",
     "initialStudentCode": "package piscine\n\nfunc ActiveBits(n int) int {\n\t// Write your code here\n\treturn 0\n}",
     "testCases": [
-      { "input": "7", "expectedOutput": "3" },
-      { "input": "0", "expectedOutput": "0" },
-      { "input": "8", "expectedOutput": "1" },
-      { "input": "15", "expectedOutput": "4" }
+      {
+        "input": "7",
+        "expectedOutput": "3"
+      },
+      {
+        "input": "0",
+        "expectedOutput": "0"
+      },
+      {
+        "input": "8",
+        "expectedOutput": "1"
+      },
+      {
+        "input": "15",
+        "expectedOutput": "4"
+      }
     ]
   },
   {
@@ -155,7 +191,10 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\ta := []int{23, 123, 1, 11, 55, 93}\n\tmax := piscine.Max(a)\n\tfmt.Println(max)\n\tfmt.Println(piscine.Max([]int{}))\n}",
     "initialStudentCode": "package piscine\n\nfunc Max(a []int) int {\n\t// Write your code here\n\treturn 0\n}",
     "testCases": [
-      { "input": "[23, 123, 1, 11, 55, 93]", "expectedOutput": "123\n0" }
+      {
+        "input": "[23, 123, 1, 11, 55, 93]",
+        "expectedOutput": "123\n0"
+      }
     ]
   },
   {
@@ -176,10 +215,22 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.Itoa(12345))\n\tfmt.Println(piscine.Itoa(0))\n\tfmt.Println(piscine.Itoa(-1234))\n\tfmt.Println(piscine.Itoa(987654321))\n}",
     "initialStudentCode": "package piscine\n\nfunc Itoa(n int) string {\n\t// Write your code here\n\treturn \"\"\n}",
     "testCases": [
-      { "input": "12345", "expectedOutput": "12345" },
-      { "input": "0", "expectedOutput": "0" },
-      { "input": "-1234", "expectedOutput": "-1234" },
-      { "input": "987654321", "expectedOutput": "987654321" }
+      {
+        "input": "12345",
+        "expectedOutput": "12345"
+      },
+      {
+        "input": "0",
+        "expectedOutput": "0"
+      },
+      {
+        "input": "-1234",
+        "expectedOutput": "-1234"
+      },
+      {
+        "input": "987654321",
+        "expectedOutput": "987654321"
+      }
     ]
   },
   {
@@ -195,22 +246,46 @@
       "Write a function that simulates the behaviour of the Atoi function in Go.",
       "Atoi transforms a number represented as a string into a number represented as an int.",
       "Atoi returns 0 if the string is not considered as a valid number.",
-      "Non-valid string chains will be tested — some will contain non-digit characters.",
+      "Non-valid string chains will be tested \u2014 some will contain non-digit characters.",
       "The handling of the signs + or - does have to be taken into account.",
-      "This function will only have to return the int — the error result of Atoi is not required."
+      "This function will only have to return the int \u2014 the error result of Atoi is not required."
     ],
     "expectedSignature": "func Atoi(s string) int {\n\n}",
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.Atoi(\"12345\"))\n\tfmt.Println(piscine.Atoi(\"0000000012345\"))\n\tfmt.Println(piscine.Atoi(\"012 345\"))\n\tfmt.Println(piscine.Atoi(\"Hello World!\"))\n\tfmt.Println(piscine.Atoi(\"+1234\"))\n\tfmt.Println(piscine.Atoi(\"-1234\"))\n\tfmt.Println(piscine.Atoi(\"++1234\"))\n\tfmt.Println(piscine.Atoi(\"--1234\"))\n}",
     "initialStudentCode": "package piscine\n\nfunc Atoi(s string) int {\n\t// Write your code here\n\treturn 0\n}",
     "testCases": [
-      { "input": "12345", "expectedOutput": "12345" },
-      { "input": "0000000012345", "expectedOutput": "12345" },
-      { "input": "012 345", "expectedOutput": "0" },
-      { "input": "Hello World!", "expectedOutput": "0" },
-      { "input": "+1234", "expectedOutput": "1234" },
-      { "input": "-1234", "expectedOutput": "-1234" },
-      { "input": "++1234", "expectedOutput": "0" },
-      { "input": "--1234", "expectedOutput": "0" }
+      {
+        "input": "12345",
+        "expectedOutput": "12345"
+      },
+      {
+        "input": "0000000012345",
+        "expectedOutput": "12345"
+      },
+      {
+        "input": "012 345",
+        "expectedOutput": "0"
+      },
+      {
+        "input": "Hello World!",
+        "expectedOutput": "0"
+      },
+      {
+        "input": "+1234",
+        "expectedOutput": "1234"
+      },
+      {
+        "input": "-1234",
+        "expectedOutput": "-1234"
+      },
+      {
+        "input": "++1234",
+        "expectedOutput": "0"
+      },
+      {
+        "input": "--1234",
+        "expectedOutput": "0"
+      }
     ]
   },
   {
@@ -227,17 +302,32 @@
       "The first value is at index 0.",
       "The sequence starts this way: 0, 1, 1, 2, 3, 5, 8...",
       "A negative index will return -1.",
-      "for loops are forbidden for this exercise — use recursion only."
+      "for loops are forbidden for this exercise \u2014 use recursion only."
     ],
     "expectedSignature": "func Fibonacci(index int) int {\n\n}",
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.Fibonacci(0))\n\tfmt.Println(piscine.Fibonacci(1))\n\tfmt.Println(piscine.Fibonacci(4))\n\tfmt.Println(piscine.Fibonacci(10))\n\tfmt.Println(piscine.Fibonacci(-1))\n}",
     "initialStudentCode": "package piscine\n\nfunc Fibonacci(index int) int {\n\t// Write your code here\n\treturn 0\n}",
     "testCases": [
-      { "input": "0", "expectedOutput": "0" },
-      { "input": "1", "expectedOutput": "1" },
-      { "input": "4", "expectedOutput": "3" },
-      { "input": "10", "expectedOutput": "55" },
-      { "input": "-1", "expectedOutput": "-1" }
+      {
+        "input": "0",
+        "expectedOutput": "0"
+      },
+      {
+        "input": "1",
+        "expectedOutput": "1"
+      },
+      {
+        "input": "4",
+        "expectedOutput": "3"
+      },
+      {
+        "input": "10",
+        "expectedOutput": "55"
+      },
+      {
+        "input": "-1",
+        "expectedOutput": "-1"
+      }
     ]
   },
   {
@@ -258,11 +348,26 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.IsPrime(5))\n\tfmt.Println(piscine.IsPrime(4))\n\tfmt.Println(piscine.IsPrime(1))\n\tfmt.Println(piscine.IsPrime(-7))\n\tfmt.Println(piscine.IsPrime(13))\n}",
     "initialStudentCode": "package piscine\n\nfunc IsPrime(nb int) bool {\n\t// Write your code here\n\treturn false\n}",
     "testCases": [
-      { "input": "5", "expectedOutput": "true" },
-      { "input": "4", "expectedOutput": "false" },
-      { "input": "1", "expectedOutput": "false" },
-      { "input": "-7", "expectedOutput": "false" },
-      { "input": "13", "expectedOutput": "true" }
+      {
+        "input": "5",
+        "expectedOutput": "true"
+      },
+      {
+        "input": "4",
+        "expectedOutput": "false"
+      },
+      {
+        "input": "1",
+        "expectedOutput": "false"
+      },
+      {
+        "input": "-7",
+        "expectedOutput": "false"
+      },
+      {
+        "input": "13",
+        "expectedOutput": "true"
+      }
     ]
   },
   {
@@ -283,7 +388,10 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\ta := []int{1, 2, 3, 4, 5, 6}\n\tresult := piscine.Map(piscine.IsEven, a)\n\tfmt.Println(result)\n}",
     "initialStudentCode": "package piscine\n\nfunc IsEven(n int) bool {\n\treturn n%2 == 0\n}\n\nfunc Map(f func(int) bool, a []int) []bool {\n\t// Write your code here\n\treturn nil\n}",
     "testCases": [
-      { "input": "[1,2,3,4,5,6]", "expectedOutput": "[false true false true false true]" }
+      {
+        "input": "[1,2,3,4,5,6]",
+        "expectedOutput": "[false true false true false true]"
+      }
     ]
   },
   {
@@ -303,8 +411,14 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\ttab1 := []string{\"Hello\", \"how\", \"are\", \"you\"}\n\ttab2 := []string{\"This\", \"1\", \"is\", \"4\", \"you\"}\n\tfmt.Println(piscine.CountIf(piscine.IsNumeric, tab1))\n\tfmt.Println(piscine.CountIf(piscine.IsNumeric, tab2))\n}",
     "initialStudentCode": "package piscine\n\nimport \"unicode\"\n\nfunc IsNumeric(s string) bool {\n\tif s == \"\" {\n\t\treturn false\n\t}\n\tfor _, r := range s {\n\t\tif !unicode.IsDigit(r) {\n\t\t\treturn false\n\t\t}\n\t}\n\treturn true\n}\n\nfunc CountIf(f func(string) bool, tab []string) int {\n\t// Write your code here\n\treturn 0\n}",
     "testCases": [
-      { "input": "tab1", "expectedOutput": "0" },
-      { "input": "tab2", "expectedOutput": "2" }
+      {
+        "input": "tab1",
+        "expectedOutput": "0"
+      },
+      {
+        "input": "tab2",
+        "expectedOutput": "2"
+      }
     ]
   },
   {
@@ -324,10 +438,22 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.ReverseString(\"hello\"))\n\tfmt.Println(piscine.ReverseString(\"Go Language\"))\n\tfmt.Println(piscine.ReverseString(\"\"))\n\tfmt.Println(piscine.ReverseString(\"A\"))\n}",
     "initialStudentCode": "package piscine\n\nfunc ReverseString(s string) string {\n\t// Write your code here\n\treturn \"\"\n}",
     "testCases": [
-      { "input": "hello", "expectedOutput": "olleh" },
-      { "input": "Go Language", "expectedOutput": "egaugnaL oG" },
-      { "input": "", "expectedOutput": "" },
-      { "input": "A", "expectedOutput": "A" }
+      {
+        "input": "hello",
+        "expectedOutput": "olleh"
+      },
+      {
+        "input": "Go Language",
+        "expectedOutput": "egaugnaL oG"
+      },
+      {
+        "input": "",
+        "expectedOutput": ""
+      },
+      {
+        "input": "A",
+        "expectedOutput": "A"
+      }
     ]
   },
   {
@@ -349,10 +475,22 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.RetainFirstHalf(\"This is the 1st halfThis is the 2nd half\"))\n\tfmt.Println(piscine.RetainFirstHalf(\"A\"))\n\tfmt.Println(piscine.RetainFirstHalf(\"\"))\n\tfmt.Println(piscine.RetainFirstHalf(\"Hello World\"))\n}",
     "initialStudentCode": "package piscine\n\nfunc RetainFirstHalf(str string) string {\n\t// Write your code here\n\treturn \"\"\n}",
     "testCases": [
-      { "input": "This is the 1st halfThis is the 2nd half", "expectedOutput": "This is the 1st half" },
-      { "input": "A", "expectedOutput": "A" },
-      { "input": "", "expectedOutput": "" },
-      { "input": "Hello World", "expectedOutput": "Hello" }
+      {
+        "input": "This is the 1st halfThis is the 2nd half",
+        "expectedOutput": "This is the 1st half"
+      },
+      {
+        "input": "A",
+        "expectedOutput": "A"
+      },
+      {
+        "input": "",
+        "expectedOutput": ""
+      },
+      {
+        "input": "Hello World",
+        "expectedOutput": "Hello"
+      }
     ]
   },
   {
@@ -377,12 +515,30 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.CamelToSnakeCase(\"HelloWorld\"))\n\tfmt.Println(piscine.CamelToSnakeCase(\"helloWorld\"))\n\tfmt.Println(piscine.CamelToSnakeCase(\"camelCase\"))\n\tfmt.Println(piscine.CamelToSnakeCase(\"CAMELtoSnackCASE\"))\n\tfmt.Println(piscine.CamelToSnakeCase(\"camelToSnakeCase\"))\n\tfmt.Println(piscine.CamelToSnakeCase(\"hey2\"))\n}",
     "initialStudentCode": "package piscine\n\nfunc CamelToSnakeCase(s string) string {\n\t// Write your code here\n\treturn \"\"\n}",
     "testCases": [
-      { "input": "HelloWorld", "expectedOutput": "Hello_World" },
-      { "input": "helloWorld", "expectedOutput": "hello_World" },
-      { "input": "camelCase", "expectedOutput": "camel_Case" },
-      { "input": "CAMELtoSnackCASE", "expectedOutput": "CAMELtoSnackCASE" },
-      { "input": "camelToSnakeCase", "expectedOutput": "camel_To_Snake_Case" },
-      { "input": "hey2", "expectedOutput": "hey2" }
+      {
+        "input": "HelloWorld",
+        "expectedOutput": "Hello_World"
+      },
+      {
+        "input": "helloWorld",
+        "expectedOutput": "hello_World"
+      },
+      {
+        "input": "camelCase",
+        "expectedOutput": "camel_Case"
+      },
+      {
+        "input": "CAMELtoSnackCASE",
+        "expectedOutput": "CAMELtoSnackCASE"
+      },
+      {
+        "input": "camelToSnakeCase",
+        "expectedOutput": "camel_To_Snake_Case"
+      },
+      {
+        "input": "hey2",
+        "expectedOutput": "hey2"
+      }
     ]
   },
   {
@@ -401,8 +557,14 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.CheckNumber(\"Hello\"))\n\tfmt.Println(piscine.CheckNumber(\"Hello1\"))\n}",
     "initialStudentCode": "package piscine\n\nfunc CheckNumber(arg string) bool {\n\t// Write your code here\n\treturn false\n}",
     "testCases": [
-      { "input": "Hello", "expectedOutput": "false" },
-      { "input": "Hello1", "expectedOutput": "true" }
+      {
+        "input": "Hello",
+        "expectedOutput": "false"
+      },
+      {
+        "input": "Hello1",
+        "expectedOutput": "true"
+      }
     ]
   },
   {
@@ -423,10 +585,22 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.HashCode(\"A\"))\n\tfmt.Println(piscine.HashCode(\"AB\"))\n\tfmt.Println(piscine.HashCode(\"BAC\"))\n\tfmt.Println(piscine.HashCode(\"Hello World\"))\n}",
     "initialStudentCode": "package piscine\n\nfunc HashCode(dec string) string {\n\t// Write your code here\n\treturn \"\"\n}",
     "testCases": [
-      { "input": "A", "expectedOutput": "B" },
-      { "input": "AB", "expectedOutput": "CD" },
-      { "input": "BAC", "expectedOutput": "EDF" },
-      { "input": "Hello World", "expectedOutput": "Spwwz+bz}wo" }
+      {
+        "input": "A",
+        "expectedOutput": "B"
+      },
+      {
+        "input": "AB",
+        "expectedOutput": "CD"
+      },
+      {
+        "input": "BAC",
+        "expectedOutput": "EDF"
+      },
+      {
+        "input": "Hello World",
+        "expectedOutput": "Spwwz+bz}wo"
+      }
     ]
   },
   {
@@ -448,7 +622,10 @@
     "testTemplate": "package main\n\nimport \"piscine\"\n\nfunc main() {\n\tpiscine.PrintComb()\n}",
     "initialStudentCode": "package piscine\n\nimport \"fmt\"\n\nfunc PrintComb() {\n\t// Write your code here\n\t_ = fmt.Sprintf\n}",
     "testCases": [
-      { "input": "output", "expectedOutput": "012, 013, 014, 015, 016, 017, 018, 019, 023, ..., 689, 789" }
+      {
+        "input": "output",
+        "expectedOutput": "012, 013, 014, 015, 016, 017, 018, 019, 023, ..., 689, 789"
+      }
     ]
   },
   {
@@ -470,7 +647,10 @@
     "testTemplate": "",
     "initialStudentCode": "package main\n\nfunc main() {\n\t// Write your code here\n}",
     "testCases": [
-      { "input": "output", "expectedOutput": "987, 986, 985, 984, 983, 982, 981, 980, 976, ..., 310, 210" }
+      {
+        "input": "output",
+        "expectedOutput": "987, 986, 985, 984, 983, 982, 981, 980, 976, ..., 310, 210"
+      }
     ]
   },
   {
@@ -489,7 +669,10 @@
     "testTemplate": "package main\n\nimport \"piscine\"\n\nfunc main() {\n\tpiscine.PrintStr(\"Hello World!\")\n}",
     "initialStudentCode": "package piscine\n\nimport \"fmt\"\n\nfunc PrintStr(s string) {\n\t// Write your code here\n\t_ = fmt.Sprintf\n}",
     "testCases": [
-      { "input": "Hello World!", "expectedOutput": "Hello World!" }
+      {
+        "input": "Hello World!",
+        "expectedOutput": "Hello World!"
+      }
     ]
   },
   {
@@ -504,7 +687,7 @@
     "instructions": [
       "Write a function that simulates the behaviour of the Atoi function in Go.",
       "Atoi transforms a number defined as a string into a number defined as an int.",
-      "For this exercise only valid strings will be tested — they will only contain digit characters.",
+      "For this exercise only valid strings will be tested \u2014 they will only contain digit characters.",
       "The handling of the signs + or - does not have to be taken into account.",
       "This function will only have to return the int."
     ],
@@ -512,9 +695,18 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.BasicAtoi(\"12345\"))\n\tfmt.Println(piscine.BasicAtoi(\"0000000012345\"))\n\tfmt.Println(piscine.BasicAtoi(\"000000\"))\n}",
     "initialStudentCode": "package piscine\n\nfunc BasicAtoi(s string) int {\n\t// Write your code here\n\treturn 0\n}",
     "testCases": [
-      { "input": "12345", "expectedOutput": "12345" },
-      { "input": "0000000012345", "expectedOutput": "12345" },
-      { "input": "000000", "expectedOutput": "0" }
+      {
+        "input": "12345",
+        "expectedOutput": "12345"
+      },
+      {
+        "input": "0000000012345",
+        "expectedOutput": "12345"
+      },
+      {
+        "input": "000000",
+        "expectedOutput": "0"
+      }
     ]
   },
   {
@@ -530,7 +722,7 @@
       "Write a function that simulates the behaviour of the Atoi function in Go.",
       "Atoi transforms a number defined as a string into a number defined as an int.",
       "Atoi returns 0 if the string is not considered as a valid number.",
-      "Non-valid string chains will be tested — some will contain non-digit characters.",
+      "Non-valid string chains will be tested \u2014 some will contain non-digit characters.",
       "The handling of the signs + or - does not have to be taken into account.",
       "This function will only have to return the int."
     ],
@@ -538,13 +730,24 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.BasicAtoi2(\"12345\"))\n\tfmt.Println(piscine.BasicAtoi2(\"0000000012345\"))\n\tfmt.Println(piscine.BasicAtoi2(\"012 345\"))\n\tfmt.Println(piscine.BasicAtoi2(\"Hello World!\"))\n}",
     "initialStudentCode": "package piscine\n\nfunc BasicAtoi2(s string) int {\n\t// Write your code here\n\treturn 0\n}",
     "testCases": [
-      { "input": "12345", "expectedOutput": "12345" },
-      { "input": "0000000012345", "expectedOutput": "12345" },
-      { "input": "012 345", "expectedOutput": "0" },
-      { "input": "Hello World!", "expectedOutput": "0" }
+      {
+        "input": "12345",
+        "expectedOutput": "12345"
+      },
+      {
+        "input": "0000000012345",
+        "expectedOutput": "12345"
+      },
+      {
+        "input": "012 345",
+        "expectedOutput": "0"
+      },
+      {
+        "input": "Hello World!",
+        "expectedOutput": "0"
+      }
     ]
-  }
-,
+  },
   {
     "id": "atoibase",
     "level": 25,
@@ -565,10 +768,22 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.AtoiBase(\"125\", \"0123456789\"))\n\tfmt.Println(piscine.AtoiBase(\"1111101\", \"01\"))\n\tfmt.Println(piscine.AtoiBase(\"7D\", \"0123456789ABCDEF\"))\n\tfmt.Println(piscine.AtoiBase(\"bbbbbab\", \"-ab\"))\n}",
     "initialStudentCode": "package piscine\n\nfunc AtoiBase(s string, base string) int {\n\t// Write your code here\n\treturn 0\n}",
     "testCases": [
-      { "input": "125 base10", "expectedOutput": "125" },
-      { "input": "1111101 base2", "expectedOutput": "125" },
-      { "input": "7D base16", "expectedOutput": "125" },
-      { "input": "bbbbbab invalid-base", "expectedOutput": "0" }
+      {
+        "input": "125 base10",
+        "expectedOutput": "125"
+      },
+      {
+        "input": "1111101 base2",
+        "expectedOutput": "125"
+      },
+      {
+        "input": "7D base16",
+        "expectedOutput": "125"
+      },
+      {
+        "input": "bbbbbab invalid-base",
+        "expectedOutput": "0"
+      }
     ]
   },
   {
@@ -592,10 +807,22 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.ItoaBase(125, 10))\n\tfmt.Println(piscine.ItoaBase(125, 2))\n\tfmt.Println(piscine.ItoaBase(125, 16))\n\tfmt.Println(piscine.ItoaBase(-42, 16))\n}",
     "initialStudentCode": "package piscine\n\nfunc ItoaBase(value, base int) string {\n\t// Write your code here\n\treturn \"\"\n}",
     "testCases": [
-      { "input": "125 base10", "expectedOutput": "125" },
-      { "input": "125 base2", "expectedOutput": "1111101" },
-      { "input": "125 base16", "expectedOutput": "7D" },
-      { "input": "-42 base16", "expectedOutput": "-2A" }
+      {
+        "input": "125 base10",
+        "expectedOutput": "125"
+      },
+      {
+        "input": "125 base2",
+        "expectedOutput": "1111101"
+      },
+      {
+        "input": "125 base16",
+        "expectedOutput": "7D"
+      },
+      {
+        "input": "-42 base16",
+        "expectedOutput": "-2A"
+      }
     ]
   },
   {
@@ -614,10 +841,22 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.IsAlpha(\"Hello! How are you?\"))\n\tfmt.Println(piscine.IsAlpha(\"HelloHowareyou\"))\n\tfmt.Println(piscine.IsAlpha(\"What's this 4?\"))\n\tfmt.Println(piscine.IsAlpha(\"Whatsthis4\"))\n}",
     "initialStudentCode": "package piscine\n\nfunc IsAlpha(s string) bool {\n\t// Write your code here\n\treturn false\n}",
     "testCases": [
-      { "input": "Hello! How are you?", "expectedOutput": "false" },
-      { "input": "HelloHowareyou", "expectedOutput": "true" },
-      { "input": "What's this 4?", "expectedOutput": "false" },
-      { "input": "Whatsthis4", "expectedOutput": "true" }
+      {
+        "input": "Hello! How are you?",
+        "expectedOutput": "false"
+      },
+      {
+        "input": "HelloHowareyou",
+        "expectedOutput": "true"
+      },
+      {
+        "input": "What's this 4?",
+        "expectedOutput": "false"
+      },
+      {
+        "input": "Whatsthis4",
+        "expectedOutput": "true"
+      }
     ]
   },
   {
@@ -638,13 +877,24 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.IsCapitalized(\"Hello! How are you?\"))\n\tfmt.Println(piscine.IsCapitalized(\"Hello How Are You\"))\n\tfmt.Println(piscine.IsCapitalized(\"Whats 4this 100K?\"))\n\tfmt.Println(piscine.IsCapitalized(\"\"))\n}",
     "initialStudentCode": "package piscine\n\nfunc IsCapitalized(s string) bool {\n\t// Write your code here\n\treturn false\n}",
     "testCases": [
-      { "input": "Hello! How are you?", "expectedOutput": "false" },
-      { "input": "Hello How Are You", "expectedOutput": "true" },
-      { "input": "Whats 4this 100K?", "expectedOutput": "true" },
-      { "input": "", "expectedOutput": "false" }
+      {
+        "input": "Hello! How are you?",
+        "expectedOutput": "false"
+      },
+      {
+        "input": "Hello How Are You",
+        "expectedOutput": "true"
+      },
+      {
+        "input": "Whats 4this 100K?",
+        "expectedOutput": "true"
+      },
+      {
+        "input": "",
+        "expectedOutput": "false"
+      }
     ]
-  }
-,
+  },
   {
     "id": "issorted",
     "level": 29,
@@ -663,8 +913,14 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\ta1 := []int{0, 1, 2, 3, 4, 5}\n\ta2 := []int{0, 2, 1, 3}\n\tfmt.Println(piscine.IsSorted(piscine.Compare, a1))\n\tfmt.Println(piscine.IsSorted(piscine.Compare, a2))\n}",
     "initialStudentCode": "package piscine\n\nfunc Compare(a, b int) int {\n\treturn a - b\n}\n\nfunc IsSorted(f func(a, b int) int, a []int) bool {\n\t// Write your code here\n\treturn false\n}",
     "testCases": [
-      { "input": "[0,1,2,3,4,5]", "expectedOutput": "true" },
-      { "input": "[0,2,1,3]", "expectedOutput": "false" }
+      {
+        "input": "[0,1,2,3,4,5]",
+        "expectedOutput": "true"
+      },
+      {
+        "input": "[0,2,1,3]",
+        "expectedOutput": "false"
+      }
     ]
   },
   {
@@ -687,9 +943,18 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.AppendRange(5, 10))\n\tfmt.Println(piscine.AppendRange(10, 5))\n\tfmt.Println(piscine.AppendRange(0, 1))\n}",
     "initialStudentCode": "package piscine\n\nfunc AppendRange(min, max int) []int {\n\t// Write your code here\n\treturn nil\n}",
     "testCases": [
-      { "input": "5,10", "expectedOutput": "[5 6 7 8 9]" },
-      { "input": "10,5", "expectedOutput": "[]" },
-      { "input": "0,1", "expectedOutput": "[0]" }
+      {
+        "input": "5,10",
+        "expectedOutput": "[5 6 7 8 9]"
+      },
+      {
+        "input": "10,5",
+        "expectedOutput": "[]"
+      },
+      {
+        "input": "0,1",
+        "expectedOutput": "[0]"
+      }
     ]
   },
   {
@@ -712,9 +977,18 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.MakeRange(5, 10))\n\tfmt.Println(piscine.MakeRange(10, 5))\n\tfmt.Println(piscine.MakeRange(0, 3))\n}",
     "initialStudentCode": "package piscine\n\nfunc MakeRange(min, max int) []int {\n\t// Write your code here\n\treturn nil\n}",
     "testCases": [
-      { "input": "5,10", "expectedOutput": "[5 6 7 8 9]" },
-      { "input": "10,5", "expectedOutput": "[]" },
-      { "input": "0,3", "expectedOutput": "[0 1 2]" }
+      {
+        "input": "5,10",
+        "expectedOutput": "[5 6 7 8 9]"
+      },
+      {
+        "input": "10,5",
+        "expectedOutput": "[]"
+      },
+      {
+        "input": "0,3",
+        "expectedOutput": "[0 1 2]"
+      }
     ]
   },
   {
@@ -733,11 +1007,16 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\ts1 := []int{5, 4, 3, 2, 1, 0}\n\tpiscine.SortIntegerTable(s1)\n\tfmt.Println(s1)\n\ts2 := []int{3, 1, 4, 1, 5, 9, 2, 6}\n\tpiscine.SortIntegerTable(s2)\n\tfmt.Println(s2)\n}",
     "initialStudentCode": "package piscine\n\nfunc SortIntegerTable(table []int) {\n\t// Write your code here\n}",
     "testCases": [
-      { "input": "[5,4,3,2,1,0]", "expectedOutput": "[0 1 2 3 4 5]" },
-      { "input": "[3,1,4,1,5,9,2,6]", "expectedOutput": "[1 1 2 3 4 5 6 9]" }
+      {
+        "input": "[5,4,3,2,1,0]",
+        "expectedOutput": "[0 1 2 3 4 5]"
+      },
+      {
+        "input": "[3,1,4,1,5,9,2,6]",
+        "expectedOutput": "[1 1 2 3 4 5 6 9]"
+      }
     ]
-  }
-,
+  },
   {
     "id": "concatparams",
     "level": 33,
@@ -755,7 +1034,10 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\ttest := []string{\"Hello\", \"how\", \"are\", \"you?\"}\n\tfmt.Println(piscine.ConcatParams(test))\n}",
     "initialStudentCode": "package piscine\n\nfunc ConcatParams(args []string) string {\n\t// Write your code here\n\treturn \"\"\n}",
     "testCases": [
-      { "input": "[Hello,how,are,you?]", "expectedOutput": "Hello\nhow\nare\nyou?" }
+      {
+        "input": "[Hello,how,are,you?]",
+        "expectedOutput": "Hello\nhow\nare\nyou?"
+      }
     ]
   },
   {
@@ -775,8 +1057,14 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Printf(\"%#v\\n\", piscine.SplitWhiteSpaces(\"Hello how are you?\"))\n\tfmt.Printf(\"%#v\\n\", piscine.SplitWhiteSpaces(\"one\\ttwo\\nthree\"))\n}",
     "initialStudentCode": "package piscine\n\nfunc SplitWhiteSpaces(s string) []string {\n\t// Write your code here\n\treturn nil\n}",
     "testCases": [
-      { "input": "Hello how are you?", "expectedOutput": "[]string{\"Hello\", \"how\", \"are\", \"you?\"}" },
-      { "input": "one\ttwo\nthree", "expectedOutput": "[]string{\"one\", \"two\", \"three\"}" }
+      {
+        "input": "Hello how are you?",
+        "expectedOutput": "[]string{\"Hello\", \"how\", \"are\", \"you?\"}"
+      },
+      {
+        "input": "one\ttwo\nthree",
+        "expectedOutput": "[]string{\"one\", \"two\", \"three\"}"
+      }
     ]
   },
   {
@@ -797,11 +1085,26 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.CollatzCountdown(12))\n\tfmt.Println(piscine.CollatzCountdown(1))\n\tfmt.Println(piscine.CollatzCountdown(0))\n\tfmt.Println(piscine.CollatzCountdown(-5))\n\tfmt.Println(piscine.CollatzCountdown(27))\n}",
     "initialStudentCode": "package piscine\n\nfunc CollatzCountdown(start int) int {\n\t// Write your code here\n\treturn 0\n}",
     "testCases": [
-      { "input": "12", "expectedOutput": "9" },
-      { "input": "1", "expectedOutput": "0" },
-      { "input": "0", "expectedOutput": "-1" },
-      { "input": "-5", "expectedOutput": "-1" },
-      { "input": "27", "expectedOutput": "111" }
+      {
+        "input": "12",
+        "expectedOutput": "9"
+      },
+      {
+        "input": "1",
+        "expectedOutput": "0"
+      },
+      {
+        "input": "0",
+        "expectedOutput": "-1"
+      },
+      {
+        "input": "-5",
+        "expectedOutput": "-1"
+      },
+      {
+        "input": "27",
+        "expectedOutput": "111"
+      }
     ]
   },
   {
@@ -822,7 +1125,10 @@
     "testTemplate": "package main\n\nimport (\n\t\"piscine\"\n)\n\nfunc main() {\n\tas := []int{500, 2}\n\tpiscine.ReduceInt(as, piscine.Mul)\n\tpiscine.ReduceInt(as, piscine.Add)\n}",
     "initialStudentCode": "package piscine\n\nimport \"fmt\"\n\nfunc Add(acc, cur int) int { return acc + cur }\nfunc Mul(acc, cur int) int { return acc * cur }\n\nfunc ReduceInt(a []int, f func(int, int) int) {\n\t// Write your code here\n\t_ = fmt.Println\n}",
     "testCases": [
-      { "input": "[500,2] Mul then Add", "expectedOutput": "1000\n502" }
+      {
+        "input": "[500,2] Mul then Add",
+        "expectedOutput": "1000\n502"
+      }
     ]
   },
   {
@@ -844,8 +1150,14 @@
     "testTemplate": "",
     "initialStudentCode": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n}",
     "testCases": [
-      { "input": "abc", "expectedOutput": "zyx" },
-      { "input": "My horse is Amazing.", "expectedOutput": "Nb slihv rh Znzarmt." }
+      {
+        "input": "abc",
+        "expectedOutput": "zyx"
+      },
+      {
+        "input": "My horse is Amazing.",
+        "expectedOutput": "Nb slihv rh Znzarmt."
+      }
     ]
   },
   {
@@ -867,8 +1179,14 @@
     "testTemplate": "",
     "initialStudentCode": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n}",
     "testCases": [
-      { "input": "SometHingS iS WronG", "expectedOutput": "sOMEThINGs Is wRONg" },
-      { "input": "Hello World", "expectedOutput": "hELLO wORLD" }
+      {
+        "input": "SometHingS iS WronG",
+        "expectedOutput": "sOMEThINGs Is wRONg"
+      },
+      {
+        "input": "Hello World",
+        "expectedOutput": "hELLO wORLD"
+      }
     ]
   },
   {
@@ -891,10 +1209,22 @@
     "testTemplate": "",
     "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
     "testCases": [
-      { "input": "2", "expectedOutput": "true" },
-      { "input": "64", "expectedOutput": "true" },
-      { "input": "513", "expectedOutput": "false" },
-      { "input": "1", "expectedOutput": "true" }
+      {
+        "input": "2",
+        "expectedOutput": "true"
+      },
+      {
+        "input": "64",
+        "expectedOutput": "true"
+      },
+      {
+        "input": "513",
+        "expectedOutput": "false"
+      },
+      {
+        "input": "1",
+        "expectedOutput": "true"
+      }
     ]
   },
   {
@@ -914,11 +1244,26 @@
     "testTemplate": "",
     "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
     "testCases": [
-      { "input": "5", "expectedOutput": "10" },
-      { "input": "7", "expectedOutput": "17" },
-      { "input": "0", "expectedOutput": "0" },
-      { "input": "2", "expectedOutput": "2" },
-      { "input": "10", "expectedOutput": "17" }
+      {
+        "input": "5",
+        "expectedOutput": "10"
+      },
+      {
+        "input": "7",
+        "expectedOutput": "17"
+      },
+      {
+        "input": "0",
+        "expectedOutput": "0"
+      },
+      {
+        "input": "2",
+        "expectedOutput": "2"
+      },
+      {
+        "input": "10",
+        "expectedOutput": "17"
+      }
     ]
   },
   {
@@ -938,10 +1283,22 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.FindPrevPrime(5))\n\tfmt.Println(piscine.FindPrevPrime(4))\n\tfmt.Println(piscine.FindPrevPrime(1))\n\tfmt.Println(piscine.FindPrevPrime(10))\n}",
     "initialStudentCode": "package piscine\n\nfunc FindPrevPrime(nb int) int {\n\t// Write your code here\n\treturn 0\n}",
     "testCases": [
-      { "input": "5", "expectedOutput": "5" },
-      { "input": "4", "expectedOutput": "3" },
-      { "input": "1", "expectedOutput": "0" },
-      { "input": "10", "expectedOutput": "7" }
+      {
+        "input": "5",
+        "expectedOutput": "5"
+      },
+      {
+        "input": "4",
+        "expectedOutput": "3"
+      },
+      {
+        "input": "1",
+        "expectedOutput": "0"
+      },
+      {
+        "input": "10",
+        "expectedOutput": "7"
+      }
     ]
   },
   {
@@ -964,10 +1321,22 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Print(piscine.FromTo(1, 5))\n\tfmt.Print(piscine.FromTo(10, 7))\n\tfmt.Print(piscine.FromTo(10, 10))\n\tfmt.Print(piscine.FromTo(100, 10))\n}",
     "initialStudentCode": "package piscine\n\nfunc FromTo(from int, to int) string {\n\t// Write your code here\n\treturn \"\"\n}",
     "testCases": [
-      { "input": "1,5", "expectedOutput": "01, 02, 03, 04, 05\n" },
-      { "input": "10,7", "expectedOutput": "10, 09, 08, 07\n" },
-      { "input": "10,10", "expectedOutput": "10\n" },
-      { "input": "100,10", "expectedOutput": "Invalid\n" }
+      {
+        "input": "1,5",
+        "expectedOutput": "01, 02, 03, 04, 05\n"
+      },
+      {
+        "input": "10,7",
+        "expectedOutput": "10, 09, 08, 07\n"
+      },
+      {
+        "input": "10,10",
+        "expectedOutput": "10\n"
+      },
+      {
+        "input": "100,10",
+        "expectedOutput": "Invalid\n"
+      }
     ]
   },
   {
@@ -989,10 +1358,22 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Print(piscine.ThirdTimeIsACharm(\"123456789\"))\n\tfmt.Print(piscine.ThirdTimeIsACharm(\"\"))\n\tfmt.Print(piscine.ThirdTimeIsACharm(\"a b c d e f\"))\n\tfmt.Print(piscine.ThirdTimeIsACharm(\"12\"))\n}",
     "initialStudentCode": "package piscine\n\nfunc ThirdTimeIsACharm(str string) string {\n\t// Write your code here\n\treturn \"\"\n}",
     "testCases": [
-      { "input": "123456789", "expectedOutput": "369\n" },
-      { "input": "", "expectedOutput": "\n" },
-      { "input": "a b c d e f", "expectedOutput": "b e\n" },
-      { "input": "12", "expectedOutput": "\n" }
+      {
+        "input": "123456789",
+        "expectedOutput": "369\n"
+      },
+      {
+        "input": "",
+        "expectedOutput": "\n"
+      },
+      {
+        "input": "a b c d e f",
+        "expectedOutput": "b e\n"
+      },
+      {
+        "input": "12",
+        "expectedOutput": "\n"
+      }
     ]
   },
   {
@@ -1013,9 +1394,18 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.WeAreUnique(\"foo\", \"boo\"))\n\tfmt.Println(piscine.WeAreUnique(\"\", \"\"))\n\tfmt.Println(piscine.WeAreUnique(\"abc\", \"def\"))\n}",
     "initialStudentCode": "package piscine\n\nfunc WeAreUnique(str1, str2 string) int {\n\t// Write your code here\n\treturn 0\n}",
     "testCases": [
-      { "input": "foo,boo", "expectedOutput": "2" },
-      { "input": ",", "expectedOutput": "-1" },
-      { "input": "abc,def", "expectedOutput": "6" }
+      {
+        "input": "foo,boo",
+        "expectedOutput": "2"
+      },
+      {
+        "input": ",",
+        "expectedOutput": "-1"
+      },
+      {
+        "input": "abc,def",
+        "expectedOutput": "6"
+      }
     ]
   },
   {
@@ -1035,8 +1425,14 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.ZipString(\"YouuungFellllas\"))\n\tfmt.Println(piscine.ZipString(\"Helloo Therre!\"))\n}",
     "initialStudentCode": "package piscine\n\nfunc ZipString(s string) string {\n\t// Write your code here\n\treturn \"\"\n}",
     "testCases": [
-      { "input": "YouuungFellllas", "expectedOutput": "1Y1o3u1n1g1F1e4l1a1s" },
-      { "input": "Helloo Therre!", "expectedOutput": "1H1e2l2o1 1T1h1e2r1e1!" }
+      {
+        "input": "YouuungFellllas",
+        "expectedOutput": "1Y1o3u1n1g1F1e4l1a1s"
+      },
+      {
+        "input": "Helloo Therre!",
+        "expectedOutput": "1H1e2l2o1 1T1h1e2r1e1!"
+      }
     ]
   },
   {
@@ -1058,7 +1454,10 @@
     "testTemplate": "package main\n\nimport \"piscine\"\n\nfunc main() {\n\tpiscine.PrintMemory([10]byte{'h', 'e', 'l', 'l', 'o', 16, 21, '*'})\n}",
     "initialStudentCode": "package piscine\n\nimport \"fmt\"\n\nfunc PrintMemory(arr [10]byte) {\n\t// Write your code here\n\t_ = fmt.Sprintf\n}",
     "testCases": [
-      { "input": "hello\\x10\\x15*\\x00\\x00", "expectedOutput": "68 65 6c 6c\n6f 10 15 2a\n00 00\nhello..*.." }
+      {
+        "input": "hello\\x10\\x15*\\x00\\x00",
+        "expectedOutput": "68 65 6c 6c\n6f 10 15 2a\n00 00\nhello..*.."
+      }
     ]
   },
   {
@@ -1080,10 +1479,22 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.CanJump([]uint{2, 3, 1, 1, 4}))\n\tfmt.Println(piscine.CanJump([]uint{3, 2, 1, 0, 4}))\n\tfmt.Println(piscine.CanJump([]uint{0}))\n\tfmt.Println(piscine.CanJump([]uint{}))\n}",
     "initialStudentCode": "package piscine\n\nfunc CanJump(nums []uint) bool {\n\t// Write your code here\n\treturn false\n}",
     "testCases": [
-      { "input": "[2,3,1,1,4]", "expectedOutput": "true" },
-      { "input": "[3,2,1,0,4]", "expectedOutput": "false" },
-      { "input": "[0]", "expectedOutput": "true" },
-      { "input": "[]", "expectedOutput": "false" }
+      {
+        "input": "[2,3,1,1,4]",
+        "expectedOutput": "true"
+      },
+      {
+        "input": "[3,2,1,0,4]",
+        "expectedOutput": "false"
+      },
+      {
+        "input": "[0]",
+        "expectedOutput": "true"
+      },
+      {
+        "input": "[]",
+        "expectedOutput": "false"
+      }
     ]
   },
   {
@@ -1102,9 +1513,18 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.ConcatSlice([]int{1, 2, 3}, []int{4, 5, 6}))\n\tfmt.Println(piscine.ConcatSlice([]int{}, []int{4, 5, 6, 7, 8, 9}))\n\tfmt.Println(piscine.ConcatSlice([]int{1, 2, 3}, []int{}))\n}",
     "initialStudentCode": "package piscine\n\nfunc ConcatSlice(slice1, slice2 []int) []int {\n\t// Write your code here\n\treturn nil\n}",
     "testCases": [
-      { "input": "[1,2,3],[4,5,6]", "expectedOutput": "[1 2 3 4 5 6]" },
-      { "input": "[],[4,5,6,7,8,9]", "expectedOutput": "[4 5 6 7 8 9]" },
-      { "input": "[1,2,3],[]", "expectedOutput": "[1 2 3]" }
+      {
+        "input": "[1,2,3],[4,5,6]",
+        "expectedOutput": "[1 2 3 4 5 6]"
+      },
+      {
+        "input": "[],[4,5,6,7,8,9]",
+        "expectedOutput": "[4 5 6 7 8 9]"
+      },
+      {
+        "input": "[1,2,3],[]",
+        "expectedOutput": "[1 2 3]"
+      }
     ]
   },
   {
@@ -1126,9 +1546,18 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.ConcatAlternate([]int{1, 2, 3}, []int{4, 5, 6}))\n\tfmt.Println(piscine.ConcatAlternate([]int{1, 2, 3}, []int{4, 5, 6, 7, 8, 9}))\n\tfmt.Println(piscine.ConcatAlternate([]int{1, 2, 3}, []int{}))\n}",
     "initialStudentCode": "package piscine\n\nfunc ConcatAlternate(slice1, slice2 []int) []int {\n\t// Write your code here\n\treturn nil\n}",
     "testCases": [
-      { "input": "[1,2,3],[4,5,6]", "expectedOutput": "[1 4 2 5 3 6]" },
-      { "input": "[1,2,3],[4,5,6,7,8,9]", "expectedOutput": "[4 1 5 2 6 3 7 8 9]" },
-      { "input": "[1,2,3],[]", "expectedOutput": "[1 2 3]" }
+      {
+        "input": "[1,2,3],[4,5,6]",
+        "expectedOutput": "[1 4 2 5 3 6]"
+      },
+      {
+        "input": "[1,2,3],[4,5,6,7,8,9]",
+        "expectedOutput": "[4 1 5 2 6 3 7 8 9]"
+      },
+      {
+        "input": "[1,2,3],[]",
+        "expectedOutput": "[1 2 3]"
+      }
     ]
   },
   {
@@ -1150,9 +1579,18 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.RevConcatAlternate([]int{1, 2, 3}, []int{4, 5, 6}))\n\tfmt.Println(piscine.RevConcatAlternate([]int{1, 2, 3}, []int{4, 5, 6, 7, 8, 9}))\n\tfmt.Println(piscine.RevConcatAlternate([]int{1, 2, 3}, []int{}))\n}",
     "initialStudentCode": "package piscine\n\nfunc RevConcatAlternate(slice1, slice2 []int) []int {\n\t// Write your code here\n\treturn nil\n}",
     "testCases": [
-      { "input": "[1,2,3],[4,5,6]", "expectedOutput": "[3 6 2 5 1 4]" },
-      { "input": "[1,2,3],[4,5,6,7,8,9]", "expectedOutput": "[9 8 7 3 6 2 5 1 4]" },
-      { "input": "[1,2,3],[]", "expectedOutput": "[3 2 1]" }
+      {
+        "input": "[1,2,3],[4,5,6]",
+        "expectedOutput": "[3 6 2 5 1 4]"
+      },
+      {
+        "input": "[1,2,3],[4,5,6,7,8,9]",
+        "expectedOutput": "[9 8 7 3 6 2 5 1 4]"
+      },
+      {
+        "input": "[1,2,3],[]",
+        "expectedOutput": "[3 2 1]"
+      }
     ]
   },
   {
@@ -1174,11 +1612,26 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\ta := []string{\"coding\", \"algorithm\", \"ascii\", \"package\", \"golang\"}\n\tfmt.Printf(\"%#v\\n\", piscine.Slice(a, 1))\n\tfmt.Printf(\"%#v\\n\", piscine.Slice(a, 2, 4))\n\tfmt.Printf(\"%#v\\n\", piscine.Slice(a, -3))\n\tfmt.Printf(\"%#v\\n\", piscine.Slice(a, -2, -1))\n\tfmt.Printf(\"%#v\\n\", piscine.Slice(a, 2, 0))\n}",
     "initialStudentCode": "package piscine\n\nfunc Slice(a []string, nbrs ...int) []string {\n\t// Write your code here\n\treturn nil\n}",
     "testCases": [
-      { "input": "from index 1", "expectedOutput": "[]string{\"algorithm\", \"ascii\", \"package\", \"golang\"}" },
-      { "input": "from 2 to 4", "expectedOutput": "[]string{\"ascii\", \"package\"}" },
-      { "input": "from -3", "expectedOutput": "[]string{\"ascii\", \"package\", \"golang\"}" },
-      { "input": "from -2 to -1", "expectedOutput": "[]string{\"package\"}" },
-      { "input": "from 2 to 0", "expectedOutput": "[]string(nil)" }
+      {
+        "input": "from index 1",
+        "expectedOutput": "[]string{\"algorithm\", \"ascii\", \"package\", \"golang\"}"
+      },
+      {
+        "input": "from 2 to 4",
+        "expectedOutput": "[]string{\"ascii\", \"package\"}"
+      },
+      {
+        "input": "from -3",
+        "expectedOutput": "[]string{\"ascii\", \"package\", \"golang\"}"
+      },
+      {
+        "input": "from -2 to -1",
+        "expectedOutput": "[]string{\"package\"}"
+      },
+      {
+        "input": "from 2 to 0",
+        "expectedOutput": "[]string(nil)"
+      }
     ]
   },
   {
@@ -1200,10 +1653,22 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Println(piscine.SaveAndMiss(\"123456789\", 3))\n\tfmt.Println(piscine.SaveAndMiss(\"abcdefghijklmnopqrstuvwyz\", 3))\n\tfmt.Println(piscine.SaveAndMiss(\"\", 3))\n\tfmt.Println(piscine.SaveAndMiss(\"hello\", 0))\n}",
     "initialStudentCode": "package piscine\n\nfunc SaveAndMiss(arg string, num int) string {\n\t// Write your code here\n\treturn \"\"\n}",
     "testCases": [
-      { "input": "123456789,3", "expectedOutput": "123789" },
-      { "input": "abcdefghijklmnopqrstuvwyz,3", "expectedOutput": "abcghimnostuz" },
-      { "input": ",3", "expectedOutput": "" },
-      { "input": "hello,0", "expectedOutput": "hello" }
+      {
+        "input": "123456789,3",
+        "expectedOutput": "123789"
+      },
+      {
+        "input": "abcdefghijklmnopqrstuvwyz,3",
+        "expectedOutput": "abcghimnostuz"
+      },
+      {
+        "input": ",3",
+        "expectedOutput": ""
+      },
+      {
+        "input": "hello,0",
+        "expectedOutput": "hello"
+      }
     ]
   },
   {
@@ -1224,9 +1689,18 @@
     "testTemplate": "",
     "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
     "testCases": [
-      { "input": "225225", "expectedOutput": "3*3*5*5*7*11*13" },
-      { "input": "42", "expectedOutput": "2*3*7" },
-      { "input": "9539", "expectedOutput": "9539" }
+      {
+        "input": "225225",
+        "expectedOutput": "3*3*5*5*7*11*13"
+      },
+      {
+        "input": "42",
+        "expectedOutput": "2*3*7"
+      },
+      {
+        "input": "9539",
+        "expectedOutput": "9539"
+      }
     ]
   },
   {
@@ -1249,9 +1723,18 @@
     "testTemplate": "",
     "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
     "testCases": [
-      { "input": "abc 2altrb53c.sse", "expectedOutput": "1" },
-      { "input": "abc btarc", "expectedOutput": "0" },
-      { "input": "DD DABC", "expectedOutput": "0" }
+      {
+        "input": "abc 2altrb53c.sse",
+        "expectedOutput": "1"
+      },
+      {
+        "input": "abc btarc",
+        "expectedOutput": "0"
+      },
+      {
+        "input": "DD DABC",
+        "expectedOutput": "0"
+      }
     ]
   },
   {
@@ -1272,8 +1755,14 @@
     "testTemplate": "",
     "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
     "testCases": [
-      { "input": "padinton paqefwtdjetyiytjneytjoeyjnejeyj", "expectedOutput": "padinto" },
-      { "input": "ddf6vewg64f twthgdwthdwfteewhrtag6h4ffdhsd", "expectedOutput": "df6ewg4" }
+      {
+        "input": "padinton paqefwtdjetyiytjneytjoeyjnejeyj",
+        "expectedOutput": "padinto"
+      },
+      {
+        "input": "ddf6vewg64f twthgdwthdwfteewhrtag6h4ffdhsd",
+        "expectedOutput": "df6ewg4"
+      }
     ]
   },
   {
@@ -1294,8 +1783,14 @@
     "testTemplate": "",
     "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
     "testCases": [
-      { "input": "zpadinton paqefwtdjetyiytjneytjoeyjnejeyj", "expectedOutput": "zpadintoqefwjy" },
-      { "input": "rien cette phrase ne cache rien", "expectedOutput": "rienct phas" }
+      {
+        "input": "zpadinton paqefwtdjetyiytjneytjoeyjnejeyj",
+        "expectedOutput": "zpadintoqefwjy"
+      },
+      {
+        "input": "rien cette phrase ne cache rien",
+        "expectedOutput": "rienct phas"
+      }
     ]
   },
   {
@@ -1316,9 +1811,30 @@
     "testTemplate": "",
     "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
     "testCases": [
-      { "input": "123 123", "expectedOutput": "123" },
-      { "input": "faya fgvvfdxcacpolhyghbreda", "expectedOutput": "faya" },
-      { "input": "faya fgvvfdxcacpolhyghbred", "expectedOutput": "" }
+      {
+        "input": "123 123",
+        "expectedOutput": "123"
+      },
+      {
+        "input": "faya fgvvfdxcacpolhyghbreda",
+        "expectedOutput": "faya"
+      },
+      {
+        "input": "faya fgvvfdxcacpolhyghbred",
+        "expectedOutput": ""
+      },
+      {
+        "input": "error rrerrrfiiljdfxjyuifrrvcoojhr",
+        "expectedOutput": "error"
+      },
+      {
+        "input": "\"quarante deux\" \"qfqfsudf arzgsayns tsregfdgs sjytdekuoixq \"",
+        "expectedOutput": "quarante deux"
+      },
+      {
+        "input": "",
+        "expectedOutput": ""
+      }
     ]
   },
   {
@@ -1339,8 +1855,14 @@
     "testTemplate": "",
     "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
     "testCases": [
-      { "input": "First SMALL TesT", "expectedOutput": "firsT smalL tesT" },
-      { "input": "SEconD Test IS a LItTLE EasIEr", "expectedOutput": "seconD tesT iS A littlE easieR" }
+      {
+        "input": "First SMALL TesT",
+        "expectedOutput": "firsT smalL tesT"
+      },
+      {
+        "input": "SEconD Test IS a LItTLE EasIEr",
+        "expectedOutput": "seconD tesT iS A littlE easieR"
+      }
     ]
   },
   {
@@ -1363,9 +1885,18 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Print(piscine.FifthAndSkip(\"abcdefghijklmnopqrstuwxyz\"))\n\tfmt.Print(piscine.FifthAndSkip(\"This is a short sentence\"))\n\tfmt.Print(piscine.FifthAndSkip(\"1234\"))\n}",
     "initialStudentCode": "package piscine\n\nfunc FifthAndSkip(str string) string {\n\t// Write your code here\n\treturn \"\"\n}",
     "testCases": [
-      { "input": "abcdefghijklmnopqrstuwxyz", "expectedOutput": "abcde ghijk mnopq stuwx z\n" },
-      { "input": "This is a short sentence", "expectedOutput": "Thisi ashor sente ce\n" },
-      { "input": "1234", "expectedOutput": "Invalid Input\n" }
+      {
+        "input": "abcdefghijklmnopqrstuwxyz",
+        "expectedOutput": "abcde ghijk mnopq stuwx z\n"
+      },
+      {
+        "input": "This is a short sentence",
+        "expectedOutput": "Thisi ashor sente ce\n"
+      },
+      {
+        "input": "1234",
+        "expectedOutput": "Invalid Input\n"
+      }
     ]
   },
   {
@@ -1387,10 +1918,22 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Print(piscine.NotDecimal(\"0.1\"))\n\tfmt.Print(piscine.NotDecimal(\"174.2\"))\n\tfmt.Print(piscine.NotDecimal(\"1952\"))\n\tfmt.Print(piscine.NotDecimal(\"\"))\n}",
     "initialStudentCode": "package piscine\n\nfunc NotDecimal(dec string) string {\n\t// Write your code here\n\treturn \"\"\n}",
     "testCases": [
-      { "input": "0.1", "expectedOutput": "1\n" },
-      { "input": "174.2", "expectedOutput": "1742\n" },
-      { "input": "1952", "expectedOutput": "1952\n" },
-      { "input": "", "expectedOutput": "\n" }
+      {
+        "input": "0.1",
+        "expectedOutput": "1\n"
+      },
+      {
+        "input": "174.2",
+        "expectedOutput": "1742\n"
+      },
+      {
+        "input": "1952",
+        "expectedOutput": "1952\n"
+      },
+      {
+        "input": "",
+        "expectedOutput": "\n"
+      }
     ]
   },
   {
@@ -1412,9 +1955,18 @@
     "testTemplate": "",
     "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
     "testCases": [
-      { "input": "the time of contempt precedes that of indifference", "expectedOutput": "indifference of that precedes contempt of time the" },
-      { "input": "he stared at the mountain", "expectedOutput": "mountain the at stared he" },
-      { "input": "abcdefghijklm", "expectedOutput": "abcdefghijklm" }
+      {
+        "input": "the time of contempt precedes that of indifference",
+        "expectedOutput": "indifference of that precedes contempt of time the"
+      },
+      {
+        "input": "he stared at the mountain",
+        "expectedOutput": "mountain the at stared he"
+      },
+      {
+        "input": "abcdefghijklm",
+        "expectedOutput": "abcdefghijklm"
+      }
     ]
   },
   {
@@ -1437,8 +1989,14 @@
     "testTemplate": "",
     "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
     "testCases": [
-      { "input": "Let there be light", "expectedOutput": "there be light Let" },
-      { "input": "hello world foo", "expectedOutput": "world foo hello" }
+      {
+        "input": "Let there be light",
+        "expectedOutput": "there be light Let"
+      },
+      {
+        "input": "hello world foo",
+        "expectedOutput": "world foo hello"
+      }
     ]
   },
   {
@@ -1460,9 +2018,18 @@
     "testTemplate": "package main\n\nimport (\n\t\"fmt\"\n\t\"piscine\"\n)\n\nfunc main() {\n\tfmt.Print(piscine.WordFlip(\"First second last\"))\n\tfmt.Print(piscine.WordFlip(\"\"))\n\tfmt.Print(piscine.WordFlip(\" hello  all  of  you! \"))\n}",
     "initialStudentCode": "package piscine\n\nfunc WordFlip(str string) string {\n\t// Write your code here\n\treturn \"\"\n}",
     "testCases": [
-      { "input": "First second last", "expectedOutput": "last second First\n" },
-      { "input": "", "expectedOutput": "Invalid Output" },
-      { "input": " hello  all  of  you! ", "expectedOutput": "you! of all hello\n" }
+      {
+        "input": "First second last",
+        "expectedOutput": "last second First\n"
+      },
+      {
+        "input": "",
+        "expectedOutput": "Invalid Output"
+      },
+      {
+        "input": " hello  all  of  you! ",
+        "expectedOutput": "you! of all hello\n"
+      }
     ]
   },
   {
@@ -1487,9 +2054,18 @@
     "testTemplate": "",
     "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
     "testCases": [
-      { "input": "[1, 2, 3, 4, 5] 6", "expectedOutput": "Pairs with sum 6: [[0 4] [1 3]]" },
-      { "input": "[1, 2, 3, 4, 5] 10", "expectedOutput": "No pairs found." },
-      { "input": "[-1, 2, -3, 4, -5] 1", "expectedOutput": "Pairs with sum 1: [[0 1] [2 3]]" }
+      {
+        "input": "[1, 2, 3, 4, 5] 6",
+        "expectedOutput": "Pairs with sum 6: [[0 4] [1 3]]"
+      },
+      {
+        "input": "[1, 2, 3, 4, 5] 10",
+        "expectedOutput": "No pairs found."
+      },
+      {
+        "input": "[-1, 2, -3, 4, -5] 1",
+        "expectedOutput": "Pairs with sum 1: [[0 1] [2 3]]"
+      }
     ]
   },
   {
@@ -1512,10 +2088,22 @@
     "testTemplate": "",
     "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
     "testCases": [
-      { "input": "pig", "expectedOutput": "igpay" },
-      { "input": "Is", "expectedOutput": "Isay" },
-      { "input": "crunch", "expectedOutput": "unchcray" },
-      { "input": "crnch", "expectedOutput": "No vowels" }
+      {
+        "input": "pig",
+        "expectedOutput": "igpay"
+      },
+      {
+        "input": "Is",
+        "expectedOutput": "Isay"
+      },
+      {
+        "input": "crunch",
+        "expectedOutput": "unchcray"
+      },
+      {
+        "input": "crnch",
+        "expectedOutput": "No vowels"
+      }
     ]
   },
   {
@@ -1536,9 +2124,18 @@
     "testTemplate": "",
     "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
     "testCases": [
-      { "input": "hello", "expectedOutput": "ERROR: cannot convert to roman digit" },
-      { "input": "123", "expectedOutput": "C+X+X+I+I+I\nCXXIII" },
-      { "input": "4000", "expectedOutput": "ERROR: cannot convert to roman digit" }
+      {
+        "input": "hello",
+        "expectedOutput": "ERROR: cannot convert to roman digit"
+      },
+      {
+        "input": "123",
+        "expectedOutput": "C+X+X+I+I+I\nCXXIII"
+      },
+      {
+        "input": "4000",
+        "expectedOutput": "ERROR: cannot convert to roman digit"
+      }
     ]
   },
   {
@@ -1562,9 +2159,18 @@
     "testTemplate": "",
     "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
     "testCases": [
-      { "input": "(johndoe)", "expectedOutput": "OK" },
-      { "input": "([)]", "expectedOutput": "Error" },
-      { "input": "{[(0 + 0)(1 + 1)](3*(-1)){()}}", "expectedOutput": "OK" }
+      {
+        "input": "(johndoe)",
+        "expectedOutput": "OK"
+      },
+      {
+        "input": "([)]",
+        "expectedOutput": "Error"
+      },
+      {
+        "input": "{[(0 + 0)(1 + 1)](3*(-1)){()}}",
+        "expectedOutput": "OK"
+      }
     ]
   },
   {
@@ -1586,9 +2192,18 @@
     "testTemplate": "",
     "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
     "testCases": [
-      { "input": "1 2 * 3 * 4 +", "expectedOutput": "10" },
-      { "input": "1 2 3 4 +", "expectedOutput": "Error" },
-      { "input": "3 4 +", "expectedOutput": "7" }
+      {
+        "input": "1 2 * 3 * 4 +",
+        "expectedOutput": "10"
+      },
+      {
+        "input": "1 2 3 4 +",
+        "expectedOutput": "Error"
+      },
+      {
+        "input": "3 4 +",
+        "expectedOutput": "7"
+      }
     ]
   },
   {
@@ -1611,8 +2226,14 @@
     "testTemplate": "",
     "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
     "testCases": [
-      { "input": "(a) I'm heavy, jumpsuit is on steady, Lighter when I'm lower, higher when I'm heavy", "expectedOutput": "1: heavy\n2: steady\n3: heavy" },
-      { "input": "(hi) He swore he just saw his sushi move.", "expectedOutput": "1: his\n2: sushi" }
+      {
+        "input": "(a) I'm heavy, jumpsuit is on steady, Lighter when I'm lower, higher when I'm heavy",
+        "expectedOutput": "1: heavy\n2: steady\n3: heavy"
+      },
+      {
+        "input": "(hi) He swore he just saw his sushi move.",
+        "expectedOutput": "1: his\n2: sushi"
+      }
     ]
   },
   {
@@ -1637,8 +2258,14 @@
     "testTemplate": "",
     "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
     "testCases": [
-      { "input": "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.", "expectedOutput": "Hello World!" },
-      { "input": "++++++++++[>++++++++++>++++++++++>++++++++++<<<-]>---.>--.>-.", "expectedOutput": "abc" }
+      {
+        "input": "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.",
+        "expectedOutput": "Hello World!"
+      },
+      {
+        "input": "++++++++++[>++++++++++>++++++++++>++++++++++<<<-]>---.>--.>-.",
+        "expectedOutput": "abc"
+      }
     ]
   },
   {
@@ -1662,9 +2289,18 @@
     "testTemplate": "",
     "initialStudentCode": "package main\n\nimport (\n\t\"fmt\"\n\t\"os\"\n)\n\nfunc main() {\n\t// Write your code here\n\t_ = fmt.Println\n\t_ = os.Args\n}",
     "testCases": [
-      { "input": "-abc -ijk", "expectedOutput": "00000000 00000000 00000111 00000111" },
-      { "input": "-z", "expectedOutput": "00000010 00000000 00000000 00000000" },
-      { "input": "-%", "expectedOutput": "Invalid Option" }
+      {
+        "input": "-abc -ijk",
+        "expectedOutput": "00000000 00000000 00000111 00000111"
+      },
+      {
+        "input": "-z",
+        "expectedOutput": "00000010 00000000 00000000 00000000"
+      },
+      {
+        "input": "-%",
+        "expectedOutput": "Invalid Option"
+      }
     ]
   }
 ]
