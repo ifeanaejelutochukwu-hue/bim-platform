@@ -1,20 +1,31 @@
 import React, { useState } from "react";
-import { User } from "../types";
+import { User, Challenge } from "../types";
 import { LogOut, BookOpen, Clock, ArrowRight } from "lucide-react";
 
 interface HomePageProps {
   user: User | null;
   token: string | null;
+  challenges: Challenge[];
   onStartPractice: () => void;
   onStartExam: (numQuestions: number, timeLimitMinutes: number) => void;
   onLogout: () => void;
 }
 
-export default function HomePage({ user, token: _token, onStartPractice, onStartExam, onLogout }: HomePageProps) {
+export default function HomePage({ user, token: _token, challenges, onStartPractice, onStartExam, onLogout }: HomePageProps) {
   const [numQuestions, setNumQuestions] = useState(10);
   const [timeLimitMinutes, setTimeLimitMinutes] = useState(30);
+  const [searchQuery, setSearchQuery] = useState("");
   const isGuest = user === null;
   const displayName = isGuest ? "Guest" : user.username;
+
+  // Filter challenges by search query
+  const filteredChallenges = searchQuery.trim() === "" 
+    ? challenges
+    : challenges.filter(c => 
+        c.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        c.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        c.id.toLowerCase().includes(searchQuery.toLowerCase())
+      );
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
@@ -83,7 +94,7 @@ export default function HomePage({ user, token: _token, onStartPractice, onStart
         </div>
 
         {/* Mode cards */}
-        <div className="w-full max-w-3xl grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="w-full max-w-3xl grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
 
           {/* ── Practice Checkpoint card ────────────────────────────── */}
           <div className="bg-white border-2 border-gray-100 hover:border-emerald-300 rounded-2xl p-7 flex flex-col gap-5 transition-all shadow-sm hover:shadow-md group cursor-pointer"
@@ -204,7 +215,55 @@ export default function HomePage({ user, token: _token, onStartPractice, onStart
           </div>
         </div>
 
-        {/* Stats row for logged-in users */}
+        {/* ── Search and browse challenges ──────────────────────────────── */}
+        <div className="w-full max-w-4xl mt-8">
+          <div className="mb-6">
+            <h2 className="text-lg font-bold text-gray-900 mb-3">Browse Challenges</h2>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search by title, category, or ID..."
+              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+            />
+            {searchQuery && (
+              <p className="mt-2 text-xs text-gray-500">
+                {filteredChallenges.length} of {challenges.length} challenges match
+              </p>
+            )}
+          </div>
+
+          {filteredChallenges.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {filteredChallenges.map((c) => (
+                <button
+                  key={c.id}
+                  onClick={onStartPractice}
+                  className="text-left bg-white border border-gray-200 hover:border-emerald-300 hover:shadow-md rounded-lg p-4 transition-all cursor-pointer"
+                >
+                  <div className="flex items-start justify-between gap-2 mb-2">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-sm font-semibold text-gray-900 truncate">{c.title}</h3>
+                      <p className="text-[11px] text-gray-500 font-mono mt-1">Lvl {c.level} • {c.xp}</p>
+                    </div>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded shrink-0 ${
+                      c.category === "BONUS"
+                        ? "bg-amber-100 text-amber-700"
+                        : "bg-emerald-100 text-emerald-700"
+                    }`}>
+                      {c.category}
+                    </span>
+                  </div>
+                  <p className="text-[12px] text-gray-600 line-clamp-2">{c.instructions[0]}</p>
+                </button>
+              ))}
+            </div>
+          ) : searchQuery ? (
+            <div className="text-center py-8 text-gray-500">
+              <p className="text-sm">No challenges match your search.</p>
+            </div>
+          ) : null}
+        </div>
         {!isGuest && (
           <div className="mt-10 flex items-center gap-8 text-sm text-gray-400">
             <div className="flex flex-col items-center gap-0.5">

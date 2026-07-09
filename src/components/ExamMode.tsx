@@ -135,19 +135,44 @@ export default function ExamMode({ challenges, numQuestions, timeLimitMinutes, u
   );
   const [currentIndex, setCurrentIndex] = useState(0);
   const [studentCodes, setStudentCodes] = useState<Record<string, string>>({});
-  // Track which question indices have been solved (at least one passing run)
   const [solvedIndices, setSolvedIndices] = useState<Set<number>>(new Set());
   const [timeLeft, setTimeLeft] = useState(timeLimitMinutes * 60);
   const [examStartTime] = useState(() => Date.now());
   const [examResult, setExamResult] = useState<ExamResult | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  // Submit confirmation dialog
   const [showConfirm, setShowConfirm] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Resizable split
   const [splitPct, setSplitPct] = useState(45);
   const containerRef = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
+
+  // Filter questions by search
+  const filteredExamChallenges = searchQuery.trim() === ""
+    ? examChallenges.map((c, i) => ({ challenge: c, originalIndex: i }))
+    : examChallenges
+        .map((c, i) => ({ challenge: c, originalIndex: i }))
+        .filter(({ challenge }) =>
+          challenge.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          challenge.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          challenge.id.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+
+  // Map filtered index to original index for navigation
+  const filteredIndexToOriginalIndex = (filteredIndex: number) => {
+    if (filteredIndex >= 0 && filteredIndex < filteredExamChallenges.length) {
+      return filteredExamChallenges[filteredIndex].originalIndex;
+    }
+    return currentIndex;
+  };
+
+  // Map original index to filtered index for display
+  const originalIndexToFilteredIndex = (originalIndex: number) => {
+    return filteredExamChallenges.findIndex(
+      ({ originalIndex: oi }) => oi === originalIndex
+    );
+  };
 
   const onDragStart = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
@@ -458,33 +483,38 @@ export default function ExamMode({ challenges, numQuestions, timeLimitMinutes, u
           Previous
         </button>
 
+        {/* Search box */}
+        <div className="flex-1 mx-4 max-w-xs">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search questions..."
+            className="w-full px-3 py-1.5 text-xs bg-[#0e0f14] border border-slate-700 rounded-lg text-slate-300 placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition-colors"
+          />
+        </div>
+
         {/* Question dots — only solved / current are clickable */}
         <div className="flex items-center gap-1.5">
-          {examChallenges.map((_, i) => {
-            const isCurrent = i === currentIndex;
-            const isSolved = solvedIndices.has(i);
-            // Can navigate to: current, previous (any index ≤ current), or solved
-            const canClick = i <= currentIndex || isSolved;
+          {filteredExamChallenges.map(({ originalIndex, challenge }, filteredIdx) => {
+            const isCurrent = originalIndex === currentIndex;
+            const isSolved = solvedIndices.has(originalIndex);
+            const canClick = originalIndex <= currentIndex || isSolved;
             return (
               <button
-                key={i}
-                onClick={() => canClick && setCurrentIndex(i)}
+                key={originalIndex}
+                onClick={() => canClick && setCurrentIndex(originalIndex)}
                 disabled={!canClick}
+                title={`${challenge.title}`}
                 className={`transition-all rounded-full ${
                   isCurrent
-                    ? "w-3 h-3 bg-indigo-400 scale-125 cursor-pointer"
+                    ? "w-3 h-3 bg-emerald-400 scale-125 cursor-pointer"
                     : isSolved
                     ? "w-2.5 h-2.5 bg-emerald-500 cursor-pointer hover:scale-110"
-                    : i < currentIndex
+                    : originalIndex < currentIndex
                     ? "w-2 h-2 bg-slate-500 cursor-pointer hover:bg-slate-400"
                     : "w-2 h-2 bg-slate-700 cursor-not-allowed opacity-40"
                 }`}
-                title={
-                  isSolved ? `Q${i + 1} — solved ✓` :
-                  isCurrent ? `Q${i + 1} — current` :
-                  i < currentIndex ? `Q${i + 1} — attempted` :
-                  `Q${i + 1} — locked (solve current first)`
-                }
               />
             );
           })}

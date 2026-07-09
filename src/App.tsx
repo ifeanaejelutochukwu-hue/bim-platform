@@ -171,6 +171,7 @@ export default function App() {
       <HomePage
         user={isGuest ? null : (auth?.user ?? null)}
         token={auth?.token ?? null}
+        challenges={challenges}
         onStartPractice={() => setView("practice")}
         onStartExam={(n, t) => { setNumExamQuestions(n); setExamTimeLimitMinutes(t); setView("exam"); }}
         onLogout={handleLogout}
