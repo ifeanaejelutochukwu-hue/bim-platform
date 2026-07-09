@@ -89,6 +89,8 @@ export default function App() {
   const [numExamQuestions, setNumExamQuestions] = useState(10);
   const [examTimeLimitMinutes, setExamTimeLimitMinutes] = useState(30);
   const [challenges, setChallenges] = useState<Challenge[]>([]);
+  // IDs of challenges the user explicitly selected; empty = use all
+  const [selectedChallengeIds, setSelectedChallengeIds] = useState<string[]>([]);
 
   // Persist view and flags whenever they change
   useEffect(() => { storeView(view); }, [view]);
@@ -172,8 +174,10 @@ export default function App() {
         user={isGuest ? null : (auth?.user ?? null)}
         token={auth?.token ?? null}
         challenges={challenges}
-        onStartPractice={() => setView("practice")}
-        onStartExam={(n, t) => { setNumExamQuestions(n); setExamTimeLimitMinutes(t); setView("exam"); }}
+        selectedChallengeIds={selectedChallengeIds}
+        onSelectionChange={setSelectedChallengeIds}
+        onStartPractice={(ids) => { setSelectedChallengeIds(ids); setView("practice"); }}
+        onStartExam={(n, t, ids) => { setNumExamQuestions(n); setExamTimeLimitMinutes(t); setSelectedChallengeIds(ids); setView("exam"); }}
         onLogout={handleLogout}
       />
     );
@@ -212,6 +216,7 @@ export default function App() {
         challenges={challenges}
         numQuestions={numExamQuestions}
         timeLimitMinutes={examTimeLimitMinutes}
+        selectedChallengeIds={selectedChallengeIds}
         user={isGuest ? null : (auth?.user ?? null)}
         token={auth?.token ?? null}
         onRun={handleExamRun}
@@ -221,10 +226,14 @@ export default function App() {
   }
 
   // Practice mode
+  const practicePool = selectedChallengeIds.length > 0
+    ? challenges.filter(c => selectedChallengeIds.includes(c.id))
+    : challenges;
+
   return (
     <Platform
       auth={auth}
-      challenges={challenges}
+      challenges={practicePool}
       onChallengesLoaded={setChallenges}
       onLogout={handleLogout}
       onGoHome={() => setView("home")}

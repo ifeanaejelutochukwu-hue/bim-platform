@@ -7,6 +7,8 @@ interface ExamModeProps {
   challenges: Challenge[];
   numQuestions: number;
   timeLimitMinutes: number;
+  /** IDs explicitly chosen by the user; empty array means use all challenges */
+  selectedChallengeIds?: string[];
   user: User | null;
   token: string | null;
   onRun: (challengeId: string, studentCode: string, args: string, mainCode: string) => Promise<ExecutionResult>;
@@ -129,9 +131,14 @@ function ExamResultsModal({ result, onRetry, onHome }: ExamResultsModalProps) {
 }
 
 // ── ExamMode ──────────────────────────────────────────────────────────────
-export default function ExamMode({ challenges, numQuestions, timeLimitMinutes, user, token, onRun, onExit }: ExamModeProps) {
+export default function ExamMode({ challenges, numQuestions, timeLimitMinutes, selectedChallengeIds = [], user, token, onRun, onExit }: ExamModeProps) {
+  // Build the pool: use selected subset if provided, otherwise all challenges
+  const pool = selectedChallengeIds.length > 0
+    ? challenges.filter(c => selectedChallengeIds.includes(c.id))
+    : challenges;
+
   const [examChallenges, setExamChallenges] = useState<Challenge[]>(() =>
-    pickRandom(challenges, numQuestions)
+    pickRandom(pool, numQuestions)
   );
   const [currentIndex, setCurrentIndex] = useState(0);
   const [studentCodes, setStudentCodes] = useState<Record<string, string>>({});
@@ -293,7 +300,7 @@ export default function ExamMode({ challenges, numQuestions, timeLimitMinutes, u
   };
 
   const handleRetry = () => {
-    setExamChallenges(pickRandom(challenges, numQuestions));
+    setExamChallenges(pickRandom(pool, numQuestions));
     setCurrentIndex(0);
     setStudentCodes({});
     setSolvedIndices(new Set());
